@@ -18,8 +18,15 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function DataTable({ columns, customWidgets }) {
+export default function DataTable({
+	columns,
+	customWidgets,
+	options: { sort, columnSelect, csvDownload },
+}) {
 	const classes = useStyles();
+
+	const icons = [columnSelect, csvDownload].filter((icon) => icon);
+	console.log("icons", icons);
 
 	const [data, setData] = useState(dummyData);
 	const [csvDownloadLink, setCsvDownloadLink] = useState(null);
@@ -53,28 +60,30 @@ export default function DataTable({ columns, customWidgets }) {
 	}
 
 	let sortBy = (key) => {
-		let index = tableColumns.findIndex((column) => column == key);
+		if (sort) {
+			let index = tableColumns.findIndex((column) => column == key);
 
-		if (orderDesc[index]) {
-			setData([
-				...data.sort((a, b) =>
-					isNaN(a[key])
-						? a[key].toLowerCase() < b[key].toLowerCase()
-						: parseInt(b[key]) - parseInt(a[key])
-				),
-			]);
-		} else {
-			setData([
-				...data.sort((a, b) =>
-					isNaN(a[key])
-						? a[key].toLowerCase() > b[key].toLowerCase()
-						: parseInt(a[key]) - parseInt(b[key])
-				),
-			]);
+			if (orderDesc[index]) {
+				setData([
+					...data.sort((a, b) =>
+						isNaN(a[key])
+							? a[key].toLowerCase() < b[key].toLowerCase()
+							: parseInt(b[key]) - parseInt(a[key])
+					),
+				]);
+			} else {
+				setData([
+					...data.sort((a, b) =>
+						isNaN(a[key])
+							? a[key].toLowerCase() > b[key].toLowerCase()
+							: parseInt(a[key]) - parseInt(b[key])
+					),
+				]);
+			}
+			const desc = [...orderDesc];
+			desc[index] = !desc[index];
+			setOrderDesc(desc);
 		}
-		const desc = [...orderDesc];
-		desc[index] = !desc[index];
-		setOrderDesc(desc);
 	};
 
 	useEffect(() => {
@@ -120,57 +129,68 @@ export default function DataTable({ columns, customWidgets }) {
 
 	return (
 		<div>
-			<div className={styles.iconsWrapper}>
-				<div className={styles.icons}>
-					<IconButton
-						aria-describedby={id}
-						variant="contained"
-						color="primary"
-						onClick={handleClick}
-					>
-						<ViewColumnIcon />
-					</IconButton>
-					<Popover
-						id={id}
-						open={open}
-						anchorEl={anchorEl}
-						onClose={handleClose}
-						anchorOrigin={{
-							vertical: "bottom",
-							horizontal: "center",
-						}}
-						transformOrigin={{
-							vertical: "top",
-							horizontal: "center",
-						}}
-					>
-						<div className={styles.popoverContent}>
-							{filterColumns.map((column) => (
-								<div>
-									<Checkbox
-										checked={tableColumns.includes(column)}
-										onChange={(e) =>
-											handleColumnChange(
-												tableColumns.includes(column),
+			{icons.length != 0 && (
+				<div className={styles.iconsWrapper}>
+					<div className={styles.icons} style={{gridTemplateColumns:`repeat(${icons.length},1fr)`}}>
+						{columnSelect && (
+							<IconButton
+								aria-describedby={id}
+								variant="contained"
+								color="primary"
+								onClick={handleClick}
+							>
+								<ViewColumnIcon />
+							</IconButton>
+						)}
+						<Popover
+							id={id}
+							open={open}
+							anchorEl={anchorEl}
+							onClose={handleClose}
+							anchorOrigin={{
+								vertical: "bottom",
+								horizontal: "center",
+							}}
+							transformOrigin={{
+								vertical: "top",
+								horizontal: "center",
+							}}
+						>
+							<div className={styles.popoverContent}>
+								{filterColumns.map((column) => (
+									<div>
+										<Checkbox
+											checked={tableColumns.includes(
 												column
-											)
-										}
-										inputProps={{
-											"aria-label": "primary checkbox",
-										}}
-									/>
-									{column}
-								</div>
-							))}
-						</div>
-					</Popover>
-					<a href={csvDownloadLink} download="table.csv">
-						<IconButton>
-							<GetAppIcon />
-						</IconButton>
-					</a>
+											)}
+											onChange={(e) =>
+												handleColumnChange(
+													tableColumns.includes(
+														column
+													),
+													column
+												)
+											}
+											inputProps={{
+												"aria-label":
+													"primary checkbox",
+											}}
+										/>
+										{column}
+									</div>
+								))}
+							</div>
+						</Popover>
+						{csvDownload && (
+							<a href={csvDownloadLink} download="table.csv">
+								<IconButton>
+									<GetAppIcon />
+								</IconButton>
+							</a>
+						)}
+					</div>
 				</div>
-			</div>
+			)}
 			<div className={styles.tableWrapper}>
 				<table className={styles.table}>
 					<tr className={styles.headerRow}>
@@ -178,13 +198,15 @@ export default function DataTable({ columns, customWidgets }) {
 							<th onClick={(e) => sortBy(heading)}>
 								<div>
 									<p>{heading}</p>{" "}
-									<ArrowUpwardIcon
-										className={`${styles.upicon} ${
-											orderDesc[index]
-												? styles.invert
-												: styles.normal
-										}`}
-									/>
+									{sort && (
+										<ArrowUpwardIcon
+											className={`${styles.upicon} ${
+												orderDesc[index]
+													? styles.invert
+													: styles.normal
+											}`}
+										/>
+									)}
 								</div>
 							</th>
 						))}
@@ -192,7 +214,11 @@ export default function DataTable({ columns, customWidgets }) {
 					{data.map((row, index) => (
 						<tr className={styles.row}>
 							{tableColumns.map((column) => (
-								<td>{customWidgets[column] ? customWidgets[column](row[column]) : row[column]}</td>
+								<td>
+									{customWidgets[column]
+										? customWidgets[column](row[column])
+										: row[column]}
+								</td>
 							))}
 						</tr>
 					))}
