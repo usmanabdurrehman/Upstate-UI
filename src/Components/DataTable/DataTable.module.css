@@ -19,7 +19,7 @@
 }
 
 .icons{
-	padding:4px;
+	padding:4px 8px;
 	box-shadow: 3px -3px 7px lightgray;
 	border-radius: 12px 12px 0 0;
 	display: grid;

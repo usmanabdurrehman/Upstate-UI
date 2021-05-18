@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function DataTable({ columns }) {
+export default function DataTable({ columns, customWidgets }) {
 	const classes = useStyles();
 
 	const [data, setData] = useState(dummyData);
@@ -192,7 +192,7 @@ export default function DataTable({ columns }) {
 					{data.map((row, index) => (
 						<tr className={styles.row}>
 							{tableColumns.map((column) => (
-								<td>{row[column]}</td>
+								<td>{customWidgets[column] ? customWidgets[column](row[column]) : row[column]}</td>
 							))}
 						</tr>
 					))}
