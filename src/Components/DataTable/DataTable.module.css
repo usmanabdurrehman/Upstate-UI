@@ -1,0 +1,51 @@
+.tableWrapper{
+	overflow: auto;
+	box-shadow: 3px 3px 7px lightgray;
+	padding:0;
+}
+
+.table{
+	border-collapse: collapse;
+	min-width: 600px;
+	font-weight: 300;
+	font-size: 14px;
+	width:100%;
+}
+
+.table th,.table td{
+	padding:8px;
+	text-align: left;
+}
+
+.table th{
+	cursor: pointer;
+	text-transform: capitalize;
+}
+
+.table tr:nth-child(odd){
+	background-color: #f4f4f4;
+}
+
+.table tr:nth-child(1){
+	background-color: #f47100;
+	color:white;
+}
+
+.upicon{
+	width:12px;
+	height: 12px;
+	transition: 0.3s;
+}
+
+.invert{
+	transform:rotateZ(180deg);
+}
+
+.normal{ 
+	transform:rotateZ(0deg); 
+}
+
+/* :root{
+  scrollbar-color: rgb(210,210,210) rgb(46,54,69) !important;
+  scrollbar-width: thin !important;
+} */
