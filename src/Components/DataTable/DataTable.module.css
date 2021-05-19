@@ -12,10 +12,37 @@
 	width:100%;
 }
 
-.iconsWrapper{
+.filterWrapper{
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
 	background-color: transparent;
+}
+
+.searchWrapper{
+	display: flex;
+	align-items:center;
+	position: relative;
+	min-width: 100px;
+	max-width:350px;
+	width:50%;
+	padding:4px 8px;
+	box-shadow: 3px -3px 7px lightgray;
+	border-radius: 12px 12px 0 0;
+}
+
+.searchWrapper .search{
+	width:100%;
+	border-radius: 20px;
+	padding:10px;
+	border:2px solid gray;
+	padding-left: 40px;
+	box-sizing: border-box;
+}
+
+.searchWrapper .searchIcon{
+	position: absolute;
+	left:15px;
+	color: gray;
 }
 
 .icons{
@@ -59,6 +86,10 @@
 	color:white;
 }
 
+.table tr{
+	/* border-bottom: 1px solid #ccc; */
+}
+
 .upicon{
 	font-size: 16px !important; 
 	margin-left: 10px;
@@ -76,6 +107,25 @@
 .popoverContent{
 	padding:5px;
 	font-size: 14px;
+}
+
+.paginationWrapper{
+	display: flex;
+	justify-content: flex-end;
+	padding:2px;
+}
+
+.pagination{
+	display: grid;
+	grid-gap:10px;
+	color:gray;
+}
+
+.pagination>div{
+	padding:8px;
+	box-shadow: 3px -3px 7px lightgray;
+	border-radius: 0 0 6px 6px;
+	cursor: pointer;
 }
 
 /* :root{

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import dummyData from "./DataTable.constants";
 
 import styles from "./DataTable.module.css";
@@ -6,6 +6,8 @@ import styles from "./DataTable.module.css";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import ViewColumnIcon from "@material-ui/icons/ViewColumn";
+import SearchIcon from "@material-ui/icons/Search";
+import PrintIcon from "@material-ui/icons/Print";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Popover from "@material-ui/core/Popover";
@@ -21,19 +23,33 @@ const useStyles = makeStyles((theme) => ({
 export default function DataTable({
 	columns,
 	customWidgets,
-	options: { sort, columnSelect, csvDownload },
+	options: { sort, sortWholeData, columnSelect, csvDownload, printCsv, paginationLimit },
 }) {
 	const classes = useStyles();
 
-	const icons = [columnSelect, csvDownload].filter((icon) => icon);
-	console.log("icons", icons);
+	const icons = [columnSelect, csvDownload, printCsv].filter((icon) => icon);
+	const tableRef = useRef(null);
 
-	const [data, setData] = useState(dummyData);
-	const [csvDownloadLink, setCsvDownloadLink] = useState(null);
-
-	const dataColumns = Object.keys(data[0]);
+	const dataColumns = Object.keys(dummyData[0]);
 	const [tableColumns, setTableColumns] = useState(columns || dataColumns);
 	const [filterColumns, setFilterColumns] = useState(tableColumns);
+
+	const [data, setData] = useState(
+		dummyData.map((obj) => {
+			{
+				let tempObj = {};
+				filterColumns.forEach((column) => {
+					tempObj[column] = obj[column];
+				});
+				return tempObj;
+			}
+		})
+	);
+
+	const [paginationData,setPaginationData] = useState(data.length>paginationLimit ? data.slice(0,paginationLimit) : data)
+
+	const [csvDownloadLink, setCsvDownloadLink] = useState(null);
+	const [csv, setCsv] = useState(null);
 
 	const [orderDesc, setOrderDesc] = useState(
 		tableColumns.map((column) => true)
@@ -53,7 +69,6 @@ export default function DataTable({
 	const id = open ? "simple-popover" : undefined;
 
 	if (columns.find((column) => !dataColumns.includes(column))) {
-		console.log("Column name does not exist");
 		throw new Error(
 			"Column name does not exist. Check for spelling mistakes"
 		);
@@ -64,16 +79,16 @@ export default function DataTable({
 			let index = tableColumns.findIndex((column) => column == key);
 
 			if (orderDesc[index]) {
-				setData([
-					...data.sort((a, b) =>
+				setPaginationData([
+					...paginationData.sort((a, b) =>
 						isNaN(a[key])
 							? a[key].toLowerCase() < b[key].toLowerCase()
 							: parseInt(b[key]) - parseInt(a[key])
 					),
 				]);
 			} else {
-				setData([
-					...data.sort((a, b) =>
+				setPaginationData([
+					...paginationData.sort((a, b) =>
 						isNaN(a[key])
 							? a[key].toLowerCase() > b[key].toLowerCase()
 							: parseInt(a[key]) - parseInt(b[key])
@@ -127,11 +142,107 @@ export default function DataTable({
 		);
 	};
 
+	let searchBy = (e) => {
+		const substring = e.target.value.toLowerCase();
+		if (substring) {
+			setData([
+				...data.filter((row) => {
+					console.log(row);
+					console.log(Object.values(row));
+					console.log(
+						Object.values(row).find((item) => {
+							console.log(item.includes(substring));
+							return item.includes(substring);
+						})
+					);
+					if (
+						filterColumns.find(
+							(column) =>
+								typeof row[column] == "string" &&
+								row[column].toLowerCase().includes(substring)
+						)
+					) {
+						return true;
+					} else {
+						return false;
+					}
+				}),
+			]);
+		} else {
+			setData([
+				...dummyData.map((obj) => {
+					{
+						let tempObj = {};
+						filterColumns.forEach((column) => {
+							tempObj[column] = obj[column];
+						});
+						return tempObj;
+					}
+				}),
+			]);
+		}
+	};
+
+	let handlePrint = (e) => {
+		var w = window.open();
+
+		var html = "<!DOCTYPE HTML>";
+		html += '<html lang="en-us">';
+		html += "<head><style></style></head>";
+		html += "<body>";
+		html += tableRef.current.innerHTML;
+		html += "</body></html>";
+
+		console.log(html);
+
+		w.document.write(html);
+		w.window.print();
+		// w.document.close();
+	};
+
+	let getNumberOfPages = () => {
+		let number = 1;
+		let difference = data.length;
+
+		console.log("diff", difference);
+
+		while (difference > paginationLimit) {
+			console.log("diff", difference);
+			difference -= paginationLimit;
+			number += 1;
+		}
+		console.log("num", number);
+		return number
+	};
+
+	let displayPaginationData = (number) => {
+		setPaginationData([...data.slice((number*paginationLimit)-paginationLimit,data.length>number*paginationLimit ? number*paginationLimit : data.length)])
+	}
+
 	return (
 		<div>
 			{icons.length != 0 && (
-				<div className={styles.iconsWrapper}>
-					<div className={styles.icons} style={{gridTemplateColumns:`repeat(${icons.length},1fr)`}}>
+				<div className={styles.filterWrapper}>
+					<div className={styles.searchWrapper}>
+						<SearchIcon className={styles.searchIcon} />{" "}
+						<input className={styles.search} onChange={searchBy} />
+					</div>
+					<div
+						className={styles.icons}
+						style={{
+							gridTemplateColumns: `repeat(${icons.length},1fr)`,
+						}}
+					>
+						{printCsv && (
+							<IconButton
+								aria-describedby={id}
+								variant="contained"
+								color="primary"
+								onClick={handlePrint}
+							>
+								<PrintIcon />
+							</IconButton>
+						)}
 						{columnSelect && (
 							<IconButton
 								aria-describedby={id}
@@ -191,7 +302,7 @@ export default function DataTable({
 					</div>
 				</div>
 			)}
-			<div className={styles.tableWrapper}>
+			<div className={styles.tableWrapper} ref={tableRef}>
 				<table className={styles.table}>
 					<tr className={styles.headerRow}>
 						{tableColumns.map((heading, index) => (
@@ -211,7 +322,7 @@ export default function DataTable({
 							</th>
 						))}
 					</tr>
-					{data.map((row, index) => (
+					{paginationData.map((row, index) => (
 						<tr className={styles.row}>
 							{tableColumns.map((column) => (
 								<td>
@@ -223,6 +334,14 @@ export default function DataTable({
 						</tr>
 					))}
 				</table>
+			</div>
+
+			<div className={styles.paginationWrapper}>
+				<div className={styles.pagination} style={{gridTemplateColumns:`repeat(${getNumberOfPages()},1fr)`}}>
+					{[...Array(getNumberOfPages())].map(
+						(num, index) => <div onClick={e=>displayPaginationData(index+1)}>{index + 1}</div>
+					)}
+				</div>
 			</div>
 		</div>
 	);
