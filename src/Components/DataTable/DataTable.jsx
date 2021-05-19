@@ -31,8 +31,55 @@ export default function DataTable({
 		printCsv,
 		paginationLimit,
 	},
-	customStyles: { stripedRows, stripedRowsColor },
+	customStyles,
+	theme,
 }) {
+	let getThemeStyles = () => {
+		let themeStyles;
+
+		switch (theme) {
+			case "Aquamarine":
+				themeStyles = {
+					options: {
+						stripedRows: true,
+					},
+					searchBackground: "#47E5BC",
+					searchColor: "white",
+					searchBorder: "white",
+					headerBackground: "#47E5BC",
+					headerColor: "white",
+					stripedRowsBackground: "#EEFBFA",
+					stripedRowsColor: "black",
+					iconsBackground: "#47E5BC",
+					iconsColor: "white",
+					paginationSelectBackground: "#47E5BC",
+					paginationSelectColor: "white",
+				};
+				break;
+			default:
+				themeStyles = {
+					options: {
+						stripedRows: true,
+					},
+					headerBackground: "white",
+					headerColor: "black",
+					stripedRowsBackground: "white",
+					stripedRowsColor: "black",
+					iconsBackground: "white",
+					iconsColor: "black",
+					paginationSelectBackground: "white",
+					paginationSelectColor: "black",
+				};
+				break;
+		}
+		for (const [key, value] of Object.entries(customStyles)) {
+			themeStyles[key] = value 
+		}
+		return themeStyles
+	};
+
+	const themeStyles = getThemeStyles();
+
 	const classes = useStyles();
 
 	const icons = [columnSelect, csvDownload, printCsv].filter((icon) => icon);
@@ -53,7 +100,7 @@ export default function DataTable({
 			filterColumns.forEach((column) => {
 				tempObj[column] = obj[column];
 			});
-			tempObj["Serial#"] = index + 1
+			tempObj["Serial#"] = index + 1;
 			return tempObj;
 		})
 	);
@@ -234,14 +281,30 @@ export default function DataTable({
 		<div>
 			{icons.length != 0 && (
 				<div className={styles.filterWrapper}>
-					<div className={styles.searchWrapper}>
-						<SearchIcon className={styles.searchIcon} />{" "}
-						<input className={styles.search} onChange={searchBy} />
+					<div
+						className={styles.searchWrapper}
+						style={{
+							backgroundColor: themeStyles.searchBackground,
+						}}
+					>
+						<SearchIcon
+							className={styles.searchIcon}
+							style={{ color: themeStyles.searchColor }}
+						/>{" "}
+						<input
+							className={styles.search}
+							onChange={searchBy}
+							style={{
+								color: themeStyles.searchColor,
+								border: `2px solid ${themeStyles.searchBorder}`,
+							}}
+						/>
 					</div>
 					<div
 						className={styles.icons}
 						style={{
 							gridTemplateColumns: `repeat(${icons.length},1fr)`,
+							backgroundColor: themeStyles.iconsBackground,
 						}}
 					>
 						{printCsv && (
@@ -251,7 +314,9 @@ export default function DataTable({
 								color="primary"
 								onClick={handlePrint}
 							>
-								<PrintIcon />
+								<PrintIcon
+									style={{ color: themeStyles.iconsColor }}
+								/>
 							</IconButton>
 						)}
 						{columnSelect && (
@@ -261,7 +326,9 @@ export default function DataTable({
 								color="primary"
 								onClick={handleClick}
 							>
-								<ViewColumnIcon />
+								<ViewColumnIcon
+									style={{ color: themeStyles.iconsColor }}
+								/>
 							</IconButton>
 						)}
 						<Popover
@@ -306,7 +373,11 @@ export default function DataTable({
 						{csvDownload && (
 							<a href={csvDownloadLink} download="table.csv">
 								<IconButton>
-									<GetAppIcon />
+									<GetAppIcon
+										style={{
+											color: themeStyles.iconsColor,
+										}}
+									/>
 								</IconButton>
 							</a>
 						)}
@@ -315,13 +386,25 @@ export default function DataTable({
 			)}
 			<div className={styles.tableWrapper} ref={tableRef}>
 				<table className={`${styles.table}`}>
-					<tr className={styles.headerRow}>
+					<tr
+						className={styles.headerRow}
+						style={{
+							backgroundColor: themeStyles.headerBackground,
+							color: themeStyles.headerColor,
+						}}
+					>
 						{tableColumns.map((heading, index) => (
-							<th onClick={(e) => sortBy(heading)}>
+							<th
+								onClick={(e) => sortBy(heading)}
+								draggable="true"
+							>
 								<div>
 									<p>{heading}</p>{" "}
 									{sort && (
 										<ArrowUpwardIcon
+											style={{
+												color: themeStyles.headerColor,
+											}}
 											className={`${styles.upicon} ${
 												orderDesc[index]
 													? styles.invert
@@ -336,15 +419,16 @@ export default function DataTable({
 					{paginationData.map((row, index) => (
 						<tr
 							className={styles.row}
-							style={
-								stripedRows
-									? {
-											...(index % 2 != 0 && {
-												backgroundColor: stripedRowsColor,
-											}),
-									  }
-									: {}
-							}
+							style={{
+								order: index + 1,
+								// top:`${(index+1)*46}px`,
+								...(themeStyles.options.stripedRows &&
+									index % 2 != 0 && {
+										backgroundColor:
+											themeStyles.stripedRowsBackground,
+										color: themeStyles.stripedRowsColor,
+									}),
+							}}
 						>
 							{tableColumns.map((column) => (
 								<td>
@@ -371,11 +455,11 @@ export default function DataTable({
 							style={{
 								backgroundColor:
 									currentPage == index + 1
-										? "#f47100"
+										? themeStyles.paginationSelectBackground
 										: "white",
 								color:
 									currentPage == index + 1
-										? "white"
+										? themeStyles.paginationSelectColor
 										: "gray",
 							}}
 						>
@@ -387,3 +471,5 @@ export default function DataTable({
 		</div>
 	);
 }
+
+// #f47100

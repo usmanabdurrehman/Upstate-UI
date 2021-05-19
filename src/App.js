@@ -25,9 +25,10 @@ function App() {
 					printCsv: true,
 					paginationLimit: 6,
 				}}
+				theme='Aquamarine'
 				customStyles={{
-					stripedRows:false,
-					stripedRowsColor:'#f2f2f2'
+					// stripedRows:true,
+					// stripedRowsColor:'#f2f2f2'
 				}}
 			/>
 		</div>
