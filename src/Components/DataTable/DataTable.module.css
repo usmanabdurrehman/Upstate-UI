@@ -77,9 +77,9 @@
 	margin:0;
 }
 
-.table tr:nth-child(odd){
+/* .table tr:nth-child(odd){
 	background-color: #f4f4f4;
-}
+} */
 
 .table tr:nth-child(1){
 	background-color: #f47100;
@@ -123,7 +123,7 @@
 
 .pagination>div{
 	padding:8px;
-	box-shadow: 3px -3px 7px lightgray;
+	box-shadow: -3px 3px 7px lightgray;
 	border-radius: 0 0 6px 6px;
 	cursor: pointer;
 }

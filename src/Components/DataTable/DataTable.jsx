@@ -23,30 +23,44 @@ const useStyles = makeStyles((theme) => ({
 export default function DataTable({
 	columns,
 	customWidgets,
-	options: { sort, sortWholeData, columnSelect, csvDownload, printCsv, paginationLimit },
+	options: {
+		sort,
+		sortWholeData,
+		columnSelect,
+		csvDownload,
+		printCsv,
+		paginationLimit,
+	},
+	customStyles: { stripedRows, stripedRowsColor },
 }) {
 	const classes = useStyles();
 
 	const icons = [columnSelect, csvDownload, printCsv].filter((icon) => icon);
 	const tableRef = useRef(null);
 
+	let [currentPage, setCurrentPage] = useState(1);
+
 	const dataColumns = Object.keys(dummyData[0]);
-	const [tableColumns, setTableColumns] = useState(columns || dataColumns);
+	const [tableColumns, setTableColumns] = useState([
+		"Serial#",
+		...(columns || dataColumns),
+	]);
 	const [filterColumns, setFilterColumns] = useState(tableColumns);
 
 	const [data, setData] = useState(
-		dummyData.map((obj) => {
-			{
-				let tempObj = {};
-				filterColumns.forEach((column) => {
-					tempObj[column] = obj[column];
-				});
-				return tempObj;
-			}
+		dummyData.map((obj, index) => {
+			let tempObj = {};
+			filterColumns.forEach((column) => {
+				tempObj[column] = obj[column];
+			});
+			tempObj["Serial#"] = index + 1
+			return tempObj;
 		})
 	);
 
-	const [paginationData,setPaginationData] = useState(data.length>paginationLimit ? data.slice(0,paginationLimit) : data)
+	const [paginationData, setPaginationData] = useState(
+		data.length > paginationLimit ? data.slice(0, paginationLimit) : data
+	);
 
 	const [csvDownloadLink, setCsvDownloadLink] = useState(null);
 	const [csv, setCsv] = useState(null);
@@ -67,12 +81,6 @@ export default function DataTable({
 
 	const open = Boolean(anchorEl);
 	const id = open ? "simple-popover" : undefined;
-
-	if (columns.find((column) => !dataColumns.includes(column))) {
-		throw new Error(
-			"Column name does not exist. Check for spelling mistakes"
-		);
-	}
 
 	let sortBy = (key) => {
 		if (sort) {
@@ -114,9 +122,6 @@ export default function DataTable({
 	}, []);
 
 	let handleColumnChange = (isPresent, columnToBeOperated) => {
-		console.log(
-			filterColumns.findIndex((column) => column == columnToBeOperated)
-		);
 		setTableColumns(
 			isPresent
 				? [
@@ -147,14 +152,6 @@ export default function DataTable({
 		if (substring) {
 			setData([
 				...data.filter((row) => {
-					console.log(row);
-					console.log(Object.values(row));
-					console.log(
-						Object.values(row).find((item) => {
-							console.log(item.includes(substring));
-							return item.includes(substring);
-						})
-					);
 					if (
 						filterColumns.find(
 							(column) =>
@@ -193,8 +190,6 @@ export default function DataTable({
 		html += tableRef.current.innerHTML;
 		html += "</body></html>";
 
-		console.log(html);
-
 		w.document.write(html);
 		w.window.print();
 		// w.document.close();
@@ -204,19 +199,35 @@ export default function DataTable({
 		let number = 1;
 		let difference = data.length;
 
-		console.log("diff", difference);
-
 		while (difference > paginationLimit) {
-			console.log("diff", difference);
 			difference -= paginationLimit;
 			number += 1;
 		}
-		console.log("num", number);
-		return number
+		return number;
 	};
 
 	let displayPaginationData = (number) => {
-		setPaginationData([...data.slice((number*paginationLimit)-paginationLimit,data.length>number*paginationLimit ? number*paginationLimit : data.length)])
+		setPaginationData([
+			...data.slice(
+				number * paginationLimit - paginationLimit,
+				data.length > number * paginationLimit
+					? number * paginationLimit
+					: data.length
+			),
+		]);
+		setCurrentPage(number);
+	};
+
+	if (columns.find((column) => !dataColumns.includes(column))) {
+		throw new Error(
+			"Column name does not exist. Check for spelling mistakes"
+		);
+	}
+
+	if (paginationLimit > dummyData.length) {
+		throw new Error(
+			`The pagination limit(${paginationLimit}) cannot be greater than the number of items in the data array(${dummyData.length})`
+		);
 	}
 
 	return (
@@ -303,7 +314,7 @@ export default function DataTable({
 				</div>
 			)}
 			<div className={styles.tableWrapper} ref={tableRef}>
-				<table className={styles.table}>
+				<table className={`${styles.table}`}>
 					<tr className={styles.headerRow}>
 						{tableColumns.map((heading, index) => (
 							<th onClick={(e) => sortBy(heading)}>
@@ -323,7 +334,18 @@ export default function DataTable({
 						))}
 					</tr>
 					{paginationData.map((row, index) => (
-						<tr className={styles.row}>
+						<tr
+							className={styles.row}
+							style={
+								stripedRows
+									? {
+											...(index % 2 != 0 && {
+												backgroundColor: stripedRowsColor,
+											}),
+									  }
+									: {}
+							}
+						>
 							{tableColumns.map((column) => (
 								<td>
 									{customWidgets[column]
@@ -337,10 +359,29 @@ export default function DataTable({
 			</div>
 
 			<div className={styles.paginationWrapper}>
-				<div className={styles.pagination} style={{gridTemplateColumns:`repeat(${getNumberOfPages()},1fr)`}}>
-					{[...Array(getNumberOfPages())].map(
-						(num, index) => <div onClick={e=>displayPaginationData(index+1)}>{index + 1}</div>
-					)}
+				<div
+					className={styles.pagination}
+					style={{
+						gridTemplateColumns: `repeat(${getNumberOfPages()},1fr)`,
+					}}
+				>
+					{[...Array(getNumberOfPages())].map((num, index) => (
+						<div
+							onClick={(e) => displayPaginationData(index + 1)}
+							style={{
+								backgroundColor:
+									currentPage == index + 1
+										? "#f47100"
+										: "white",
+								color:
+									currentPage == index + 1
+										? "white"
+										: "gray",
+							}}
+						>
+							{index + 1}
+						</div>
+					))}
 				</div>
 			</div>
 		</div>
