@@ -36,14 +36,18 @@
 	border-radius: 20px;
 	padding:10px;
 	border:2px solid gray;
-	padding-left: 40px;
+	padding-left: 35px;
 	box-sizing: border-box;
 	background-color: transparent;
 }
 
+.searchWrapper .search:focus {
+    outline: none;
+}
+
 .searchWrapper .searchIcon{
 	position: absolute;
-	left:15px;
+	left:18px;
 	color: gray;
 }
 
@@ -61,14 +65,14 @@
 }
 
 .table th,.table td{
-	padding:8px;
+	padding:8px 16px;
 	text-align: left;
 }
 
 .table th{
 	cursor: pointer;
 	text-transform: capitalize;
-	cursor:move;
+	/* cursor:move; */
 	user-select: none;
 }
 
@@ -145,8 +149,14 @@
 		width:100%;
 		max-width: 100%;
 		padding:10px;
+		box-shadow: none;
 	}
 	.icons{
 		border-radius: 0;
+		box-shadow: none;
 	}
+	.tableWrapper{
+		box-shadow: none;
+	}
+
 }

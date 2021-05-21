@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import dummyData from "./DataTable.constants";
 
 import styles from "./DataTable.module.css";
 
@@ -14,6 +13,8 @@ import Popover from "@material-ui/core/Popover";
 import Typography from "@material-ui/core/Typography";
 import { IconButton, Checkbox } from "@material-ui/core";
 
+import {getThemeStyles, createCSV} from './utils'
+
 const useStyles = makeStyles((theme) => ({
 	typography: {
 		padding: theme.spacing(2),
@@ -21,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function DataTable({
+	data:Data,
 	columns,
 	customWidgets,
 	options: {
@@ -34,51 +36,7 @@ export default function DataTable({
 	customStyles,
 	theme,
 }) {
-	let getThemeStyles = () => {
-		let themeStyles;
-
-		switch (theme) {
-			case "Aquamarine":
-				themeStyles = {
-					options: {
-						stripedRows: true,
-					},
-					searchBackground: "#47E5BC",
-					searchColor: "white",
-					searchBorder: "white",
-					headerBackground: "#47E5BC",
-					headerColor: "white",
-					stripedRowsBackground: "#EEFBFA",
-					stripedRowsColor: "black",
-					iconsBackground: "#47E5BC",
-					iconsColor: "white",
-					paginationSelectBackground: "#47E5BC",
-					paginationSelectColor: "white",
-				};
-				break;
-			default:
-				themeStyles = {
-					options: {
-						stripedRows: true,
-					},
-					headerBackground: "white",
-					headerColor: "black",
-					stripedRowsBackground: "white",
-					stripedRowsColor: "black",
-					iconsBackground: "white",
-					iconsColor: "black",
-					paginationSelectBackground: "white",
-					paginationSelectColor: "black",
-				};
-				break;
-		}
-		for (const [key, value] of Object.entries(customStyles)) {
-			themeStyles[key] = value 
-		}
-		return themeStyles
-	};
-
-	const themeStyles = getThemeStyles();
+	const themeStyles = getThemeStyles(theme,customStyles);
 
 	const classes = useStyles();
 
@@ -87,7 +45,7 @@ export default function DataTable({
 
 	let [currentPage, setCurrentPage] = useState(1);
 
-	const dataColumns = Object.keys(dummyData[0]);
+	const dataColumns = Object.keys(Data[0]);
 	const [tableColumns, setTableColumns] = useState([
 		"Serial#",
 		...(columns || dataColumns),
@@ -95,7 +53,7 @@ export default function DataTable({
 	const [filterColumns, setFilterColumns] = useState(tableColumns);
 
 	const [data, setData] = useState(
-		dummyData.map((obj, index) => {
+		Data.map((obj, index) => {
 			let tempObj = {};
 			filterColumns.forEach((column) => {
 				tempObj[column] = obj[column];
@@ -157,15 +115,8 @@ export default function DataTable({
 	};
 
 	useEffect(() => {
-		let csv = Object.keys(data[0]).join(",") + "\n";
-		data.forEach((row) => {
-			Object.values(row).forEach((value) => {
-				csv += `"${value}",`;
-			});
-			csv += "\n";
-		});
-		const blob = new Blob([csv], { type: "text/csv" });
-		setCsvDownloadLink(URL.createObjectURL(blob));
+		let csv = createCSV(data)
+		setCsvDownloadLink(URL.createObjectURL(csv));
 	}, []);
 
 	let handleColumnChange = (isPresent, columnToBeOperated) => {
@@ -214,7 +165,7 @@ export default function DataTable({
 			]);
 		} else {
 			setData([
-				...dummyData.map((obj) => {
+				...Data.map((obj) => {
 					{
 						let tempObj = {};
 						filterColumns.forEach((column) => {
@@ -271,9 +222,9 @@ export default function DataTable({
 		);
 	}
 
-	if (paginationLimit > dummyData.length) {
+	if (paginationLimit > Data.length) {
 		throw new Error(
-			`The pagination limit(${paginationLimit}) cannot be greater than the number of items in the data array(${dummyData.length})`
+			`The pagination limit(${paginationLimit}) cannot be greater than the number of items in the data array(${Data.length})`
 		);
 	}
 

@@ -1,0 +1,51 @@
+.switch{
+	height: 14px;
+	width:34px;
+	background-color: #9E9E9E;
+	position: relative;
+	border-radius: 12px;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.switchCircle{
+	height:20px;
+	width:20px;
+	border-radius: 50%;
+	background-color: #1976d2;
+	background-color: white;
+	position: absolute;
+	left:0;
+	box-shadow: 1px 1px 3px #555;
+	transition: 0.5s;
+}
+
+.switchBackgroundClicked{
+	background-color: #84B4E3;
+}
+
+@keyframes spring {
+	0%{
+		transform:translateX(0);
+	}
+	25% {
+		transform:translateX(14px);
+	}
+	50% {
+		transform:translateX(18px);
+	}
+	100% {
+		transform:translateX(14px);
+	}
+}
+
+.switchClicked{
+	background-color: #1976d2;
+	box-shadow:none;
+	/* transform:translateX(14px); */
+	animation:spring;
+	animation-duration: 0.5s;
+	transform:translateX(14px);
+}
