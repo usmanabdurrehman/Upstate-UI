@@ -1,0 +1,38 @@
+.radioWrapper{
+	display: flex;
+	align-items: center;
+}
+
+.radio{
+	height:24px;
+	width:24px;
+	border-radius: 50%;
+	display: flex;
+	align-items:center;
+	border:2px solid black;
+	justify-content: center;
+	cursor: pointer;
+	margin:10px 0;
+}
+
+.radioCircle{
+	height: 12px;
+	width:12px;
+	border-radius: 50%;
+	background-color: rgb(220, 0, 78);
+	display: none;
+}
+
+.radioCircleClicked{
+	display: block;
+}
+
+.radioClicked{
+	border:2px solid rgb(220, 0, 78);
+}
+
+.optionName{
+	margin:0;
+	margin-left: 10px;
+	font-size: 14px;
+}

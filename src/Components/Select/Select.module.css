@@ -1,0 +1,43 @@
+.select{
+	height:40px;
+	width:200px;
+	border-radius: 4px;
+	border:1px solid black;
+	cursor: pointer;
+	position: relative;
+	font-size: 14px;
+}
+
+.selectedValue{
+	height: 100%;
+	width:100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding:0 10px;
+}
+
+.selectOptions{
+	position: absolute;
+	left: 0;
+	top:40px;
+	z-index:100;
+	width:100%;
+	border:1px solid black;
+	border-top: none;
+}
+
+.selectOption{
+	height: 40px;
+	display: flex;
+	align-items: center;
+	padding-left: 10px;
+}
+
+.icon{
+	transition: 0.4s;
+}
+
+.invert{
+	transform:rotateZ(180deg);
+}
