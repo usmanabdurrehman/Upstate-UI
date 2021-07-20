@@ -1,0 +1,15 @@
+.chip{
+	height:32px;
+	border-radius:20px;
+	background-color: rgb(220, 0, 78);
+	border:none;
+	display: inline-flex;
+	font-size: 12px;
+	line-height: 12px;
+	color:white;
+	white-space: nowrap;
+	align-items: center;
+	justify-content:center;
+	cursor: pointer;
+	padding:0 12px;
+}

@@ -1,6 +1,8 @@
 import React,{useState} from 'react'
 import styles from './Button.module.css'
 
+import PropTypes from 'prop-types';
+
 import {classNames,typeToColorMapping} from 'utils'
 
 export default function Button({children,type,variant,onClick}) {
@@ -25,3 +27,14 @@ export default function Button({children,type,variant,onClick}) {
 		</button>
 	)
 }
+
+Button.propTypes = {
+  type: PropTypes.oneOf(['primary', 'success', 'warning','danger','default']),
+  variant:PropTypes.oneOf(['filled', 'outlined'])
+};
+
+Button.defaultProps = {
+  type:"default",
+  variant:"outlined",
+  children:"lmao"
+};

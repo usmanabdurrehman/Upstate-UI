@@ -1,16 +1,16 @@
 import React from 'react';
 
-import { Button } from 'Components';
+import { FAB } from 'Components';
 
 export default {
-  title: 'Button',
-  component: Button,
+  title: 'FAB',
+  component: FAB,
   argTypes: {
     backgroundColor: { control: 'color' },
   },
 };
 
-const Template = (args) => <Button {...args} />;
+const Template = (args) => <FAB {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

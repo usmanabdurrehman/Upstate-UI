@@ -1,0 +1,21 @@
+.checkbox{
+	height: 24px;
+	width:24px;
+	border-radius: 4px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	border:1px solid black;
+	transition:0.4s;
+}
+
+.selected{
+	border:none;
+	background-color: rgb(220, 0, 78);
+}
+
+.check{
+	height: 80%;
+	width:80%;
+}

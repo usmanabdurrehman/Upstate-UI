@@ -20,11 +20,14 @@
 	width:12px;
 	border-radius: 50%;
 	background-color: rgb(220, 0, 78);
-	display: none;
+	visibility: hidden;
+	opacity: 0;
+	transition:0.4s;
 }
 
 .radioCircleClicked{
-	display: block;
+	visibility: visible;
+	opacity: 1;
 }
 
 .radioClicked{

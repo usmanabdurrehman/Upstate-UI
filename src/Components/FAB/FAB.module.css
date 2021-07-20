@@ -4,7 +4,9 @@
 	width: 56px;
 	border: none;
 	cursor: pointer;
-	background-color: rgb(220, 0, 78);
+	font-size: 24px;
+	/* line-height: 56px; */
+	padding:0;
 }
 
 @keyframes emerge {

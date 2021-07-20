@@ -1,0 +1,21 @@
+.badgeWrapper{
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.badge{
+	height:20px;
+	width:20px;
+	display: flex;
+	justify-content:center;
+	position: absolute;
+	bottom:50%;
+	left:100%;
+	border-radius: 4px;
+	background-color: rgb(220, 0, 78);
+	color:white;
+	border-radius: 50%;
+	transition: 0.4s;
+	font-size: 12px;
+}
