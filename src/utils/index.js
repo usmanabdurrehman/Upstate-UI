@@ -6,17 +6,30 @@ export let classNames = (classMapping) => {
 	return classes.join(" ");
 };
 
-export let typeToColorMapping = (key, variant = "filled") => {
+export let typeToColorMapping = ({type, variant = "filled", colorOpacity = 1}) => {
 	const colorMapping = {
-		primary: { backgroundColor: "#007bff", color: "#fff" },
-		success: { backgroundColor: "#28a745", color: "#fff" },
-		warning: { backgroundColor: "#ffc107", color: "#fff" },
-		danger: { backgroundColor: "#dc3545", color: "#fff" },
+		primary: {
+			backgroundColor: `rgba(0, 123, 255,${colorOpacity})`,
+			color: "#fff",
+		},
+		success: {
+			backgroundColor: `rgba(40, 167, 69,${colorOpacity})`,
+			color: "#fff",
+		},
+		warning: {
+			backgroundColor: `rgba(255, 193, 7,${colorOpacity})`,
+			color: "#fff",
+		},
+		danger: {
+			backgroundColor: `rgba(220, 53, 69,${colorOpacity})`,
+			color: "#fff",
+		},
 	};
-	const { backgroundColor, color } = colorMapping[key] || {
-		backgroundColor: "#000000",
-		color: "#ffffff",
-	};
+	const { backgroundColor, color } = colorMapping[type] || colorMapping.primary
+	// {
+	// 	backgroundColor: `rgba(0, 0, 0,${colorOpacity})`,
+	// 	color: "#ffffff",
+	// };
 	return variant == "outlined"
 		? {
 				border: `1.5px solid ${backgroundColor}`,

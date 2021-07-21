@@ -3,9 +3,13 @@ import styles from "./Select.module.css";
 
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 
-import { classNames } from "utils";
+import PropTypes from "prop-types";
 
-export default function Select({ options, selectedValue, onChange }) {
+import { classNames, typeToColorMapping } from "utils";
+
+import ClickAwayListener from "react-click-away-listener";
+
+export default function Select({ type, options, selectedValue, onChange }) {
 	if (!options) {
 		throw new Error("You should have atleast one option");
 	} else if (!Array.isArray(options)) {
@@ -15,53 +19,66 @@ export default function Select({ options, selectedValue, onChange }) {
 	const [selected, setSelected] = useState(selectedValue || options[0]);
 	const [selectOpen, setSelectOpen] = useState(false);
 
-	useEffect(() => {
-		// document.addEventListener("click", (e) => {
-		// 	let target = e.target;
-		// 	console.log(!target.closest(styles.select)?.length)
-		// 	console.log(selectOpen)
-		// 	if (!target.closest(styles.select)?.length && selectOpen) {
-		// 		console.log('yay')
-		// 		// console.log(!target.closest(styles.select)?.length && selectOpen)
-		// 		// console.log('yayyyy')
-		// 		setSelectOpen(false);
-		// 	}
-		// });
-	}, []);
+	let handleClickAway = () => setSelectOpen(false);
 
 	return (
-		<div className={styles.select}>
+		<ClickAwayListener onClickAway={handleClickAway}>
 			<div
-				className={styles.selectedValue}
-				onClick={(e) => setSelectOpen(true)}
+				className={styles.select}
+				style={{
+					borderColor: typeToColorMapping({ type }).backgroundColor,
+				}}
 			>
-				<div className={styles.selected}>{selected}</div>
-				<KeyboardArrowDownIcon
-					className={classNames({
-						[styles.icon]: true,
-						[styles.invert]: selectOpen,
-					})}
-				/>
-			</div>
-			{selectOpen && (
-				<div className={styles.selectOptions}>
-					{options.map((option) => (
-						<div
-							className={classNames({
-								[styles.selectOption]: true,
-								[styles.selectedOption]: option == selected,
-							})}
-							onClick={(e) => {
-								setSelected(option);
-								setSelectOpen(false);
-								onChange && onChange(option);
-							}}
-						>
-							{option}
-						</div>
-					))}
+				<div
+					className={styles.selectedValue}
+					onClick={(e) => setSelectOpen(true)}
+				>
+					<div className={styles.selected}>{selected}</div>
+					<KeyboardArrowDownIcon
+						className={classNames({
+							[styles.icon]: true,
+							[styles.invert]: selectOpen,
+						})}
+					/>
 				</div>
-			)}
-		</div>
+				{selectOpen && (
+					<div className={styles.selectOptions}>
+						{options.map((option) => (
+							<div
+								className={classNames({
+									[styles.selectOption]: true,
+									[styles.selectedOption]: option == selected,
+								})}
+								onClick={(e) => {
+									setSelected(option);
+									setSelectOpen(false);
+									onChange && onChange(option);
+								}}
+								style={{
+									borderColor: typeToColorMapping({ type })
+										.backgroundColor,
+								}}
+							>
+								{option}
+							</div>
+						))}
+					</div>
+				)}
+			</div>
+		</ClickAwayListener>
 	);
 }
+
+Select.propTypes = {
+	type: PropTypes.oneOf([
+		"primary",
+		"success",
+		"warning",
+		"danger",
+		"default",
+	]),
+};
+
+Select.defaultProps = {
+	type: "default",
+};

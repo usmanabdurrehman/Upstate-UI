@@ -15,5 +15,6 @@ const Template = (args) => <Button {...args} />;
 export const Primary = Template.bind({});
 Primary.args = {
   type:"default",
-  variant:"outlined"
+  variant:"outlined",
+  size:'small'
 };

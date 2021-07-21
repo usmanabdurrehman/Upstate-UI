@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import styles from "./Switch.module.css";
 
-import { classNames } from "utils";
+import PropTypes from "prop-types";
 
-export default function Switch({onChange}) {
+import { classNames, typeToColorMapping } from "utils";
+
+export default function Switch({ onChange, type, variant }) {
 	const [clicked, setClicked] = useState(false);
 
 	return (
@@ -13,16 +15,46 @@ export default function Switch({onChange}) {
 				[styles.switchBackgroundClicked]: clicked,
 			})}
 			onClick={(e) => {
-				setClicked(!clicked)
-				onChange && onChange(clicked)
+				setClicked(!clicked);
+				onChange && onChange(clicked);
 			}}
+			style={
+				clicked
+					? {
+							backgroundColor: typeToColorMapping({type,colorOpacity:0.5})
+								.backgroundColor,
+					  }
+					: {}
+			}
 		>
 			<div
 				className={classNames({
 					[styles.switchCircle]: true,
 					[styles.switchClicked]: clicked,
 				})}
+				style={
+				clicked
+					? {
+							backgroundColor: typeToColorMapping({type})
+								.backgroundColor,
+					  }
+					: {}
+			}
 			></div>
 		</div>
 	);
 }
+
+Switch.propTypes = {
+	type: PropTypes.oneOf([
+		"primary",
+		"success",
+		"warning",
+		"danger",
+		"default",
+	]),
+};
+
+Switch.defaultProps = {
+	type: "default",
+};

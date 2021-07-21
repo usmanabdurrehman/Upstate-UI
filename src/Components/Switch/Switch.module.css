@@ -42,9 +42,7 @@
 }
 
 .switchClicked{
-	background-color: #1976d2;
 	box-shadow:none;
-	/* transform:translateX(14px); */
 	animation:spring;
 	animation-duration: 0.5s;
 	transform:translateX(14px);

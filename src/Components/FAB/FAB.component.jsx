@@ -21,7 +21,7 @@ export default function FAB({ children, type, variant, onClick }) {
 			onAnimationEnd={() => {
 				setClicked(false);
 			}}
-			style={typeToColorMapping(type,variant)}
+			style={typeToColorMapping({type,variant})}
 		>
 			{children}
 		</button>

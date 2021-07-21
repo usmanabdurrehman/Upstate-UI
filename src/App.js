@@ -16,19 +16,25 @@ import {
 	Badge,
 	Checkbox,
 	Stepper,
-	Chip
+	Chip,
+	Modal
 } from "Components";
 import dummyData from "Components/DataTable/DataTable.constants";
 import SearchIcon from "@material-ui/icons/Search";
 
 function App() {
 	const [prog, setProg] = useState(0);
+	const [open,setOpen] = useState(false)
 
 	return (
 		<div className="App">
 			<div className="wrapper">
+				<Modal isOpen={open} onClose={e=>setOpen(false)}>
+					<div style={{padding:50,display:'flex',alignItems:'center',backgroundColor:'white',borderRadius:20}}>lmao son</div>
+				</Modal>
+				<button onClick={e=>setOpen(!open)}>invert modal open state</button>
 				<Stepper/>
-				<Chip label="Basic"/>
+				<Chip label="Basic" type="primary" variant="filled"/>
 				<Checkbox />
 				<Badge number={6}>Lmao</Badge>
 				<Accordion />

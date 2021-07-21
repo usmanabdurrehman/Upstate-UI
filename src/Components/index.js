@@ -24,3 +24,5 @@ export {default as Accordion} from './Accordion/Accordion.component'
 export {default as Stepper} from './Stepper/Stepper.component'
 
 export {default as Chip} from './Chip/Chip.component'
+
+export {default as Modal} from './Modal/Modal.component'
