@@ -1,3 +1,7 @@
+export let isEmpty = (value) => {
+	return typeof value != "boolean" && !value;
+};
+
 export let classNames = (classMapping) => {
 	const classes = [];
 	Object.keys(classMapping).forEach((classKey) => {
@@ -6,7 +10,11 @@ export let classNames = (classMapping) => {
 	return classes.join(" ");
 };
 
-export let typeToColorMapping = ({type, variant = "filled", colorOpacity = 1}) => {
+export let typeToColorMapping = ({
+	color: colorKey,
+	variant = "filled",
+	colorOpacity = 1,
+}) => {
 	const colorMapping = {
 		primary: {
 			backgroundColor: `rgba(0, 123, 255,${colorOpacity})`,
@@ -25,7 +33,8 @@ export let typeToColorMapping = ({type, variant = "filled", colorOpacity = 1}) =
 			color: "#fff",
 		},
 	};
-	const { backgroundColor, color } = colorMapping[type] || colorMapping.primary
+	const { backgroundColor, color } =
+		colorMapping[colorKey] || colorMapping.primary;
 	// {
 	// 	backgroundColor: `rgba(0, 0, 0,${colorOpacity})`,
 	// 	color: "#ffffff",

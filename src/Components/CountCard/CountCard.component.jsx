@@ -11,7 +11,6 @@ export default function CountCard({
 	color,
 	width,
 	height,
-	type,
 }) {
 	return (
 		<div className={styles.card} style={{ width, height }}>
@@ -19,7 +18,7 @@ export default function CountCard({
 				className={styles.hoverLineTop}
 				style={{
 					backgroundColor:
-						color || typeToColorMapping({ type }).backgroundColor,
+						typeToColorMapping({ color }).backgroundColor,
 				}}
 			></div>
 			<div className={styles.gridChild}>
@@ -31,7 +30,7 @@ export default function CountCard({
 }
 
 CountCard.propTypes = {
-	type: PropTypes.oneOf([
+	color: PropTypes.oneOf([
 		"primary",
 		"success",
 		"warning",
@@ -46,7 +45,7 @@ CountCard.propTypes = {
 };
 
 CountCard.defaultProps = {
-	type: "default",
+	color: "default",
 	width: 250,
 	height: 150,
 	number: 30,

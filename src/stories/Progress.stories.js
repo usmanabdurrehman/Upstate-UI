@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import { Switch } from 'Components';
+import { Progress } from "Components";
 
 export default {
-  title: 'Switch',
-  component: Switch,
-  argTypes: {
+	title: "Progress",
+	component: Progress,
+	argTypes: {
 		color: {
 			options: ["primary", "success", "warning", "danger", "default"],
 			control: { type: "radio" },
@@ -13,9 +13,10 @@ export default {
 	},
 };
 
-const Template = (args) => <Switch {...args} />;
+const Template = (args) => <Progress {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  color:"default",
+	color: "default",
+	progress:40
 };

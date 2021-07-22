@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 import { classNames, typeToColorMapping } from "utils";
 
-export default function Button({ children, type, variant, size, onClick }) {
+export default function Button({ children, color, variant, size, onClick }) {
 	const [clicked, setClicked] = useState(false);
 
 	let typeToSizeMapper = (size) => {
@@ -37,7 +37,7 @@ export default function Button({ children, type, variant, size, onClick }) {
 				[styles.buttonAnimation]: clicked,
 			})}
 			style={{
-				...typeToColorMapping({ type, variant }),
+				...typeToColorMapping({ color, variant }),
 				...typeToSizeMapper(size),
 			}}
 			onAnimationEnd={() => {
@@ -50,7 +50,7 @@ export default function Button({ children, type, variant, size, onClick }) {
 }
 
 Button.propTypes = {
-	type: PropTypes.oneOf([
+	color: PropTypes.oneOf([
 		"primary",
 		"success",
 		"warning",
@@ -62,7 +62,7 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
-	type: "default",
+	color: "default",
 	variant: "outlined",
 	children: "default",
 	size:'small'

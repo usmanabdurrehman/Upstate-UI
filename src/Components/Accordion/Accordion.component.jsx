@@ -1,24 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Accordion.module.css";
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import { classNames } from "utils";
+import PropTypes from "prop-types";
+
+import { classNames, isEmpty } from "utils";
 
 // https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_accordion_animate
 
-export default function Accordion({ content, title }) {
-	const [open, setOpen] = useState(false);
+// Have to check the condition placed for expanded
+
+export default function Accordion({
+	content,
+	title,
+	disabled,
+	onChange,
+	expanded,
+}) {
+	const [open, setOpen] = useState(expanded || false);
+
+	useEffect(() => {
+		setOpen(expanded);
+	}, [expanded]);
 
 	return (
 		<div
 			className={classNames({
 				[styles.accordion]: true,
 				[styles.accordionOpen]: open,
+				[styles.disabled]: disabled,
 			})}
 		>
-			<div className={styles.title} onClick={(e) => setOpen(!open)}>
-				<p>Accordion</p>
+			<div
+				className={classNames({
+					[styles.title]: true,
+					[styles.disabled]: disabled,
+				})}
+				onClick={(e) => {
+					onChange && onChange();
+					!disabled &&
+						isEmpty(expanded) &&
+						setOpen(!(expanded ? open && expanded : open));
+				}}
+			>
+				<p>{title}</p>
 				<ExpandMoreIcon
 					className={classNames({
 						[styles.arrow]: true,
@@ -26,15 +52,19 @@ export default function Accordion({ content, title }) {
 					})}
 				/>
 			</div>
-			<div className={styles.content}>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-				sodales dolor eu tellus mattis cursus. Vivamus lacus mauris,
-				gravida quis orci eu, mattis ullamcorper felis. Nunc sed mi
-				porta, condimentum mauris malesuada, commodo enim. Interdum et
-				malesuada fames ac ante ipsum primis in faucibus. Nulla et
-				iaculis arcu, eget ultrices lectus. Cras a justo ultricies,
-				congue dolor suscipit, consequat nisl. Ut ac posuere turpis.
-			</div>
+			<div className={styles.content}>{content}</div>
 		</div>
 	);
 }
+
+Accordion.propTypes = {
+	content: PropTypes.node,
+	title: PropTypes.node,
+	disabled: PropTypes.bool,
+	expanded: PropTypes.bool,
+	onChange: PropTypes.func,
+};
+
+Accordion.defaultProps = {
+	disabled: false,
+};

@@ -6,15 +6,18 @@ export default {
   title: 'Button',
   component: Button,
   argTypes: {
-    backgroundColor: { control: 'color' },
-  },
+		color: {
+			options: ["primary", "success", "warning", "danger", "default"],
+			control: { type: "radio" },
+		},
+	},
 };
 
 const Template = (args) => <Button {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  type:"default",
+  color:"default",
   variant:"outlined",
   size:'small'
 };

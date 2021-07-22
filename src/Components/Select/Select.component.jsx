@@ -9,7 +9,7 @@ import { classNames, typeToColorMapping } from "utils";
 
 import ClickAwayListener from "react-click-away-listener";
 
-export default function Select({ type, options, selectedValue, onChange }) {
+export default function Select({ color, options, selectedValue, onChange }) {
 	if (!options) {
 		throw new Error("You should have atleast one option");
 	} else if (!Array.isArray(options)) {
@@ -26,7 +26,7 @@ export default function Select({ type, options, selectedValue, onChange }) {
 			<div
 				className={styles.select}
 				style={{
-					borderColor: typeToColorMapping({ type }).backgroundColor,
+					borderColor: typeToColorMapping({ color }).backgroundColor,
 				}}
 			>
 				<div
@@ -55,7 +55,7 @@ export default function Select({ type, options, selectedValue, onChange }) {
 									onChange && onChange(option);
 								}}
 								style={{
-									borderColor: typeToColorMapping({ type })
+									borderColor: typeToColorMapping({ color })
 										.backgroundColor,
 								}}
 							>
@@ -70,7 +70,7 @@ export default function Select({ type, options, selectedValue, onChange }) {
 }
 
 Select.propTypes = {
-	type: PropTypes.oneOf([
+	color: PropTypes.oneOf([
 		"primary",
 		"success",
 		"warning",
@@ -80,5 +80,5 @@ Select.propTypes = {
 };
 
 Select.defaultProps = {
-	type: "default",
+	color: "default",
 };

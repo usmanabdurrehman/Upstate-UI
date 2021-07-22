@@ -1,25 +1,22 @@
 import React from "react";
 
-import { Checkbox } from "Components";
+import { RadioGroup } from "Components";
 
 export default {
-	title: "Checkbox",
-	component: Checkbox,
+	title: "RadioGroup",
+	component: RadioGroup,
 	argTypes: {
 		color: {
 			options: ["primary", "success", "warning", "danger", "default"],
 			control: { type: "radio" },
 		},
-		onChange: {
-			control: false,
-		},
 	},
 };
 
-const Template = (args) => <Checkbox {...args} />;
+const Template = (args) => <RadioGroup {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
 	color: "default",
-	disabled:false
+	options: ["Small", "Medium"],
 };

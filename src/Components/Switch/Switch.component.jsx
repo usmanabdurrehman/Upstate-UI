@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 import { classNames, typeToColorMapping } from "utils";
 
-export default function Switch({ onChange, type, variant }) {
+export default function Switch({ onChange, color, variant }) {
 	const [clicked, setClicked] = useState(false);
 
 	return (
@@ -21,7 +21,7 @@ export default function Switch({ onChange, type, variant }) {
 			style={
 				clicked
 					? {
-							backgroundColor: typeToColorMapping({type,colorOpacity:0.5})
+							backgroundColor: typeToColorMapping({color,colorOpacity:0.5})
 								.backgroundColor,
 					  }
 					: {}
@@ -35,7 +35,7 @@ export default function Switch({ onChange, type, variant }) {
 				style={
 				clicked
 					? {
-							backgroundColor: typeToColorMapping({type})
+							backgroundColor: typeToColorMapping({color})
 								.backgroundColor,
 					  }
 					: {}
@@ -46,7 +46,7 @@ export default function Switch({ onChange, type, variant }) {
 }
 
 Switch.propTypes = {
-	type: PropTypes.oneOf([
+	color: PropTypes.oneOf([
 		"primary",
 		"success",
 		"warning",
@@ -56,5 +56,5 @@ Switch.propTypes = {
 };
 
 Switch.defaultProps = {
-	type: "default",
+	color: "default",
 };

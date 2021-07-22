@@ -6,14 +6,17 @@ export default {
   title: 'FAB',
   component: FAB,
   argTypes: {
-    backgroundColor: { control: 'color' },
-  },
+		color: {
+			options: ["primary", "success", "warning", "danger", "default"],
+			control: { type: "radio" },
+		},
+	},
 };
 
 const Template = (args) => <FAB {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  type:"default",
+  color:"default",
   variant:"outlined"
 };

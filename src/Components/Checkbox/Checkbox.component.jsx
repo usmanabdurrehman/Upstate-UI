@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Checkbox.module.css";
 
 import Check from "./Check.svg";
@@ -7,20 +7,35 @@ import PropTypes from "prop-types";
 
 import { classNames, typeToColorMapping } from "utils";
 
-export default function Checkbox({ type }) {
-	let [checked, setChecked] = useState(false);
+// Have to check the condition placed for checked
+
+// Have to do something to make it required through a prop
+
+export default function Checkbox({ color, checked, disabled, onChange }) {
+	let [isChecked, setIsChecked] = useState(checked || false);
+
+	useEffect(() => {
+		setIsChecked(!(checked ? checked && isChecked : isChecked));
+	}, [checked]);
 
 	return (
 		<div
 			className={classNames({
 				[styles.checkbox]: true,
+				[styles.disabled]: disabled,
 			})}
-			onClick={(e) => setChecked(!checked)}
+			onClick={(e) => {
+				onChange &&
+					onChange(checked ? checked && isChecked : isChecked);
+				!disabled &&
+					setIsChecked(!(checked ? checked && isChecked : isChecked));
+			}}
 			style={
-				checked
+				(checked ? checked && isChecked : isChecked)
 					? {
-							border: 'none',
-							backgroundColor: typeToColorMapping({type}).backgroundColor,
+							border: "none",
+							backgroundColor: typeToColorMapping({ color })
+								.backgroundColor,
 					  }
 					: {}
 			}
@@ -31,15 +46,19 @@ export default function Checkbox({ type }) {
 }
 
 Checkbox.propTypes = {
-	type: PropTypes.oneOf([
+	color: PropTypes.oneOf([
 		"primary",
 		"success",
 		"warning",
 		"danger",
 		"default",
-	])
+	]),
+	checked: PropTypes.bool,
+	disabled: PropTypes.bool,
+	onChange: PropTypes.func,
 };
 
 Checkbox.defaultProps = {
-	type: "default"
+	color: "default",
+	disabled: false,
 };

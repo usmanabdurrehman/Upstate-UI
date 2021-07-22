@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import styles from "./RadioGroup.module.css";
 
-import { classNames } from "utils";
+import PropTypes from "prop-types";
 
-export default function RadioGroup({ options, onChange }) {
+import { classNames, typeToColorMapping } from "utils";
+
+export default function RadioGroup({ color, options, onChange }) {
 	if (!options) {
 		throw new Error("You should have atleast one option");
 	} else if (!Array.isArray(options)) {
@@ -31,12 +33,14 @@ export default function RadioGroup({ options, onChange }) {
 							onChange && onChange(optionsArr[index])
 							setClicked(optionsArr);
 						}}
+						style={{borderColor:typeToColorMapping({color}).backgroundColor}}
 					>
 						<div
 							className={classNames({
 								[styles.radioCircle]: true,
 								[styles.radioCircleClicked]: clicked[index],
 							})}
+							style={{backgroundColor:typeToColorMapping({color}).backgroundColor}}
 						></div>
 					</div>
 					<p className={styles.optionName}>{option}</p>
@@ -45,3 +49,17 @@ export default function RadioGroup({ options, onChange }) {
 		</div>
 	);
 }
+
+RadioGroup.propTypes = {
+	color: PropTypes.oneOf([
+		"primary",
+		"success",
+		"warning",
+		"danger",
+		"default",
+	])
+};
+
+RadioGroup.defaultProps = {
+	color: "default",
+};

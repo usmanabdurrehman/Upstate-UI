@@ -1,25 +1,24 @@
 import React from "react";
 
-import { Checkbox } from "Components";
+import { Badge } from "Components";
 
 export default {
-	title: "Checkbox",
-	component: Checkbox,
+	title: "Badge",
+	component: Badge,
 	argTypes: {
 		color: {
 			options: ["primary", "success", "warning", "danger", "default"],
 			control: { type: "radio" },
 		},
-		onChange: {
-			control: false,
-		},
 	},
 };
 
-const Template = (args) => <Checkbox {...args} />;
+const Template = (args) => <Badge {...args} />;
 
 export const Primary = Template.bind({});
+
 Primary.args = {
 	color: "default",
-	disabled:false
+	children: "Badge",
+	number: 9,
 };
