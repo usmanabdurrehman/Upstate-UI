@@ -1,49 +1,49 @@
-.select{
-	height:40px;
-	width:200px;
-	border-radius: 4px;
-	border:1px solid rgb(220, 0, 78);
-	cursor: pointer;
-	position: relative;
-	font-size: 14px;
-	z-index: 1000;
+.select {
+  height: 40px;
+  width: 200px;
+  border-radius: 4px;
+  border: 1px solid rgb(220, 0, 78);
+  cursor: pointer;
+  position: relative;
+  font-size: 14px;
+  z-index: 1000;
 }
 
-.selectedValue{
-	height: 100%;
-	width:100%;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding:0 10px;
+.selectedValue {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
 }
 
-.selectOptions{
-	position: absolute;
-	left: 0;
-	top:40px;
-	width:100%;
-	box-shadow: 3px 3px 7px lightgray;
-	z-index: 1000;
+.selectOptions {
+  position: absolute;
+  left: 0;
+  top: 40px;
+  width: 100%;
+  box-shadow: 3px 3px 7px lightgray;
+  z-index: 1000;
 }
 
-.selectOption{
-	height: 40px;
-	display: flex;
-	align-items: center;
-	padding-left: 10px;
-	box-sizing: border-box;
+.selectOption {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  box-sizing: border-box;
 }
 
-.selectedOption{
-	border-left:3px solid rgb(220, 0, 78);
-	padding-left: 7px;
+.selectedOption {
+  border-left: 3px solid rgb(220, 0, 78);
+  padding-left: 7px;
 }
 
-.icon{
-	transition: 0.4s !important;
+.icon {
+  transition: 0.4s !important;
 }
 
-.invert{
-	transform:rotateZ(180deg);
+.invert {
+  transform: rotateZ(180deg);
 }

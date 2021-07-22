@@ -1,38 +1,38 @@
-.accordion{
-	max-height: 50px;
-	overflow: hidden;	
-	transition: 0.4s;
-	border:1px solid gray;
-	border-radius: 4px;
+.accordion {
+  max-height: 50px;
+  overflow: hidden;
+  transition: 0.4s;
+  border: 1px solid gray;
+  border-radius: 4px;
 }
 
-.accordionOpen{
-	max-height: 500px;
+.accordionOpen {
+  max-height: 500px;
 }
 
-.title{
-	height: 50px;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding:0 10px;
-	cursor: pointer;
+.title {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  cursor: pointer;
 }
 
-.content{
-	padding:10px;
-	padding-bottom: 15px;
+.content {
+  padding: 10px;
+  padding-bottom: 15px;
 }
 
-.arrow{
-	transition: 0.4s !important;
-	transform: rotateZ(0deg) !important;
+.arrow {
+  transition: 0.4s !important;
+  transform: rotateZ(0deg) !important;
 }
 
-.invert{
-	transform: rotateZ(180deg) !important;
+.invert {
+  transform: rotateZ(180deg) !important;
 }
 
-.disabled{
-	cursor: not-allowed;
+.disabled {
+  cursor: not-allowed;
 }

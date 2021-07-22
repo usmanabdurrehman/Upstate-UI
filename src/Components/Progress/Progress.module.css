@@ -1,20 +1,20 @@
-.progressbar{
-	width:300px;
-	height: 15px;
-	border-radius: 10px;
-	display: flex;
-	overflow: hidden;
+.progressbar {
+  width: 300px;
+  height: 15px;
+  border-radius: 10px;
+  display: flex;
+  overflow: hidden;
 }
 
-.progress{
-	background-color: rgb(220, 0, 78);
-	border-radius: 10px;
-	position:relative;
-	z-index: 10;
+.progress {
+  background-color: rgb(220, 0, 78);
+  border-radius: 10px;
+  position: relative;
+  z-index: 10;
 }
 
-.remaining{
-	background-color: #ddd;
-	border-radius: 10px;
-	margin-left: -10px;
+.remaining {
+  background-color: #ddd;
+  border-radius: 10px;
+  margin-left: -10px;
 }

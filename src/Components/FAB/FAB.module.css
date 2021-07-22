@@ -1,28 +1,28 @@
 .button {
-	border-radius: 50%;
-	height: 56px;
-	width: 56px;
-	border: none;
-	cursor: pointer;
-	font-size: 24px;
-	/* line-height: 56px; */
-	padding:0;
-	box-shadow: 2px 2px 5px lightgray;
+  border-radius: 50%;
+  height: 56px;
+  width: 56px;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  /* line-height: 56px; */
+  padding: 0;
+  box-shadow: 2px 2px 5px lightgray;
 }
 
 @keyframes emerge {
-	0% {
-		transform: scale(1);
-	}
-	50% {
-		transform: scale(1.1);
-	}
-	100% {
-		transform: scale(1);
-	}
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .buttonAnimation {
-	animation: emerge;
-	animation-duration: 0.4s;
+  animation: emerge;
+  animation-duration: 0.4s;
 }

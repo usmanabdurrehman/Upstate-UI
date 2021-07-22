@@ -1,23 +1,23 @@
-import React from 'react';
+import React from "react";
 
-import { Button } from 'Components';
+import { Button } from "Components";
 
 export default {
-  title: 'Button',
+  title: "Button",
   component: Button,
   argTypes: {
-		color: {
-			options: ["primary", "success", "warning", "danger", "default"],
-			control: { type: "radio" },
-		},
-	},
+    color: {
+      options: ["primary", "success", "warning", "danger", "default"],
+      control: { type: "radio" },
+    },
+  },
 };
 
 const Template = (args) => <Button {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  color:"default",
-  variant:"outlined",
-  size:'small'
+  color: "default",
+  variant: "outlined",
+  size: "small",
 };

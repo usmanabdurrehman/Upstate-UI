@@ -5,49 +5,42 @@ import PropTypes from "prop-types";
 
 import { classNames, typeToColorMapping } from "utils";
 
-export default function CountCard({
-	number,
-	text,
-	color,
-	width,
-	height,
-}) {
-	return (
-		<div className={styles.card} style={{ width, height }}>
-			<div
-				className={styles.hoverLineTop}
-				style={{
-					backgroundColor:
-						typeToColorMapping({ color }).backgroundColor,
-				}}
-			></div>
-			<div className={styles.gridChild}>
-				<h1>{number}</h1>
-			</div>
-			<div className={styles.gridChild}>{text}</div>
-		</div>
-	);
+export default function CountCard({ number, text, color, width, height }) {
+  return (
+    <div className={styles.card} style={{ width, height }}>
+      <div
+        className={styles.hoverLineTop}
+        style={{
+          backgroundColor: typeToColorMapping({ color }).backgroundColor,
+        }}
+      ></div>
+      <div className={styles.gridChild}>
+        <h1>{number}</h1>
+      </div>
+      <div className={styles.gridChild}>{text}</div>
+    </div>
+  );
 }
 
 CountCard.propTypes = {
-	color: PropTypes.oneOf([
-		"primary",
-		"success",
-		"warning",
-		"danger",
-		"default",
-	]),
-	color: PropTypes.string,
-	width: PropTypes.number,
-	height: PropTypes.number,
-	number: PropTypes.number,
-	text: PropTypes.string,
+  color: PropTypes.oneOf([
+    "primary",
+    "success",
+    "warning",
+    "danger",
+    "default",
+  ]),
+  color: PropTypes.string,
+  width: PropTypes.number,
+  height: PropTypes.number,
+  number: PropTypes.number,
+  text: PropTypes.string,
 };
 
 CountCard.defaultProps = {
-	color: "default",
-	width: 250,
-	height: 150,
-	number: 30,
-	text: "Orders Completed",
+  color: "default",
+  width: 250,
+  height: 150,
+  number: 30,
+  text: "Orders Completed",
 };

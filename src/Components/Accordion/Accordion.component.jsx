@@ -12,59 +12,59 @@ import { classNames, isEmpty } from "utils";
 // Have to check the condition placed for expanded
 
 export default function Accordion({
-	content,
-	title,
-	disabled,
-	onChange,
-	expanded,
+  content,
+  title,
+  disabled,
+  onChange,
+  expanded,
 }) {
-	const [open, setOpen] = useState(expanded || false);
+  const [open, setOpen] = useState(expanded || false);
 
-	useEffect(() => {
-		setOpen(expanded);
-	}, [expanded]);
+  useEffect(() => {
+    setOpen(expanded);
+  }, [expanded]);
 
-	return (
-		<div
-			className={classNames({
-				[styles.accordion]: true,
-				[styles.accordionOpen]: open,
-				[styles.disabled]: disabled,
-			})}
-		>
-			<div
-				className={classNames({
-					[styles.title]: true,
-					[styles.disabled]: disabled,
-				})}
-				onClick={(e) => {
-					onChange && onChange();
-					!disabled &&
-						isEmpty(expanded) &&
-						setOpen(!(expanded ? open && expanded : open));
-				}}
-			>
-				<p>{title}</p>
-				<ExpandMoreIcon
-					className={classNames({
-						[styles.arrow]: true,
-						[styles.invert]: open,
-					})}
-				/>
-			</div>
-			<div className={styles.content}>{content}</div>
-		</div>
-	);
+  return (
+    <div
+      className={classNames({
+        [styles.accordion]: true,
+        [styles.accordionOpen]: open,
+        [styles.disabled]: disabled,
+      })}
+    >
+      <div
+        className={classNames({
+          [styles.title]: true,
+          [styles.disabled]: disabled,
+        })}
+        onClick={(e) => {
+          onChange && onChange();
+          !disabled &&
+            isEmpty(expanded) &&
+            setOpen(!(expanded ? open && expanded : open));
+        }}
+      >
+        <p>{title}</p>
+        <ExpandMoreIcon
+          className={classNames({
+            [styles.arrow]: true,
+            [styles.invert]: open,
+          })}
+        />
+      </div>
+      <div className={styles.content}>{content}</div>
+    </div>
+  );
 }
 
 Accordion.propTypes = {
-	content: PropTypes.node,
-	title: PropTypes.node,
-	disabled: PropTypes.bool,
-	expanded: PropTypes.bool,
-	onChange: PropTypes.func,
+  content: PropTypes.node,
+  title: PropTypes.node,
+  disabled: PropTypes.bool,
+  expanded: PropTypes.bool,
+  onChange: PropTypes.func,
 };
 
 Accordion.defaultProps = {
-	disabled: false,
+  disabled: false,
 };

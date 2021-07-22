@@ -1,16 +1,16 @@
-import React from 'react';
+import React from "react";
 
-import { Select } from 'Components';
+import { Select } from "Components";
 
 export default {
-  title: 'Select',
+  title: "Select",
   component: Select,
   argTypes: {
-		color: {
-			options: ["primary", "success", "warning", "danger", "default"],
-			control: { type: "radio" },
-		},
-	},
+    color: {
+      options: ["primary", "success", "warning", "danger", "default"],
+      control: { type: "radio" },
+    },
+  },
 };
 
 const Template = (args) => <Select {...args} />;
@@ -18,6 +18,6 @@ const Template = (args) => <Select {...args} />;
 export const Primary = Template.bind({});
 
 Primary.args = {
-  color:"default",
-  options:['Small','Medium','Large']
+  color: "default",
+  options: ["Small", "Medium", "Large"],
 };
