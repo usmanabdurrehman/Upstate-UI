@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   DataTable,
+  Table,
   CountCard,
   Container,
   FAB,
@@ -18,6 +19,7 @@ import {
   Stepper,
   Chip,
   Modal,
+  Alert,
 } from "Components";
 import dummyData from "Components/DataTable/DataTable.constants";
 import SearchIcon from "@material-ui/icons/Search";
@@ -25,10 +27,21 @@ import SearchIcon from "@material-ui/icons/Search";
 function App() {
   const [prog, setProg] = useState(0);
   const [open, setOpen] = useState(false);
+  const [showAlert,setShowAlert] = useState(false)
 
   return (
     <div className="App">
       <div className="wrapper">
+        <form onSubmit={e=>{
+          e.preventDefault()
+          console.log('lmao form submitted')
+          }}>
+          <Checkbox required/>
+          <button type="submit">submit boi</button>
+        </form>
+
+        <Switch onChange={e=>setShowAlert(!showAlert)}/>
+        <Alert color="success" text={"Your password has expired"} showAlert={showAlert}/>
         <Modal isOpen={open} onClose={(e) => setOpen(false)}>
           <div
             style={{
@@ -53,10 +66,36 @@ function App() {
         />
         <Tooltip title="meow">lmao</Tooltip>
         <Navbar logo={"lmao"} menuItems={["About Us", "Contact Us"]} />
-        <Tabs titles={["Information", "Question"]}>
-          <div>gfgfg</div>
-          <div>ddfdffgfg</div>
-        </Tabs>
+        {/* <Tabs titles={["Information", "Question"]}> */}
+        {/*   <div>gfgfg</div> */}
+        {/*   <div>ddfdffgfg</div> */}
+        {/* </Tabs> */}
+        <Table
+          data={dummyData}
+          columns={["color", "description", "quantity"]}
+          customWidgets={{
+            color: (value) => (
+              <div
+                style={{
+                  backgroundColor: value,
+                  width: "30px",
+                  height: "30px",
+                  borderRadius: "50%",
+                }}
+              ></div>
+            ),
+          }}
+          options={{
+            paginationLimit: 6,
+          }}
+          theme="navy"
+          customStyles={
+            {
+              // stripedRows:true,
+              // stripedRowsColor:'#f2f2f2'
+            }
+          }
+        />
         <DataTable
           data={dummyData}
           columns={["color", "description", "quantity"]}

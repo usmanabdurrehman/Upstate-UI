@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Stepper.module.css";
 
 import { classNames } from "utils";
 
-export default function Stepper() {
-  let [activeStep, setActiveStep] = useState(0);
+export default function Stepper({active}) {
+  let [activeStep, setActiveStep] = useState(active || 0);
   let steps = ["Step 1", "Step 2", "PreFinal", "Finish"];
+
+  useEffect(()=>{
+    setActiveStep(active)
+  },[active])
 
   return (
     <>
@@ -13,7 +17,7 @@ export default function Stepper() {
         {Array(steps.length + (steps.length - 1))
           .fill("_")
           .map((item, index) =>
-            index % 2 == 0 ? (
+            index % 2 === 0 ? (
               <div>{steps[index / 2]}</div>
             ) : (
               <div

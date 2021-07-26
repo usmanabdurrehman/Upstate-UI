@@ -1,29 +1,33 @@
 .button {
-  border: none;
   border-radius: 8px;
   padding: 10px;
   font-size: 14px;
-  background-color: rgb(220, 0, 78);
-  color: white;
   cursor: pointer;
   text-transform: uppercase;
   line-height: 1.75;
   font-weight: 500;
+  transition: 0.4s;
 }
 
-@keyframes emerge {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
+.buttonSmall{
+  font-size: 13px;
+  padding: 4px 10px;
 }
 
-.buttonAnimation {
-  animation: emerge;
-  animation-duration: 0.4s;
+.buttonMedium{
+  font-size: 14px;
+  padding: 6px 16px;
+}
+
+.buttonLarge{
+  font-size: 15px;
+  padding: 8px 22px;
+}
+
+.button:active{
+  transform: scale(1.1);
+}
+
+.fullWidth{
+  width:100%;
 }

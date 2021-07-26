@@ -4,7 +4,7 @@ import styles from "./Badge.module.css";
 
 import PropTypes from "prop-types";
 
-import { classNames, typeToColorMapping, isEmpty } from "utils";
+import { typeToColorMapping, classNames } from "utils";
 
 export default function Badge({
   color,
@@ -12,6 +12,7 @@ export default function Badge({
   max,
   invisible,
   showZero,
+  classes,
   children,
 }) {
   if (!number) {
@@ -20,12 +21,13 @@ export default function Badge({
 
   return (
     <div className={styles.badgeWrapper}>
-      {!invisible && (number == 0 ? showZero : true) && (
+      {!invisible && (number === 0 ? showZero : true) && (
         <div
-          className={styles.badge}
-          style={{
-            backgroundColor: typeToColorMapping({ color }).backgroundColor,
-          }}
+          className={classNames({
+            [styles.badge]: true,
+            [typeToColorMapping({ color })]: true,
+            [classes?.badge]:classes?.badge
+          })}
         >
           <div>{Math.min(number, max)}</div>
         </div>
@@ -43,10 +45,11 @@ Badge.propTypes = {
     "danger",
     "default",
   ]),
-  badge: PropTypes.number,
+  number: PropTypes.number,
   max: PropTypes.number,
   showZero: PropTypes.bool,
   invisible: PropTypes.bool,
+  classes:PropTypes.object
 };
 
 Badge.defaultProps = {

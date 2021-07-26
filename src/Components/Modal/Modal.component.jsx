@@ -3,6 +3,8 @@ import styles from "./Modal.module.css";
 
 import ClickAwayListener from "react-click-away-listener";
 
+import PropTypes from "prop-types";
+
 export default function Modal({ children, isOpen, onClose }) {
   let [open, setOpen] = useState(isOpen || false);
 
@@ -11,7 +13,6 @@ export default function Modal({ children, isOpen, onClose }) {
   }, [isOpen]);
 
   let handleClickAway = () => {
-    console.log("Clicked away");
     setOpen(false);
     onClose && onClose();
   };
@@ -27,3 +28,13 @@ export default function Modal({ children, isOpen, onClose }) {
     )
   );
 }
+
+Modal.propTypes = {
+  children:PropTypes.node,
+  isOpen:PropTypes.bool,
+  onClose:PropTypes.func
+};
+
+Modal.defaultProps = {
+  isOpen:false
+};

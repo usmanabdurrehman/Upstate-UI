@@ -13,13 +13,10 @@ import Popover from "@material-ui/core/Popover";
 import Typography from "@material-ui/core/Typography";
 import { IconButton, Checkbox } from "@material-ui/core";
 
-import { getThemeStyles, createCSV } from "./utils";
+import { createCSV } from "./utils";
+import { getThemeStyles } from "utils";
 
-const useStyles = makeStyles((theme) => ({
-  typography: {
-    padding: theme.spacing(2),
-  },
-}));
+import PropTypes from "prop-types";
 
 export default function DataTable({
   data: Data,
@@ -33,12 +30,10 @@ export default function DataTable({
     printCsv,
     paginationLimit,
   },
-  customStyles,
+  customStyles = {},
   theme,
 }) {
   const themeStyles = getThemeStyles(theme, customStyles);
-
-  const classes = useStyles();
 
   const icons = [columnSelect, csvDownload, printCsv].filter((icon) => icon);
   const tableRef = useRef(null);
@@ -399,3 +394,14 @@ export default function DataTable({
 }
 
 // #f47100
+
+DataTable.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object),
+  columns: PropTypes.arrayOf(PropTypes.string),
+  customWidgets: PropTypes.object,
+  options: PropTypes.object,
+  customStyles: PropTypes.object,
+  theme: PropTypes.oneOf(["tree", "aquamarine", "navy"]),
+};
+
+DataTable.defaultProps = {};

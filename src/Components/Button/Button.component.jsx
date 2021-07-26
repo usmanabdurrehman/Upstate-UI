@@ -1,27 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Button.module.css";
 
 import PropTypes from "prop-types";
 
 import { classNames, typeToColorMapping } from "utils";
 
-export default function Button({ children, color, variant, size, onClick }) {
-  const [clicked, setClicked] = useState(false);
-
+export default function Button({
+  children,
+  color,
+  variant,
+  size,
+  fullWidth,
+  classes,
+  onClick,
+}) {
   let typeToSizeMapper = (size) => {
     let typeToSizeMapper = {
-      small: {
-        fontSize: "13px",
-        padding: "4px 10px",
-      },
-      medium: {
-        fontSize: "14px",
-        padding: "6px 16px",
-      },
-      large: {
-        fontSize: "15px",
-        padding: "8px 22px",
-      },
+      small: styles.buttonSmall,
+      medium: styles.buttonMedium,
+      large: styles.buttonLarge,
     };
     return typeToSizeMapper[size] || typeToSizeMapper.small;
   };
@@ -29,20 +26,15 @@ export default function Button({ children, color, variant, size, onClick }) {
   return (
     <button
       onClick={() => {
-        setClicked(true);
         onClick && onClick();
       }}
       className={classNames({
         [styles.button]: true,
-        [styles.buttonAnimation]: clicked,
+        [typeToSizeMapper(size)]: true,
+        [typeToColorMapping({ color, variant })]: true,
+        [styles.fullWidth]: fullWidth,
+        [classes?.button]: classes?.button,
       })}
-      style={{
-        ...typeToColorMapping({ color, variant }),
-        ...typeToSizeMapper(size),
-      }}
-      onAnimationEnd={() => {
-        setClicked(false);
-      }}
     >
       {children}
     </button>
@@ -59,6 +51,8 @@ Button.propTypes = {
   ]),
   variant: PropTypes.oneOf(["filled", "outlined"]),
   size: PropTypes.oneOf(["small", "medium", "large"]),
+  fullWidth: PropTypes.bool,
+  classes:PropTypes.object
 };
 
 Button.defaultProps = {
@@ -66,4 +60,5 @@ Button.defaultProps = {
   variant: "outlined",
   children: "default",
   size: "small",
+  fullWidth: false,
 };

@@ -1,5 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap");
 
+:root{
+	--primary:#1266F1;
+	--primary-light:#cce5ff;
+
+	--success:#00B74A;
+	--success-light:#d4edda;
+
+	--warning:#FFA900;
+	--warning-light:#fff3cd;
+
+	--danger:#F93154;
+	--danger-light:#f8d7da;	
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

@@ -22,4 +22,5 @@ export const Primary = Template.bind({});
 Primary.args = {
   color: "default",
   disabled: false,
+  required:false
 };

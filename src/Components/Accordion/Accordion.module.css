@@ -32,7 +32,3 @@
 .invert {
   transform: rotateZ(180deg) !important;
 }
-
-.disabled {
-  cursor: not-allowed;
-}

@@ -20,4 +20,5 @@ Primary.args = {
   color: "default",
   variant: "outlined",
   size: "small",
+  fullWidth:false
 };

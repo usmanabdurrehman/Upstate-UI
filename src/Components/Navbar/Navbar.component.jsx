@@ -8,7 +8,9 @@ import { IconButton } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
 
-export default function Navbar({ logo, menuItems, bgColor }) {
+import PropTypes from "prop-types";
+
+export default function Navbar({ logo, menuItems, classes }) {
   let [sidebarOpen, setSidebarOpen] = useState(false);
 
   let clickHandler = () => {
@@ -17,10 +19,10 @@ export default function Navbar({ logo, menuItems, bgColor }) {
 
   return (
     <div className={styles.navbar}>
-      <Container className={styles.navbarWrapper}>
-        <div className={styles.logo}>
-          <h2>{logo}</h2>
-        </div>
+      <Container classes={{container:styles.navbarWrapper}}>
+        <h2 className={styles.logo}>
+          {logo}
+        </h2>
         <div className={styles.menuItems}>
           {menuItems.map((item) => (
             <div className={styles.menuItem}>{item}</div>
@@ -46,4 +48,10 @@ export default function Navbar({ logo, menuItems, bgColor }) {
       </div>
     </div>
   );
+}
+
+Navbar.propTypes = {
+  logo:PropTypes.node,
+  menuItems:PropTypes.arrayOf(PropTypes.node),
+  classes:PropTypes.arrayOf(PropTypes.string)
 }

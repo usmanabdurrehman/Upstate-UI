@@ -1,7 +1,9 @@
 export { default as Container } from "./Container/Container.component";
 
 export { default as CountCard } from "./CountCard/CountCard.component";
+
 export { default as DataTable } from "./DataTable/DataTable.component";
+export {default as Table} from './Table/Table.component'
 
 export { default as FAB } from "./FAB/FAB.component";
 export { default as Button } from "./Button/Button.component";
@@ -26,3 +28,4 @@ export { default as Stepper } from "./Stepper/Stepper.component";
 export { default as Chip } from "./Chip/Chip.component";
 
 export { default as Modal } from "./Modal/Modal.component";
+export { default as Alert } from "./Alert/Alert.component";

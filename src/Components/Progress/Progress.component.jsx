@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 import { classNames, typeToColorMapping } from "utils";
 
-export default function Progress({ color, progress }) {
+export default function Progress({ color, progress, classes }) {
   const [progressState, setProgressState] = useState(progress);
 
   const prevProgress = useRef();
@@ -15,16 +15,25 @@ export default function Progress({ color, progress }) {
   }, [progress]);
 
   return (
-    <div className={styles.progressbar}>
+    <div className={classNames({
+          [styles.progressWrapper]:true,
+          [classes?.progressWrapper]:[classes?.progressWrapper]
+          })}>
       <div
-        className={styles.progress}
+        className={classNames({
+          [styles.progress]: true,
+          [typeToColorMapping({ color })]: true,
+          [classes?.progress]:classes?.progress
+        })}
         style={{
           width: `${progress}%`,
-          backgroundColor: typeToColorMapping({ color }).backgroundColor,
         }}
       ></div>
       <div
-        className={styles.remaining}
+        className={classNames({
+          [styles.remaining]:true,
+          [classes?.remaining]:[classes?.remaining]
+          })}
         style={{ width: `calc(${100 - progress}% + 10px)` }}
       ></div>
     </div>
@@ -39,6 +48,8 @@ Progress.propTypes = {
     "danger",
     "default",
   ]),
+  progress:PropTypes.number,
+  classes:PropTypes.object
 };
 
 Progress.defaultProps = {

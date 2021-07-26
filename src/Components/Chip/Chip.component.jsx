@@ -5,10 +5,25 @@ import PropTypes from "prop-types";
 
 import { classNames, typeToColorMapping } from "utils";
 
-export default function Chip({ label, color, variant }) {
+export default function Chip({
+  label,
+  color,
+  clickable,
+  disabled,
+  variant,
+  classes,
+}) {
   return (
-    <div className={styles.chip} style={typeToColorMapping({ color, variant })}>
-      <div className={styles.label}>{label}</div>
+    <div
+      className={classNames({
+        [styles.chip]: true,
+        [typeToColorMapping({ color })]: true,
+        [styles.clickable]: clickable,
+        [styles.appearDisabled]: disabled,
+        [classes?.chip]:classes?.chip
+      })}
+    >
+      {label}
     </div>
   );
 }
@@ -23,10 +38,15 @@ Chip.propTypes = {
   ]),
   variant: PropTypes.oneOf(["filled", "outlined"]),
   label: PropTypes.string,
+  clickable: PropTypes.bool,
+  disabled: PropTypes.bool,
+  classes:PropTypes.object
 };
 
 Chip.defaultProps = {
   color: "default",
   variant: "outlined",
   label: "default",
+  clickable: true,
+  disabled: false,
 };

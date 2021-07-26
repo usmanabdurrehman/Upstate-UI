@@ -5,23 +5,23 @@ import PropTypes from "prop-types";
 
 import { classNames, typeToColorMapping } from "utils";
 
-export default function FAB({ children, color, variant, onClick }) {
-  const [clicked, setClicked] = useState(false);
-
+export default function FAB({
+  children,
+  color,
+  variant,
+  disabled,
+  classes,
+  onClick,
+}) {
   return (
     <button
-      onClick={() => {
-        setClicked(true);
-        onClick && onClick();
-      }}
+      onClick={onClick}
       className={classNames({
         [styles.button]: true,
-        [styles.buttonAnimation]: clicked,
+        [typeToColorMapping({ color, variant })]: true,
+        [styles.disabled]: disabled,
+        [classes?.FAB]: classes?.FAB,
       })}
-      onAnimationEnd={() => {
-        setClicked(false);
-      }}
-      style={typeToColorMapping({ color, variant })}
     >
       {children}
     </button>
@@ -37,10 +37,12 @@ FAB.propTypes = {
     "default",
   ]),
   variant: PropTypes.oneOf(["filled", "outlined"]),
+  disabled: PropTypes.bool,
+  classes:PropTypes.object
 };
 
 FAB.defaultProps = {
   color: "default",
   variant: "outlined",
-  children: "+",
+  disabled: false,
 };

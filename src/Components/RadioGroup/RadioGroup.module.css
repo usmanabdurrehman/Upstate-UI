@@ -13,13 +13,13 @@
   justify-content: center;
   cursor: pointer;
   margin: 10px 0;
+  transition: 0.4s;
 }
 
 .radioCircle {
   height: 12px;
   width: 12px;
   border-radius: 50%;
-  background-color: rgb(220, 0, 78);
   visibility: hidden;
   opacity: 0;
   transition: 0.4s;
@@ -31,7 +31,7 @@
 }
 
 .radioClicked {
-  border: 2px solid rgb(220, 0, 78);
+  border: 2px solid;
 }
 
 .optionName {

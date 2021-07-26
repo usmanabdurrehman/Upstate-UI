@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 import { classNames, typeToColorMapping } from "utils";
 
-export default function RadioGroup({ color, options, onChange }) {
+export default function RadioGroup({ color, options, classes, onChange }) {
   if (!options) {
     throw new Error("You should have atleast one option");
   } else if (!Array.isArray(options)) {
@@ -13,17 +13,29 @@ export default function RadioGroup({ color, options, onChange }) {
   }
 
   const [clicked, setClicked] = useState(
-    options.map((option, index) => (index == 0 ? true : false))
+    options.map((option, index) => (index === 0 ? true : false))
   );
 
   return (
-    <div className={styles.radioGroup}>
+    <div
+      className={classNames({
+        [styles.radioGroup]: true,
+        [classes?.radioGroup]: classes?.radioGroup,
+      })}
+    >
       {options.map((option, index) => (
-        <div className={styles.radioWrapper}>
+        <div
+          className={classNames({
+            [styles.radioWrapper]: true,
+            [classes?.radioWrapper]: classes?.radioWrapper,
+          })}
+        >
           <div
             className={classNames({
               [styles.radio]: true,
+              [typeToColorMapping({ color, variant: "outlined" })]: true,
               [styles.radioClicked]: clicked[index],
+              [classes?.radio]: classes?.radio,
             })}
             onClick={(e) => {
               const optionsArr = [...options].map((option) => false);
@@ -31,18 +43,14 @@ export default function RadioGroup({ color, options, onChange }) {
               onChange && onChange(optionsArr[index]);
               setClicked(optionsArr);
             }}
-            style={{
-              borderColor: typeToColorMapping({ color }).backgroundColor,
-            }}
           >
             <div
               className={classNames({
                 [styles.radioCircle]: true,
                 [styles.radioCircleClicked]: clicked[index],
+                [typeToColorMapping({ color })]: true,
+                [classes?.radio]: classes?.radio,
               })}
-              style={{
-                backgroundColor: typeToColorMapping({ color }).backgroundColor,
-              }}
             ></div>
           </div>
           <p className={styles.optionName}>{option}</p>
@@ -60,6 +68,9 @@ RadioGroup.propTypes = {
     "danger",
     "default",
   ]),
+  classes:PropTypes.object,
+  options:PropTypes.string,
+  onChange:PropTypes.func
 };
 
 RadioGroup.defaultProps = {

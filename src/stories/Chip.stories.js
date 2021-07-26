@@ -19,4 +19,6 @@ export const Primary = Template.bind({});
 Primary.args = {
   color: "default",
   variant: "outlined",
+  clickable:true,
+  disabled:false
 };

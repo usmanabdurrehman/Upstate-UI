@@ -5,19 +5,37 @@ import PropTypes from "prop-types";
 
 import { classNames, typeToColorMapping } from "utils";
 
-export default function CountCard({ number, text, color, width, height }) {
+export default function CountCard({
+  number,
+  text,
+  color,
+  width,
+  height,
+  classes,
+}) {
   return (
     <div className={styles.card} style={{ width, height }}>
       <div
-        className={styles.hoverLineTop}
-        style={{
-          backgroundColor: typeToColorMapping({ color }).backgroundColor,
-        }}
+        className={classNames({
+          [styles.hoverLineTop]: true,
+          [typeToColorMapping({ color })]: true,
+          [classes?.hoverLine]: classes?.hoverLine,
+        })}
       ></div>
-      <div className={styles.gridChild}>
-        <h1>{number}</h1>
+      <h1
+        className={classNames({
+          [classes?.number]: classes?.number,
+        })}
+      >
+        {number}
+      </h1>
+      <div
+        className={classNames({
+          [classes?.text]: classes?.text,
+        })}
+      >
+        {text}
       </div>
-      <div className={styles.gridChild}>{text}</div>
     </div>
   );
 }
@@ -35,6 +53,7 @@ CountCard.propTypes = {
   height: PropTypes.number,
   number: PropTypes.number,
   text: PropTypes.string,
+  classes:PropTypes.object
 };
 
 CountCard.defaultProps = {

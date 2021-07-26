@@ -3,6 +3,8 @@ import styles from "./Tabs.module.css";
 
 import { classNames } from "utils";
 
+import PropTypes from "prop-types";
+
 export default function Tabs({ children, titles }) {
   const [selected, setSelected] = useState(
     titles.map((title, index) => (index == 0 ? true : false))
@@ -53,4 +55,9 @@ export default function Tabs({ children, titles }) {
       </div>
     </div>
   );
+}
+
+Tabs.propTypes = {
+  children:PropTypes.node,
+  titles:PropTypes.arrayOf(PropTypes.string)
 }

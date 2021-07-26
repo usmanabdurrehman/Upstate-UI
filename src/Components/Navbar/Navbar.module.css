@@ -2,7 +2,10 @@
   height: 70px;
   background-color: purple;
   color: white;
-  /* overflow-x: hidden; */
+  position: relative;
+  overflow: hidden;
+  /* overflow-x: hidden;
+  overflow-y:hidden; */
 }
 
 .navbarWrapper {
