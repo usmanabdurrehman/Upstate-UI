@@ -49,10 +49,8 @@
   transform: rotateZ(180deg);
 }
 
-.outlined-primary {
-  border: 1.5px solid var(--primary) !important;
-  color: var(--primary);
-  background-color: #fff;
+.selectOption-primary {
+  border-left: 3px solid var(--primary) !important;
 }
 
 .outlined-success {

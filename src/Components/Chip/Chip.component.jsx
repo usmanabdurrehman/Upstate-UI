@@ -17,7 +17,7 @@ export default function Chip({
     <div
       className={classNames({
         [styles.chip]: true,
-        [typeToColorMapping({ color })]: true,
+        [typeToColorMapping({ color,variant })]: true,
         [styles.clickable]: clickable,
         [styles.appearDisabled]: disabled,
         [classes?.chip]:classes?.chip

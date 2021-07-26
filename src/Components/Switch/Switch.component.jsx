@@ -24,6 +24,7 @@ export default function Switch({ onChange, color, classes }) {
         className={classNames({
           [styles.switchCircle]: true,
           [styles.switchClicked]: clicked,
+          [styles.switchUnclicked]:!clicked,
           [typeToColorMapping({ color })]: clicked,
           [classes?.switchCircle]:classes?.switchCircle
         })}

@@ -48,7 +48,7 @@ export default function Select({
           })}
           onClick={(e) => setSelectOpen(!selectOpen)}
         >
-          <div className={styles.selected}>{selected || placeholder}</div>
+          <div className={styles.selected}>{selected?.label || placeholder}</div>
           <KeyboardArrowDownIcon
             className={classNames({
               [styles.icon]: true,
@@ -77,7 +77,7 @@ export default function Select({
                   onChange && onChange(option);
                 }}
               >
-                {option}
+                {option.label}
               </div>
             ))}
           </div>
@@ -100,7 +100,8 @@ Select.propTypes = {
   selectedValue:PropTypes.string,
   classes:PropTypes.arrayOf(PropTypes.string),
   onChange:PropTypes.func,
-  required:PropTypes.bool
+  required:PropTypes.bool,
+  placeholder:PropTypes.string
 };
 
 Select.defaultProps = {

@@ -19,5 +19,6 @@ export const Primary = Template.bind({});
 
 Primary.args = {
   color: "default",
-  options: ["Small", "Medium", "Large"],
+  options: [{label:"Small",value:"small"}, {label:"Medium",value:"medium"}, {label:"Large",value:"large"}],
+  placeholder:"Select Size"
 };

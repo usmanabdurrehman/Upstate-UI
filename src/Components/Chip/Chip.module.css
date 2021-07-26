@@ -1,7 +1,6 @@
 .chip {
   height: 32px;
   border-radius: 20px;
-  border: none;
   display: inline-flex;
   font-size: 12px;
   line-height: 12px;
