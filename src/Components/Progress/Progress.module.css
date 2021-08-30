@@ -17,3 +17,14 @@
   border-radius: 10px;
   margin-left: -10px;
 }
+/* 
+.changeProgress{
+  animation-name: progress;
+}
+
+@keyframes progress {
+  0% {
+    transform: translateX(0);
+  }
+}
+ */

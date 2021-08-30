@@ -20,6 +20,7 @@ import {
   Chip,
   Modal,
   Alert,
+  TransferList
 } from "Components";
 import dummyData from "Components/DataTable/DataTable.constants";
 import SearchIcon from "@material-ui/icons/Search";
@@ -27,21 +28,28 @@ import SearchIcon from "@material-ui/icons/Search";
 function App() {
   const [prog, setProg] = useState(0);
   const [open, setOpen] = useState(false);
-  const [showAlert,setShowAlert] = useState(false)
+  const [showAlert, setShowAlert] = useState(false);
 
   return (
     <div className="App">
       <div className="wrapper">
-        <form onSubmit={e=>{
-          e.preventDefault()
-          console.log('lmao form submitted')
-          }}>
-          <Checkbox required/>
+        <TransferList/>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            console.log("lmao form submitted");
+          }}
+        >
+          <Checkbox required />
           <button type="submit">submit boi</button>
         </form>
 
-        <Switch onChange={e=>setShowAlert(!showAlert)}/>
-        <Alert color="success" text={"Your password has expired"} showAlert={showAlert}/>
+        <Switch onChange={(e) => setShowAlert(!showAlert)} />
+        <Alert
+          color="success"
+          text={"Your password has expired"}
+          showAlert={showAlert}
+        />
         <Modal isOpen={open} onClose={(e) => setOpen(false)}>
           <div
             style={{
@@ -138,7 +146,13 @@ function App() {
         </FAB>
         <Switch />
         <RadioGroup options={["Male", "Female"]} />
-        <Select options={["Male", "Female"]} />
+        <Select
+          options={[
+            { label: "Small", value: "small" },
+            { label: "Medium", value: "medium" },
+            { label: "Large", value: "large" },
+          ]}
+        />
         <Button
           type="success"
           variant="outlined"
@@ -148,6 +162,7 @@ function App() {
         </Button>
         <Progress progress={prog} />
         <input type="number" onChange={(e) => setProg(e.target.value)} />
+        <RadioGroup options={[30, 60, 90]} onChange={(val) => setProg(val)}/>
       </div>
       <Container></Container>
     </div>

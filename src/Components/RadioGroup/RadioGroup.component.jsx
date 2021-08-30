@@ -40,7 +40,7 @@ export default function RadioGroup({ color, options, classes, onChange }) {
             onClick={(e) => {
               const optionsArr = [...options].map((option) => false);
               optionsArr[index] = true;
-              onChange && onChange(optionsArr[index]);
+              onChange && onChange(options[index]);
               setClicked(optionsArr);
             }}
           >

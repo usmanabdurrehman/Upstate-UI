@@ -25,6 +25,8 @@ export default function Select({
     throw new Error("You should have atleast one option");
   } else if (!Array.isArray(options)) {
     throw new Error("options prop should be an array of strings");
+  }else if(!options.every(option=>option?.value)){
+    throw new Error("options should be of type [{value,label},...]");
   }
 
   const [selected, setSelected] = useState(selectedValue || null);

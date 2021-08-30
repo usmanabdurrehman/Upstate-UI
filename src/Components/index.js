@@ -29,3 +29,5 @@ export { default as Chip } from "./Chip/Chip.component";
 
 export { default as Modal } from "./Modal/Modal.component";
 export { default as Alert } from "./Alert/Alert.component";
+
+export {default as TransferList} from './TransferList/TransferList.component'
