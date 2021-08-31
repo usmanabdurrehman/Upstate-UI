@@ -20,7 +20,8 @@ import {
   Chip,
   Modal,
   Alert,
-  TransferList
+  TransferList,
+  Tags
 } from "Components";
 import dummyData from "Components/DataTable/DataTable.constants";
 import SearchIcon from "@material-ui/icons/Search";
@@ -33,6 +34,7 @@ function App() {
   return (
     <div className="App">
       <div className="wrapper">
+        <Tags tags={['wrestling','AEW','Rampage']}/>
         <TransferList headers={["Positive", "Negative", "Neutral"]} transferListData={[['lmao','yo'],[],['xd']]}/>
         <form
           onSubmit={(e) => {
