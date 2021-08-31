@@ -3,14 +3,30 @@ import styles from "./TransferList.module.css";
 
 import { classNames } from "utils";
 
-export default function TransferList() {
-	const NUM_COLS = 3;
-	const [transferList, setTransferList] = useState([
-		["lmao", undefined, undefined],
-		["son", undefined, "xd"],
-	]);
+import PropTypes from "prop-types";
 
-	let headers = ["Positive", "Negative", "Neutral"];
+export default function TransferList({ headers, transferListData }) {
+	const NUM_COLS = 3;
+
+	let conversion = (array) => {
+		let NUM_ROWS = Math.max(...array.map((arr) => arr.length));
+		let NUM_COLS = array.length;
+		let newArr = [];
+		let i = 0;
+		while (i < NUM_ROWS) {
+			let dummyArr = [];
+			array.forEach((arr) => {
+				dummyArr.push(arr[i]);
+			});
+			newArr.push(dummyArr);
+			i += 1;
+		}
+		return newArr;
+	};
+
+	const [transferList, setTransferList] = useState(
+		conversion(transferListData)
+	);
 
 	useEffect(() => {}, [transferList]);
 
@@ -112,3 +128,11 @@ export default function TransferList() {
 		</div>
 	);
 }
+
+
+TransferList.propTypes = {
+  headers: PropTypes.arrayOf(PropTypes.string),
+  transferListData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+};
+
+TransferList.defaultProps = {};

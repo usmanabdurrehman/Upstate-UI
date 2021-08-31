@@ -33,7 +33,7 @@ function App() {
   return (
     <div className="App">
       <div className="wrapper">
-        <TransferList/>
+        <TransferList headers={["Positive", "Negative", "Neutral"]} transferListData={[['lmao','yo'],[],['xd']]}/>
         <form
           onSubmit={(e) => {
             e.preventDefault();
