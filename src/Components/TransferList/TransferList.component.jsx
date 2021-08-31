@@ -4,18 +4,15 @@ import styles from "./TransferList.module.css";
 import { classNames } from "utils";
 
 export default function TransferList() {
-	const NUM_COLS = 2;
-	// Array(NUM_COLS).fill('_').map(_=>_)
+	const NUM_COLS = 3;
 	const [transferList, setTransferList] = useState([
-		["lmao", undefined],
-		["son", undefined],
+		["lmao", undefined, undefined],
+		["son", undefined, "xd"],
 	]);
 
-	let headers = ["Postive", "Negative"];
+	let headers = ["Positive", "Negative", "Neutral"];
 
-	useEffect(() => {
-		console.log("useEffect transferList", transferList);
-	}, [transferList]);
+	useEffect(() => {}, [transferList]);
 
 	return (
 		<div
@@ -45,6 +42,13 @@ export default function TransferList() {
 									}
 									i += 1;
 								}
+
+								if (typeof newRowIndex == "undefined") {
+									newRowIndex = transferListArray.length;
+									transferListArray.push(
+										Array(NUM_COLS).fill(undefined)
+									);
+								}
 								transferListArray[newRowIndex][
 									newColumnIndex
 								] = value;
@@ -57,13 +61,12 @@ export default function TransferList() {
 										transferListArray[i + 1][columnIndex];
 									i += 1;
 								}
-								transferListArray[i][
-									columnIndex
-								] = undefined;
+								transferListArray[i][columnIndex] = undefined;
 								setTransferList(transferListArray);
 							}
 						}}
 						onContextMenu={(e) => {
+							e.preventDefault();
 							let transferListArray = [...transferList];
 							let newColumnIndex = columnIndex - 1;
 							let newRowIndex;
@@ -77,12 +80,27 @@ export default function TransferList() {
 									}
 									i += 1;
 								}
+
+								if (typeof newRowIndex == "undefined") {
+									newRowIndex = transferListArray.length;
+									transferListArray.push(
+										Array(NUM_COLS).fill(undefined)
+									);
+								}
 								transferListArray[newRowIndex][
 									newColumnIndex
 								] = value;
 								transferListArray[listIndex][
 									columnIndex
 								] = undefined;
+
+								i = listIndex;
+								while (i <= transferList.length - 2) {
+									transferListArray[i][columnIndex] =
+										transferListArray[i + 1][columnIndex];
+									i += 1;
+								}
+								transferListArray[i][columnIndex] = undefined;
 								setTransferList(transferListArray);
 							}
 						}}
