@@ -17,6 +17,6 @@ export const Primary = Template.bind({});
 
 Primary.args = {
   color: "default",
-  text:'Your password has expired',
+  text:'You have logged in',
   showAlert:true
 };

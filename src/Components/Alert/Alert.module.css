@@ -13,13 +13,11 @@
 	top:40px;
 	right:-250px;
 	font-size: 14px;
-	height: 60px;
+	min-height: 60px;
 	padding: 0 15px;
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
-	max-width: 250px;
-	width: 100%;
+	max-width: 300px;
 	border:none;
 	transition:0.4s;
 	z-index:1000;
@@ -56,4 +54,14 @@
 	background-color: var(--danger-light);
 	color: var(--danger);
 	border-left: 6px solid var(--danger);
+}
+
+.alertIcon{
+	height:20px;
+	width:20px;
+}
+
+.alertText{
+	flex:1;
+	padding:0 20px 0 10px;
 }

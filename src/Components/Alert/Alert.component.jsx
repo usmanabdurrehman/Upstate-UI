@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState, useEffect} from "react";
 import styles from "./Alert.module.css";
 
 import { typeToColorMapping } from "utils";
@@ -9,7 +9,13 @@ import PropTypes from "prop-types";
 
 import { classNames, returnDefault } from "utils";
 
-export default function Alert({ color, text, showAlert, classes }) {
+export default function Alert({ color, text, showAlert:showAlertProp, classes }) {
+
+	let [showAlert,setShowAlert] = useState(showAlertProp || false)
+
+	useEffect(() => {
+		setShowAlert(showAlertProp)	
+	}, [showAlertProp])
 
 	return (
 		<div className={classNames({
@@ -23,8 +29,9 @@ export default function Alert({ color, text, showAlert, classes }) {
 					[classes?.alert]: classes?.alert,
 				})}
 			>
-				<p>{text}</p>
-				<ClearIcon className={styles.icon} />
+				<img src={`/icons/alert-${color}.svg`} className={styles.alertIcon}/>
+				<p className={styles.alertText}>{text}</p>
+				<ClearIcon className={styles.icon} onClick={e=>setShowAlert(false)} />
 			</div>
 		</div>			
 	);
