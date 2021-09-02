@@ -21,7 +21,8 @@ import {
   Modal,
   Alert,
   TransferList,
-  Tags
+  Tags,
+  BottomNavigation,
 } from "Components";
 import dummyData from "Components/DataTable/DataTable.constants";
 import SearchIcon from "@material-ui/icons/Search";
@@ -33,9 +34,17 @@ function App() {
 
   return (
     <div className="App">
+      <BottomNavigation active={1}>
+        <div>Home</div>
+        <div>About</div>
+        <div>Contact</div>
+      </BottomNavigation>
       <div className="wrapper">
-        <Tags tags={['wrestling','AEW','Rampage']}/>
-        <TransferList headers={["Positive", "Negative", "Neutral"]} transferListData={[['lmao','yo'],[],['xd']]}/>
+        <Tags tags={["wrestling", "AEW", "Rampage"]} />
+        <TransferList
+          headers={["Positive", "Negative", "Neutral"]}
+          transferListData={[["lmao", "yo"], [], ["xd"]]}
+        />
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -164,7 +173,7 @@ function App() {
         </Button>
         <Progress progress={prog} />
         <input type="number" onChange={(e) => setProg(e.target.value)} />
-        <RadioGroup options={[30, 60, 90]} onChange={(val) => setProg(val)}/>
+        <RadioGroup options={[30, 60, 90]} onChange={(val) => setProg(val)} />
       </div>
       <Container></Container>
     </div>

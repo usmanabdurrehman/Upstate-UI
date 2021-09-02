@@ -15,6 +15,7 @@ export { default as Checkbox } from "./Checkbox/Checkbox.component";
 export { default as Progress } from "./Progress/Progress.component";
 
 export { default as Tabs } from "./Tabs/Tabs.component";
+export {default as BottomNavigation} from './BottomNavigation/BottomNavigation.component'
 
 export { default as Navbar } from "./Navbar/Navbar.component";
 
