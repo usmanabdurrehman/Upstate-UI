@@ -89,7 +89,7 @@ Name of function which should be called if the name of condition is rule
 Params to be passed in the rule function call if the name of condition is rule
 
 # FormData
-formdata to be passed. Structure is similar to
+formdata to be passed. Structure is similar to the rjsf library
 
 # submitOptions
 The properties which axios accepts like url, method, withCredentials etc
