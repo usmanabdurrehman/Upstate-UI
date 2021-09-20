@@ -13,6 +13,7 @@ export default function Button({
   fullWidth,
   classes,
   onClick,
+  ...rest
 }) {
   let typeToSizeMapper = (size) => {
     let typeToSizeMapper = {
@@ -35,6 +36,7 @@ export default function Button({
         [styles.fullWidth]: fullWidth,
         [classes?.button]: classes?.button,
       })}
+      {...rest}
     >
       {children}
     </button>

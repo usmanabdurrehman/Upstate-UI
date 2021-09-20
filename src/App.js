@@ -1,182 +1,223 @@
 import { useState } from "react";
-import {
-  DataTable,
-  Table,
-  CountCard,
-  Container,
-  FAB,
-  Button,
-  Switch,
-  RadioGroup,
-  Select,
-  Progress,
-  Tabs,
-  Navbar,
-  Tooltip,
-  Accordion,
-  Badge,
-  Checkbox,
-  Stepper,
-  Chip,
-  Modal,
-  Alert,
-  TransferList,
-  Tags,
-  BottomNavigation,
-} from "Components";
 import dummyData from "Components/DataTable/DataTable.constants";
 import SearchIcon from "@material-ui/icons/Search";
 
+import Form from "./Form";
+
+/*
+Note:
+Right now only use Checkbox and Input as widgets. It would work with all other components
+as well with little tweaks but for now testing can be done with these two
+
+Rules are not working now as they result in an infinite render. Figuring it out
+
+Schema format
+Keys which have a ? after them are optional
+The rest are required
+{
+  <Name of formfield>:{
+    widget:<Name of component to be used>,
+    block?:<Name of block this formfield is part of>
+    gridRow?:<Which row it should be on> defaultValue => 'auto',
+    gridColumn?:<Which column it should be on> defaultValue => 1,
+    condition:[
+      {
+        name:<Name of condition> Allowed values show | propPass,
+        value:<Value which should trigger condition>,
+        applyTo:<Name of field or block on which the condition should be applied>,
+        order?:<Order in which conditions should be applied>
+        props?:<Props to be passed in the applyTo field when name of condition is propPass>,
+        function?:<Name of the rule function to be called when name of condition is rule>, 
+        params?:<Params to be passed to the rule function when name of condition is rule>
+      },
+      ...
+    ],
+    {...props a component expects}
+  },
+  ....
+}
+
+Schema Keys/Properties Description
+
+widget<string>
+==============
+Name of the component which is to be used. It should be a valid component name
+e.g if a component is normally imported as import {Button} from '@material-ui/core'
+then it should be "Button". 
+
+block<string>
+=============
+Name of the block. We can assign form fields to blocks so that we can apply
+a condition to more than one fields at the same time without writing a condition
+over and over again
+
+gridRow<integer specifying row | "auto">
+==============================
+
+gridColumn<integer specifying column | "auto">
+==============================================
+
+condition<array of conditions>
+==============================
+An array of conditions which a particular form field will trigger. Each condition
+would have the following keys
+
+1) name
+Name of the condition. It would either be show or propPass for now
+show would show the block of fields or indivdiual field specified in the applyTo property
+
+2) value
+The value of the form field at which the condition should trigger
+
+3) applyTo
+Which field or block of fields should this condition be applied on
+
+4) order
+This property is vital for how the show condition would work
+If two conditions applied on the same field have the same order then both the conditions
+need to be fulfilled in order to show the field or block specified in applyTo
+
+If two conditions applied on the same field have different order then the condition
+with greater order would have more preference over whether the field or block
+should be shown or not. e.g if there is a condition with an order of 2, it would 
+overshadow the effect of condition with order 1.
+
+5) props
+Props to be passed in the applyTo field if the name of condition is propPass
+
+6) function
+Name of function which should be called if the name of condition is rule
+
+7) params
+Params to be passed in the rule function call if the name of condition is rule
+
+FormData
+formdata to be passed. Structure is similar to
+
+submitOptions
+The properties which axios accepts like url, method, withCredentials etc
+This can be replaced with fetch, react-query or any other library.
+*/
+
+let schema = {
+  name: {
+    widget: "Input",
+    placeholder: "Name",
+    required: true,
+    block: "input_block1",
+  },
+  email: {
+    widget: "Input",
+    placeholder: "Email",
+    block: "input_block1",
+    gridColumn:2
+  },
+  password: {
+    widget: "Input",
+    placeholder: "Password",
+    block: "input_block1",
+    gridRow:4,
+    gridColumn:2
+  },
+  phone_no: {
+    widget: "Input",
+    placeholder: "Phone Number",
+    required: true,
+    block: "input_block2",
+    gridColumn:2,
+    gridRow:2
+  },
+  address: {
+    widget: "Input",
+    placeholder: "Address",
+    block: "input_block2",
+    gridColumn:2
+  },
+  zip_code: {
+    widget: "Input",
+    placeholder: "Zip Code",
+    block: "input_block2",
+  },
+  checkbox_1: {
+    name: "checkbox_1",
+    widget: "Checkbox",
+    required: true,
+    condition: [
+      {
+        name: "show",
+        value: true,
+        applyTo: "password",
+      },
+      {
+        name: "propPass",
+        value: false,
+        applyTo: "input_block2",
+        props: {
+          required: true,
+          meow:false
+        },
+      },
+    ],
+    color: "danger",
+    gridColumn:2,
+    gridRow:3
+  },
+  checkbox_2: {
+    widget: "Checkbox",
+    required: true,
+    color: "danger",
+    condition: [
+      {
+        name: "show",
+        value: true,
+        applyTo: "input_block1",
+      },
+    ],
+  },
+  checkbox_3: {
+    widget: "Checkbox",
+    required: true,
+    color: "danger",
+    disabled:true,
+    condition: [
+      {
+        name: "rule",
+        value: true,
+        function: "populatePackageDescription",
+        params: {
+          fieldToCheck: "immunization__immunization",
+          fieldToUpdate: "immunization__packageDescription",
+          groupToUpdate: "immunization__detailsOption",
+        },
+      },
+    ],
+  },
+  "submit-btn": {
+    widget: "Button",
+    required: true,
+    color: "danger",
+    type: "submit",
+    children: "Submit",
+  },
+};
+
+let formData = {
+  checkbox_1: true,
+  checkbox_2: true,
+  name:"I am new here"
+};
+
+let submitOptions = {
+  url: "http://localhost:7000/test",
+};
+
 function App() {
-  const [prog, setProg] = useState(0);
-  const [open, setOpen] = useState(false);
-  const [showAlert, setShowAlert] = useState(false);
-
   return (
-    <div className="App">
-      <BottomNavigation active={1}>
-        <div>Home</div>
-        <div>About</div>
-        <div>Contact</div>
-      </BottomNavigation>
-      <div className="wrapper">
-        <Tags tags={["wrestling", "AEW", "Rampage"]} />
-        <TransferList
-          headers={["Positive", "Negative", "Neutral"]}
-          transferListData={[["lmao", "yo"], [], ["xd"]]}
-        />
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            console.log("lmao form submitted");
-          }}
-        >
-          <Checkbox required />
-          <button type="submit">submit boi</button>
-        </form>
-
-        <Switch onChange={(e) => setShowAlert(!showAlert)} />
-        <Alert
-          color="success"
-          text={"Your password has expired"}
-          showAlert={showAlert}
-        />
-        <Modal isOpen={open} onClose={(e) => setOpen(false)}>
-          <div
-            style={{
-              padding: 50,
-              display: "flex",
-              alignItems: "center",
-              backgroundColor: "white",
-              borderRadius: 20,
-            }}
-          >
-            lmao son
-          </div>
-        </Modal>
-        <button onClick={(e) => setOpen(!open)}>invert modal open state</button>
-        <Stepper />
-        <Chip label="Basic" type="primary" variant="filled" />
-        <Checkbox />
-        <Badge number={6}>Lmao</Badge>
-        <Accordion
-          title="Accordion"
-          content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean finibus risus mi, a semper nisi eleifend in. Donec vestibulum dui eget mi rutrum, eu egestas eros accumsan. Sed sem augue, aliquam et ipsum eu, ultrices egestas ex. Etiam dignissim sollicitudin nibh, a lacinia dolor ornare cursus. Aenean luctus vitae dolor vel aliquam. Nullam vel purus ac diam facilisis pretium eu tincidunt lorem. Nullam aliquet nibh eget ante malesuada, vitae ultrices ante ornare. Curabitur molestie suscipit sem sit amet placerat. Curabitur nunc nunc, bibendum eget urna a, commodo interdum purus. Quisque interdum finibus posuere. Mauris sem tellus, ullamcorper non eros nec, tristique pretium dui. "
-        />
-        <Tooltip title="meow">lmao</Tooltip>
-        <Navbar logo={"lmao"} menuItems={["About Us", "Contact Us"]} />
-        {/* <Tabs titles={["Information", "Question"]}> */}
-        {/*   <div>gfgfg</div> */}
-        {/*   <div>ddfdffgfg</div> */}
-        {/* </Tabs> */}
-        <Table
-          data={dummyData}
-          columns={["color", "description", "quantity"]}
-          customWidgets={{
-            color: (value) => (
-              <div
-                style={{
-                  backgroundColor: value,
-                  width: "30px",
-                  height: "30px",
-                  borderRadius: "50%",
-                }}
-              ></div>
-            ),
-          }}
-          options={{
-            paginationLimit: 6,
-          }}
-          theme="navy"
-          customStyles={
-            {
-              // stripedRows:true,
-              // stripedRowsColor:'#f2f2f2'
-            }
-          }
-        />
-        <DataTable
-          data={dummyData}
-          columns={["color", "description", "quantity"]}
-          customWidgets={{
-            color: (value) => (
-              <div
-                style={{
-                  backgroundColor: value,
-                  width: "30px",
-                  height: "30px",
-                  borderRadius: "50%",
-                }}
-              ></div>
-            ),
-          }}
-          options={{
-            sort: true,
-            sortWholeData: false,
-            columnSelect: true,
-            csvDownload: true,
-            printCsv: true,
-            paginationLimit: 6,
-          }}
-          theme="navy"
-          customStyles={
-            {
-              // stripedRows:true,
-              // stripedRowsColor:'#f2f2f2'
-            }
-          }
-        />
-        <CountCard
-          number={30}
-          text={"Orders Completed"}
-          width={250}
-          type="success"
-        />
-        <FAB variant="filled">
-          <SearchIcon style={{ color: "white" }} />{" "}
-        </FAB>
-        <Switch />
-        <RadioGroup options={["Male", "Female"]} />
-        <Select
-          options={[
-            { label: "Small", value: "small" },
-            { label: "Medium", value: "medium" },
-            { label: "Large", value: "large" },
-          ]}
-        />
-        <Button
-          type="success"
-          variant="outlined"
-          onClick={(e) => console.log("lmao")}
-        >
-          Sign Up
-        </Button>
-        <Progress progress={prog} />
-        <input type="number" onChange={(e) => setProg(e.target.value)} />
-        <RadioGroup options={[30, 60, 90]} onChange={(val) => setProg(val)} />
-      </div>
-      <Container></Container>
-    </div>
+    <Form
+      schema={schema}
+      formData={formData}
+      submitOptions={submitOptions}
+    />
   );
 }
 

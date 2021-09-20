@@ -17,8 +17,8 @@ import InputBase from '../InputBase/InputBase.component'
 
 // Have to have a class for the checkmark
 
-export default function Checkbox({ color, checked, disabled, classes, required, onChange }) {
-	let [isChecked, setIsChecked] = useState(checked || null);
+export default function Checkbox({ color, value, disabled, classes, required, onChange }) {
+	let [isChecked, setIsChecked] = useState(value || null);
 
 	const mounted = useRef();
 
@@ -27,24 +27,24 @@ export default function Checkbox({ color, checked, disabled, classes, required, 
 			// do componentDidMount logic
 			mounted.current = true;
 		} else {
-			setIsChecked(!(checked ? checked && isChecked : isChecked));
+			setIsChecked(value);
 		}
-	}, [checked]);
+	}, [value]);
 
 	return (
 		<div
 			className={classNames({
 				[styles.checkbox]: true,
-				[typeToColorMapping({ color })]: checked ? checked && isChecked : isChecked,
-				[styles.removeBorder]:checked ? checked && isChecked : isChecked,
+				[typeToColorMapping({ color })]: value ? value && isChecked : isChecked,
+				[styles.removeBorder]:value ? value && isChecked : isChecked,
 				[globalStyles.disabled]: disabled,
 				[classes?.checkbox]:classes?.checkbox
 			})}
 			onClick={(e) => {
-				onChange &&
-					onChange(checked ? checked && isChecked : isChecked);
+				!disabled && onChange &&
+					onChange(!(value ? value && isChecked : isChecked));
 				!disabled &&
-					setIsChecked(!(checked ? checked && isChecked : isChecked));
+					setIsChecked(!(value ? value && isChecked : isChecked));
 			}}
 		>
 			<img src={Check} className={styles.check} alt="Check mark" />
@@ -61,7 +61,7 @@ Checkbox.propTypes = {
 		"danger",
 		"default",
 	]),
-	checked: PropTypes.bool,
+	value: PropTypes.bool,
 	disabled: PropTypes.bool,
 	required:PropTypes.bool,
 	onChange: PropTypes.func,
