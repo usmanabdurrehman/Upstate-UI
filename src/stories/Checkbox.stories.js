@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Checkbox } from "Components";
 
@@ -16,11 +16,4 @@ export default {
   },
 };
 
-const Template = (args) => <Checkbox {...args} />;
-
-export const Primary = Template.bind({});
-Primary.args = {
-  color: "default",
-  disabled: false,
-  required:false
-};
+export const Primary = (args) => <Checkbox {...args} />;

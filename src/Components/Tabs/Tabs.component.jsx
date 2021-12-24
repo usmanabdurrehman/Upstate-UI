@@ -1,53 +1,39 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Tabs.module.css";
 
 import { classNames } from "utils";
 
 import PropTypes from "prop-types";
 
-export default function Tabs({ children, titles }) {
-  const [selected, setSelected] = useState(
-    titles.map((title, index) => (index == 0 ? true : false))
-  );
-
-  const [height, setHeight] = useState(0);
-
-  // const childrenRef = children.map(child => useRef(null));
+export default function Tabs({ children, titles, selectedIndex, isConcierge }) {
+  const [selected, setSelected] = useState(selectedIndex || 0);
 
   useEffect(() => {
-    // let maxHeight = Math.max(...childrenRef.map(child=>child.clientHeight))
-    // console.log(maxHeight)
-    // setHeight(maxHeight)
-  }, []);
+    setSelected(selected=>selectedIndex || selected);
+  }, [selectedIndex]);
 
   return (
     <div className={styles.tabsWrapper}>
-      <div className={styles.tabs}>
+      <div
+        className={`${styles.tabs} ${isConcierge ? styles.isConcierge : ""}`}
+      >
         {titles.map((title, index) => (
           <div
-            className={classNames({
-              [styles.tab]: true,
-              [styles.selected]: selected[index],
-            })}
-            onClick={(_) =>
-              setSelected([
-                ...selected.map((tab, tabIndex) =>
-                  index == tabIndex ? true : false
-                ),
-              ])
-            }
+            className={`${styles.tab} ${
+              selected == index ? styles.selected : ""
+            }`}
+            onClick={(_) => setSelected(index)}
           >
             {title}
           </div>
         ))}
       </div>
-      <div className={styles.contentWrapper} style={{ height }}>
+      <div className={styles.contentWrapper}>
         {children.map((child, index) => (
           <div
-            className={styles.content}
-            style={{
-              left: `${(index - selected.findIndex((sel) => sel)) * 100}%`,
-            }}
+            className={`${styles.content} ${
+              selected == index ? styles.showContent : styles.hideContent
+            }`}
           >
             {child}
           </div>
@@ -58,6 +44,6 @@ export default function Tabs({ children, titles }) {
 }
 
 Tabs.propTypes = {
-  children:PropTypes.node,
-  titles:PropTypes.arrayOf(PropTypes.string)
-}
+  children: PropTypes.node,
+  titles: PropTypes.arrayOf(PropTypes.string),
+};

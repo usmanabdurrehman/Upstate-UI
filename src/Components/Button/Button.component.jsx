@@ -3,7 +3,9 @@ import styles from "./Button.module.css";
 
 import PropTypes from "prop-types";
 
-import { classNames, typeToColorMapping } from "utils";
+import { typeToColorMapping } from "utils";
+
+import classNames from "classnames";
 
 export default function Button({
   children,
@@ -13,6 +15,7 @@ export default function Button({
   fullWidth,
   classes,
   onClick,
+  isLoading,
   ...rest
 }) {
   let typeToSizeMapper = (size) => {
@@ -27,7 +30,7 @@ export default function Button({
   return (
     <button
       onClick={() => {
-        onClick && onClick();
+        !isLoading && onClick && onClick();
       }}
       className={classNames({
         [styles.button]: true,
@@ -38,7 +41,14 @@ export default function Button({
       })}
       {...rest}
     >
-      {children}
+      <div
+        className={classNames({
+          [typeToColorMapping({ color, variant: "filled" })]: true,
+          [styles.buttonActiveRibbon]: true,
+          [styles.isLoading]: isLoading,
+        })}
+      ></div>
+      <div className={styles.buttonContent}>{children}</div>
     </button>
   );
 }
@@ -54,7 +64,8 @@ Button.propTypes = {
   variant: PropTypes.oneOf(["filled", "outlined"]),
   size: PropTypes.oneOf(["small", "medium", "large"]),
   fullWidth: PropTypes.bool,
-  classes:PropTypes.object
+  classes: PropTypes.object,
+  isLoading: PropTypes.bool,
 };
 
 Button.defaultProps = {
@@ -63,4 +74,5 @@ Button.defaultProps = {
   children: "default",
   size: "small",
   fullWidth: false,
+  isLoading: false,
 };
