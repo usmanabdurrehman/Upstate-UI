@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Tabs.module.css";
 
-import { classNames } from "utils";
-
 import PropTypes from "prop-types";
 
 export default function Tabs({ children, titles, selectedIndex, isConcierge }) {
   const [selected, setSelected] = useState(selectedIndex || 0);
 
   useEffect(() => {
-    setSelected(selected=>selectedIndex || selected);
+    setSelected((selected) => selectedIndex || selected);
   }, [selectedIndex]);
 
   return (

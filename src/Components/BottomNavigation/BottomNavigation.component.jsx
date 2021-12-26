@@ -1,63 +1,65 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styles from "./BottomNavigation.module.css";
 
-import { classNames, typeToColorMapping } from "utils";
+import { typeToColorMapping } from "utils";
+import classNames from "classnames";
 
 import PropTypes from "prop-types";
 
 export default function BottomNavigation({
-	children,
-	active: activeProp,
-	classes,
-	color,
+  children,
+  active,
+  classes,
+  color,
+  onClick,
 }) {
-	const [active, setActive] = useState(activeProp);
-
-	useEffect(() => {
-		setActive(activeProp);
-	}, [activeProp]);
-
-	return (
-		<div
-			className={classNames({
-				[styles.bottomNavigation]: true,
-				[classes?.bottomNavigation]: classes?.bottomNavigation,
-			})}
-		>
-			{children.map((child, index) => (
-				<div
-					className={classNames({
-						[styles.navMenu]: true,
-						[typeToColorMapping({ color })]: true,
-						[styles.active]: index == active,
-						[classes?.navMenu]: classes?.navMenu,
-						[classes?.active]: classes?.active,
-					})}
-					onClick={(e) => {
-						setActive(index);
-					}}
-				>
-					{child}
-				</div>
-			))}
-		</div>
-	);
+  return (
+    <div
+      className={classNames({
+        [styles.bottomNavigation]: true,
+        [classes?.bottomNavigation]: classes?.bottomNavigation,
+      })}
+    >
+      {children.map((child, index) => (
+        <div
+          className={classNames({
+            [styles.navMenu]: true,
+            [classes?.navMenu]: classes?.navMenu,
+            [classes?.active]: classes?.active,
+          })}
+          onClick={(e) => {
+            onClick && onClick(index);
+          }}
+        >
+          {child}
+          <div
+            className={classNames({
+              [typeToColorMapping({ color, variant: "filled" })]: true,
+              [styles.line]: true,
+              [styles.activeLine]: index == active,
+            })}
+          ></div>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 BottomNavigation.propTypes = {
-	children: PropTypes.arrayOf(PropTypes.node),
-	active: PropTypes.number,
-	classes: PropTypes.object,
-	color: PropTypes.oneOf([
-		"primary",
-		"success",
-		"warning",
-		"danger",
-		"default",
-	]),
+  children: PropTypes.arrayOf(PropTypes.node),
+  active: PropTypes.number,
+  classes: PropTypes.object,
+  color: PropTypes.oneOf([
+    "primary",
+    "success",
+    "warning",
+    "danger",
+    "default",
+  ]),
+  onClick: PropTypes.func,
 };
 
 BottomNavigation.defaultProps = {
-	active: 0,
-	color: "default",
+  active: 0,
+  color: "default",
 };

@@ -37,6 +37,10 @@
   transition: 0.4s;
 }
 
+.buttonWhiteRibbon {
+  background-color: white;
+}
+
 .buttonContent {
   position: relative;
   z-index: 10;

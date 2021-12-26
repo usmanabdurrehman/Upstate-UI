@@ -43,7 +43,9 @@ export default function Button({
     >
       <div
         className={classNames({
-          [typeToColorMapping({ color, variant: "filled" })]: true,
+          [variant == "outlined"
+            ? typeToColorMapping({ color, variant: "filled" })
+            : styles.buttonWhiteRibbon]: true,
           [styles.buttonActiveRibbon]: true,
           [styles.isLoading]: isLoading,
         })}

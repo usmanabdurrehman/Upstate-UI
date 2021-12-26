@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Navbar.module.css";
 import { Container } from "../";
-import { classNames } from "utils";
+import classNames from "classnames";
 
 import { IconButton } from "@material-ui/core";
 
@@ -19,10 +19,8 @@ export default function Navbar({ logo, menuItems, classes }) {
 
   return (
     <div className={styles.navbar}>
-      <Container classes={{container:styles.navbarWrapper}}>
-        <h2 className={styles.logo}>
-          {logo}
-        </h2>
+      <Container classes={{ container: styles.navbarWrapper }}>
+        <h2 className={styles.logo}>{logo}</h2>
         <div className={styles.menuItems}>
           {menuItems.map((item) => (
             <div className={styles.menuItem}>{item}</div>
@@ -51,7 +49,7 @@ export default function Navbar({ logo, menuItems, classes }) {
 }
 
 Navbar.propTypes = {
-  logo:PropTypes.node,
-  menuItems:PropTypes.arrayOf(PropTypes.node),
-  classes:PropTypes.arrayOf(PropTypes.string)
-}
+  logo: PropTypes.node,
+  menuItems: PropTypes.arrayOf(PropTypes.node),
+  classes: PropTypes.arrayOf(PropTypes.string),
+};

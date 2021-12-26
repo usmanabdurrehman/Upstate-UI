@@ -7,7 +7,9 @@ import Check from "./Check.svg";
 
 import PropTypes from "prop-types";
 
-import { classNames, typeToColorMapping } from "utils";
+import { typeToColorMapping } from "utils";
+
+import classNames from "classnames";
 
 import InputBase from "../InputBase/InputBase.component";
 

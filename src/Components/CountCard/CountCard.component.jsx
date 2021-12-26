@@ -3,7 +3,9 @@ import styles from "./CountCard.module.css";
 
 import PropTypes from "prop-types";
 
-import { classNames, typeToColorMapping } from "utils";
+import { typeToColorMapping } from "utils";
+
+import classNames from "classnames";
 
 export default function CountCard({
   number,
@@ -53,7 +55,7 @@ CountCard.propTypes = {
   height: PropTypes.number,
   number: PropTypes.number,
   text: PropTypes.string,
-  classes:PropTypes.object
+  classes: PropTypes.object,
 };
 
 CountCard.defaultProps = {

@@ -5,7 +5,7 @@ export default {
   component: Alert,
   argTypes: {
     color: {
-      options: ["primary", "success", "warning", "danger", "default"],
+      options: ["primary", "success", "warning", "danger"],
       control: { type: "radio" },
     },
   },
@@ -16,7 +16,7 @@ const Template = (args) => <Alert {...args} />;
 export const Primary = Template.bind({});
 
 Primary.args = {
-  color: "default",
-  text:'You have logged in',
-  showAlert:true
+  color: "primary",
+  text: "You have logged in",
+  showAlert: true,
 };

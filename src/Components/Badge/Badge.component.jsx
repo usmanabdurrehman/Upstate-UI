@@ -4,7 +4,9 @@ import styles from "./Badge.module.css";
 
 import PropTypes from "prop-types";
 
-import { typeToColorMapping, classNames } from "utils";
+import { typeToColorMapping } from "utils";
+
+import classNames from "classnames";
 
 export default function Badge({
   color,
@@ -26,7 +28,7 @@ export default function Badge({
           className={classNames({
             [styles.badge]: true,
             [typeToColorMapping({ color })]: true,
-            [classes?.badge]:classes?.badge
+            [classes?.badge]: classes?.badge,
           })}
         >
           <div>{Math.min(number, max)}</div>
@@ -49,7 +51,7 @@ Badge.propTypes = {
   max: PropTypes.number,
   showZero: PropTypes.bool,
   invisible: PropTypes.bool,
-  classes:PropTypes.object
+  classes: PropTypes.object,
 };
 
 Badge.defaultProps = {

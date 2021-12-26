@@ -3,7 +3,9 @@ import styles from "./Chip.module.css";
 
 import PropTypes from "prop-types";
 
-import { classNames, typeToColorMapping } from "utils";
+import { typeToColorMapping } from "utils";
+
+import classNames from "classnames";
 
 export default function Chip({
   label,
@@ -17,10 +19,10 @@ export default function Chip({
     <div
       className={classNames({
         [styles.chip]: true,
-        [typeToColorMapping({ color,variant })]: true,
+        [typeToColorMapping({ color, variant })]: true,
         [styles.clickable]: clickable,
         [styles.appearDisabled]: disabled,
-        [classes?.chip]:classes?.chip
+        [classes?.chip]: classes?.chip,
       })}
     >
       {label}
@@ -40,7 +42,7 @@ Chip.propTypes = {
   label: PropTypes.string,
   clickable: PropTypes.bool,
   disabled: PropTypes.bool,
-  classes:PropTypes.object
+  classes: PropTypes.object,
 };
 
 Chip.defaultProps = {

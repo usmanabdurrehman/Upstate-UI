@@ -3,18 +3,22 @@ import styles from "./RadioGroup.module.css";
 
 import PropTypes from "prop-types";
 
-import { classNames, typeToColorMapping } from "utils";
+import { typeToColorMapping } from "utils";
 
-export default function RadioGroup({ color, options, classes, onChange }) {
+import classNames from "classnames";
+
+export default function RadioGroup({
+  color,
+  options,
+  classes,
+  selectedOption,
+  onClick,
+}) {
   if (!options) {
     throw new Error("You should have atleast one option");
   } else if (!Array.isArray(options)) {
     throw new Error("options prop should be an array of strings");
   }
-
-  const [clicked, setClicked] = useState(
-    options.map((option, index) => (index === 0 ? true : false))
-  );
 
   return (
     <div
@@ -34,20 +38,17 @@ export default function RadioGroup({ color, options, classes, onChange }) {
             className={classNames({
               [styles.radio]: true,
               [typeToColorMapping({ color, variant: "outlined" })]: true,
-              [styles.radioClicked]: clicked[index],
+              [styles.radioClicked]: selectedOption == index,
               [classes?.radio]: classes?.radio,
             })}
             onClick={(e) => {
-              const optionsArr = [...options].map((option) => false);
-              optionsArr[index] = true;
-              onChange && onChange(options[index]);
-              setClicked(optionsArr);
+              onClick && onClick(index);
             }}
           >
             <div
               className={classNames({
                 [styles.radioCircle]: true,
-                [styles.radioCircleClicked]: clicked[index],
+                [styles.radioCircleClicked]: selectedOption == index,
                 [typeToColorMapping({ color })]: true,
                 [classes?.radio]: classes?.radio,
               })}
@@ -68,11 +69,13 @@ RadioGroup.propTypes = {
     "danger",
     "default",
   ]),
-  classes:PropTypes.object,
-  options:PropTypes.string,
-  onChange:PropTypes.func
+  classes: PropTypes.object,
+  options: PropTypes.string,
+  onClick: PropTypes.func,
+  selectedOption: PropTypes.number,
 };
 
 RadioGroup.defaultProps = {
   color: "default",
+  selectedOption: 0,
 };

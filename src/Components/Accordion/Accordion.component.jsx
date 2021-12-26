@@ -5,9 +5,11 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import PropTypes from "prop-types";
 
-import { classNames, isEmpty } from "utils";
+import { isEmpty } from "utils";
 
-import globalStyles from 'styles/global.module.css'
+import classNames from "classnames";
+
+import globalStyles from "styles/global.module.css";
 
 // https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_accordion_animate
 
@@ -76,7 +78,7 @@ Accordion.propTypes = {
   disabled: PropTypes.bool,
   expanded: PropTypes.bool,
   onChange: PropTypes.func,
-  classes:PropTypes.object
+  classes: PropTypes.object,
 };
 
 Accordion.defaultProps = {

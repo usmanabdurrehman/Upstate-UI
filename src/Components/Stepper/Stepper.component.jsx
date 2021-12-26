@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Stepper.module.css";
 
-import { classNames } from "utils";
+import classNames from "classnames";
 
-export default function Stepper({active}) {
+export default function Stepper({ active }) {
   let [activeStep, setActiveStep] = useState(active || 0);
   let steps = ["Step 1", "Step 2", "PreFinal", "Finish"];
 
-  useEffect(()=>{
-    setActiveStep(active)
-  },[active])
+  useEffect(() => {
+    setActiveStep(active);
+  }, [active]);
 
   return (
     <>

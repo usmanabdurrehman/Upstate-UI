@@ -3,7 +3,9 @@ import styles from "./FAB.module.css";
 
 import PropTypes from "prop-types";
 
-import { classNames, typeToColorMapping } from "utils";
+import { typeToColorMapping } from "utils";
+
+import classNames from "classnames";
 
 export default function FAB({
   children,
@@ -23,7 +25,25 @@ export default function FAB({
         [classes?.FAB]: classes?.FAB,
       })}
     >
-      {children}
+      <div
+        className={classNames({
+          [variant == "outlined"
+            ? typeToColorMapping({ color, variant: "filled" })
+            : styles.buttonWhiteRibbon]: true,
+          [styles.buttonActiveRibbon]: true,
+          [styles.buttonActiveRibbonBottom]: true,
+        })}
+      ></div>
+      <div
+        className={classNames({
+          [variant == "outlined"
+            ? typeToColorMapping({ color, variant: "filled" })
+            : styles.buttonWhiteRibbon]: true,
+          [styles.buttonActiveRibbon]: true,
+          [styles.buttonActiveRibbonTop]: true,
+        })}
+      ></div>
+      <div className={styles.buttonContent}>{children}</div>
     </button>
   );
 }
@@ -38,7 +58,7 @@ FAB.propTypes = {
   ]),
   variant: PropTypes.oneOf(["filled", "outlined"]),
   disabled: PropTypes.bool,
-  classes:PropTypes.object
+  classes: PropTypes.object,
 };
 
 FAB.defaultProps = {

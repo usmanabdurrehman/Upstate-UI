@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
-import { classNames, typeToColorMapping } from "utils";
+import { typeToColorMapping } from "utils";
+
+import classNames from "classnames";
 
 import styles from "./Select.module.css";
 
@@ -10,7 +12,7 @@ import PropTypes from "prop-types";
 
 import ClickAwayListener from "react-click-away-listener";
 
-import InputBase from '../InputBase/InputBase.component'
+import InputBase from "../InputBase/InputBase.component";
 
 export default function Select({
   color,
@@ -19,13 +21,13 @@ export default function Select({
   classes,
   placeholder,
   onChange,
-  required
+  required,
 }) {
   if (!options) {
     throw new Error("You should have atleast one option");
   } else if (!Array.isArray(options)) {
     throw new Error("options prop should be an array of strings");
-  }else if(!options.every(option=>option?.value)){
+  } else if (!options.every((option) => option?.value)) {
     throw new Error("options should be of type [{value,label},...]");
   }
 
@@ -50,7 +52,9 @@ export default function Select({
           })}
           onClick={(e) => setSelectOpen(!selectOpen)}
         >
-          <div className={styles.selected}>{selected?.label || placeholder}</div>
+          <div className={styles.selected}>
+            {selected?.label || placeholder}
+          </div>
           <KeyboardArrowDownIcon
             className={classNames({
               [styles.icon]: true,
@@ -71,7 +75,8 @@ export default function Select({
                   [styles.selectOption]: true,
                   [styles.selectedOption]: option === selected,
                   [classes?.selectOption]: classes?.selectOption,
-                  [typeToColorMapping({ color, variant: "outlined" })]: option === selected,
+                  [typeToColorMapping({ color, variant: "outlined" })]:
+                    option === selected,
                 })}
                 onClick={(e) => {
                   setSelected(option);
@@ -84,7 +89,7 @@ export default function Select({
             ))}
           </div>
         )}
-        {required && <InputBase/>}
+        {required && <InputBase />}
       </div>
     </ClickAwayListener>
   );
@@ -98,12 +103,12 @@ Select.propTypes = {
     "danger",
     "default",
   ]),
-  options:PropTypes.arrayOf(PropTypes.string),
-  selectedValue:PropTypes.string,
-  classes:PropTypes.arrayOf(PropTypes.string),
-  onChange:PropTypes.func,
-  required:PropTypes.bool,
-  placeholder:PropTypes.string
+  options: PropTypes.arrayOf(PropTypes.string),
+  selectedValue: PropTypes.string,
+  classes: PropTypes.arrayOf(PropTypes.string),
+  onChange: PropTypes.func,
+  required: PropTypes.bool,
+  placeholder: PropTypes.string,
 };
 
 Select.defaultProps = {

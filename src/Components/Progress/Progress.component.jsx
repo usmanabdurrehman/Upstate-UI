@@ -3,7 +3,9 @@ import styles from "./Progress.module.css";
 
 import PropTypes from "prop-types";
 
-import { classNames, typeToColorMapping } from "utils";
+import { typeToColorMapping } from "utils";
+
+import classNames from "classnames";
 
 export default function Progress({ color, progress, classes }) {
   const DURATION = 0.6;

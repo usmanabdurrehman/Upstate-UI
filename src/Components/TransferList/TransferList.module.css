@@ -1,16 +1,17 @@
-.transferList{
-	display: grid;
-	grid-gap:30px;
+.transferList {
+  display: grid;
+  grid-gap: 30px;
 }
 
-.transferCard{
-	border-radius: 4px;
-	box-shadow: 3px 3px 7px lightgray;
-	padding:10px;
-	cursor: pointer;
-	transition:0.3s;
+.transferCard {
+  border-radius: 4px;
+  box-shadow: 3px 3px 7px lightgray;
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 13px;
 }
 
-.transferCard:hover{
-	transform: translateY(-3px);
+.transferCard:hover {
+  transform: translateY(-3px);
 }
