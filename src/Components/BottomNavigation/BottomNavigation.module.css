@@ -1,10 +1,17 @@
+.bottomNavigationWrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.bottomNavigationContentWrapper {
+  flex: 1;
+  position: relative;
+}
+
 .bottomNavigation {
   height: 50px;
-  position: fixed;
-  bottom: 0;
-  left: 0;
   width: 100%;
-  z-index: 9999;
   display: flex;
 }
 
@@ -31,4 +38,21 @@
 
 .activeLine {
   height: 3px;
+}
+
+.content {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.showContent {
+  display: block;
+}
+
+.hideContent {
+  display: none;
 }
