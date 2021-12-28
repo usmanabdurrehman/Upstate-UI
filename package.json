@@ -22,7 +22,7 @@
   "scripts": {
     "server": "nodemon server.js",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "rollup -c rollup.config.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
@@ -57,6 +57,9 @@
     ]
   },
   "devDependencies": {
+    "@rollup/plugin-auto-install": "^2.2.0",
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-node-resolve": "^13.1.1",
     "@storybook/addon-actions": "^6.2.9",
     "@storybook/addon-essentials": "^6.2.9",
     "@storybook/addon-links": "^6.2.9",

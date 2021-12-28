@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { RadioGroup } from "Components";
 
@@ -13,7 +13,16 @@ export default {
   },
 };
 
-const Template = (args) => <RadioGroup {...args} />;
+const Template = (args) => {
+  const [option, setOption] = useState(0);
+  return (
+    <RadioGroup
+      {...args}
+      value={option}
+      onClick={(option) => setOption(option)}
+    />
+  );
+};
 
 export const Primary = Template.bind({});
 Primary.args = {

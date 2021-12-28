@@ -16,4 +16,13 @@ export default {
   },
 };
 
-export const Primary = (args) => <Checkbox {...args} />;
+export const Primary = (args) => {
+  const [checked, setChecked] = useState(false);
+  return (
+    <Checkbox
+      {...args}
+      checked={checked}
+      onClick={(checked) => setChecked(!checked)}
+    />
+  );
+};

@@ -35,7 +35,7 @@ export default function Checkbox({
         [classes?.checkbox]: classes?.checkbox,
       })}
       onClick={(e) => {
-        !disabled && onClick && onClick();
+        !disabled && onClick && onClick(checked);
       }}
     >
       <img src={Check} className={styles.check} alt="Check mark" />

@@ -11,8 +11,8 @@ export default function RadioGroup({
   color,
   options,
   classes,
-  selectedOption,
   onClick,
+  value: selectedOption,
 }) {
   if (!options) {
     throw new Error("You should have atleast one option");

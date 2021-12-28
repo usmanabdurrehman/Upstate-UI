@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styles from "./Accordion.module.css";
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import PropTypes from "prop-types";
-
-import { isEmpty } from "utils";
 
 import classNames from "classnames";
 
@@ -19,21 +17,15 @@ export default function Accordion({
   content,
   title,
   disabled,
-  onChange,
+  onClick,
   expanded,
   classes,
 }) {
-  const [open, setOpen] = useState(expanded || false);
-
-  useEffect(() => {
-    setOpen(expanded);
-  }, [expanded]);
-
   return (
     <div
       className={classNames({
         [styles.accordion]: true,
-        [styles.accordionOpen]: open,
+        [styles.accordionOpen]: expanded,
         [globalStyles.disabled]: disabled,
         [classes?.accordionWrapper]: classes?.accordionWrapper,
       })}
@@ -44,18 +36,15 @@ export default function Accordion({
           [globalStyles.disabled]: disabled,
           [classes?.accordionTitle]: classes?.accordionTitle,
         })}
-        onClick={(e) => {
-          onChange && onChange();
-          !disabled &&
-            isEmpty(expanded) &&
-            setOpen(!(expanded ? open && expanded : open));
+        onClick={() => {
+          !disabled && onClick && onClick(expanded);
         }}
       >
         <p>{title}</p>
         <ExpandMoreIcon
           className={classNames({
             [styles.arrow]: true,
-            [styles.invert]: open,
+            [styles.invert]: expanded,
             [classes?.accordionIcon]: classes?.accordionIcon,
           })}
         />
@@ -77,7 +66,7 @@ Accordion.propTypes = {
   title: PropTypes.node,
   disabled: PropTypes.bool,
   expanded: PropTypes.bool,
-  onChange: PropTypes.func,
+  onClick: PropTypes.func,
   classes: PropTypes.object,
 };
 
