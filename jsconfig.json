@@ -2,5 +2,5 @@
   "compilerOptions": {
     "baseUrl": "src"
   },
-  "include": ["src", "rollup.config.js"]
+  "include": ["src", "rollup.config.js", "babel.config.json"]
 }
