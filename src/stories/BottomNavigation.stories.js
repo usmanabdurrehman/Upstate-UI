@@ -20,13 +20,17 @@ const Template = (args) => {
       {...args}
       index={index}
       onClick={(index) => setIndex(index)}
-      tabs={[<div>Home</div>, <div>About</div>, <div>Contact</div>]}
-    >
-      <div>lorem ipsum</div>
-      <div>lorem sdlksldksldklsdklsdkldksl</div>
-      <div>Abc sdosdpofdpfodpfodpfodpfodpfopfodpfop</div>
-    </BottomNavigation>
+    />
   );
 };
 
-export const Primary = Template.bind({});
+export const Simple = Template.bind({});
+
+Simple.args = {
+  tabs: [<div>Home</div>, <div>About</div>, <div>Contact</div>],
+  children: [
+    <div>lorem ipsum</div>,
+    <div>lorem sdlksldksldklsdklsdkldksl</div>,
+    <div>Abc sdosdpofdpfodpfodpfodpfodpfopfodpfop</div>,
+  ],
+};

@@ -1,1 +1,1 @@
-export {Badge} from './Badge.component'
+export {default as Badge} from './Badge.component'

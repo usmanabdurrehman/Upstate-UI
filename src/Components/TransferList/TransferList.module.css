@@ -4,14 +4,17 @@
 }
 
 .transferCard {
+  cursor: pointer;
+}
+
+.defaultTransferCardStyle {
   border-radius: 4px;
   box-shadow: 3px 3px 7px lightgray;
   padding: 10px;
-  cursor: pointer;
   transition: 0.3s;
   font-size: 13px;
 }
 
-.transferCard:hover {
+.defaultTransferCardStyle:hover {
   transform: translateY(-3px);
 }

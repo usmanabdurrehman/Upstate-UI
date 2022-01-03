@@ -1,1 +1,1 @@
-export {TransferList} from './TransferList.component'
+export {default as TransferList} from './TransferList.component'

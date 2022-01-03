@@ -15,10 +15,10 @@ export default {
 
 const Template = (args) => <FAB {...args} />;
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const Simple = Template.bind({});
+Simple.args = {
   color: "default",
   variant: "outlined",
   children: "+",
-  disabled:false
+  disabled: false,
 };

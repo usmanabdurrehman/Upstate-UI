@@ -15,9 +15,9 @@ export default {
 
 const Template = (args) => <Badge {...args} />;
 
-export const Primary = Template.bind({});
+export const Simple = Template.bind({});
 
-Primary.args = {
+Simple.args = {
   color: "default",
   children: "Badge",
   number: 9,

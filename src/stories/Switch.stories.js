@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { Switch } from "Components";
 
@@ -13,9 +13,23 @@ export default {
   },
 };
 
-const Template = (args) => <Switch {...args} />;
+const Template = (args) => {
+  const [checked, setChecked] = useState(false);
 
-export const Primary = Template.bind({});
-Primary.args = {
+  useEffect(() => {
+    setChecked(args.checked);
+  }, [args.checked]);
+
+  return (
+    <Switch
+      {...args}
+      checked={checked}
+      onClick={(checked) => setChecked(!checked)}
+    />
+  );
+};
+
+export const Simple = Template.bind({});
+Simple.args = {
   color: "default",
 };

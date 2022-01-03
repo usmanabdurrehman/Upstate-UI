@@ -1,1 +1,1 @@
-export {FAB} from './FAB.component'
+export {default as FAB} from './FAB.component'

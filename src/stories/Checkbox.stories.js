@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Checkbox } from "Components";
 
@@ -16,8 +16,13 @@ export default {
   },
 };
 
-export const Primary = (args) => {
+export const Simple = (args) => {
   const [checked, setChecked] = useState(false);
+
+  useEffect(() => {
+    setChecked(args.checked);
+  }, [args.checked]);
+
   return (
     <Checkbox
       {...args}

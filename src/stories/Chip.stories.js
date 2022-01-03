@@ -15,10 +15,10 @@ export default {
 
 const Template = (args) => <Chip {...args} />;
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const Simple = Template.bind({});
+Simple.args = {
   color: "default",
   variant: "outlined",
-  clickable:true,
-  disabled:false
+  clickable: true,
+  disabled: false,
 };

@@ -1,1 +1,1 @@
-export {InputBase} from './InputBase.component'
+export {default as InputBase} from './InputBase.component'

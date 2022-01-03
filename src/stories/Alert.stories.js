@@ -13,9 +13,9 @@ export default {
 
 const Template = (args) => <Alert {...args} />;
 
-export const Primary = Template.bind({});
+export const Simple = Template.bind({});
 
-Primary.args = {
+Simple.args = {
   color: "primary",
   text: "You have logged in",
   showAlert: true,

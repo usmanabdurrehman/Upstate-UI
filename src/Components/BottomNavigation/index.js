@@ -1,1 +1,1 @@
-export {BottomNavigation} from './BottomNavigation.component'
+export {default as BottomNavigation} from './BottomNavigation.component'

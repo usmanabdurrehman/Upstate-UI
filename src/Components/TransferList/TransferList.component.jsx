@@ -32,8 +32,6 @@ export default function TransferList({
     conversion(transferListData)
   );
 
-  useEffect(() => {}, [transferList]);
-
   return (
     <div
       className={styles.transferList}
@@ -47,6 +45,7 @@ export default function TransferList({
           <div
             className={classNames({
               [styles.transferCard]: column,
+              [styles.defaultTransferCardStyle]: column && !customCard,
             })}
             onClick={(e) => {
               let transferListArray = [...transferList];
@@ -113,7 +112,7 @@ export default function TransferList({
               }
             }}
           >
-            {customCard
+            {customCard && column
               ? cloneElement(customCard, { children: column })
               : column}
           </div>

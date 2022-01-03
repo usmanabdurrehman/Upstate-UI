@@ -1,1 +1,1 @@
-export { CountCard } from "./CountCard.component";
+export {default as CountCard} from './CountCard.component'

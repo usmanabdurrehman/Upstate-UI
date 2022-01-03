@@ -9,8 +9,8 @@ export default {
 
 const Template = (args) => <Tooltip {...args} />;
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const Simple = Template.bind({});
+Simple.args = {
   children: "Tooltip content",
   title: "Tooltip title",
 };

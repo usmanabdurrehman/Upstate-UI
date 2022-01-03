@@ -15,8 +15,8 @@ export default {
 
 const Template = (args) => <Progress {...args} />;
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const Simple = Template.bind({});
+Simple.args = {
   color: "default",
   progress: 40,
 };

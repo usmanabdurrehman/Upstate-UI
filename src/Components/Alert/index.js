@@ -1,1 +1,1 @@
-export {Alert} from './Alert.component'
+export {default as Alert} from './Alert.component'

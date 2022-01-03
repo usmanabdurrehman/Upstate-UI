@@ -19,9 +19,9 @@ export default {
 
 const Template = (args) => <Table {...args} />;
 
-export const Primary = Template.bind({});
+export const Simple = Template.bind({});
 
-Primary.args = {
+Simple.args = {
   data: dummyData,
   columns: ["color", "description", "quantity"],
   customWidgets: {

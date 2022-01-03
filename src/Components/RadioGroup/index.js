@@ -1,1 +1,1 @@
-export {RadioGroup} from './RadioGroup.component'
+export {default as RadioGroup} from './RadioGroup.component'

@@ -1,1 +1,1 @@
-export {Progress} from './Progress.component'
+export {default as Progress} from './Progress.component'

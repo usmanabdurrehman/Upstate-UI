@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { RadioGroup } from "Components";
 
@@ -15,6 +15,11 @@ export default {
 
 const Template = (args) => {
   const [option, setOption] = useState(0);
+
+  useEffect(() => {
+    setOption(args.value);
+  }, [args.value]);
+
   return (
     <RadioGroup
       {...args}
@@ -24,8 +29,9 @@ const Template = (args) => {
   );
 };
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const Simple = Template.bind({});
+Simple.args = {
   color: "default",
   options: ["Small", "Medium"],
+  value: 0,
 };

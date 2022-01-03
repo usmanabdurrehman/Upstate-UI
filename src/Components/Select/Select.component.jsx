@@ -17,7 +17,7 @@ import InputBase from "../InputBase/InputBase.component";
 export default function Select({
   color,
   options,
-  selectedValue,
+  selected,
   classes,
   placeholder,
   onChange,
@@ -31,7 +31,6 @@ export default function Select({
     throw new Error("options should be of type [{value,label},...]");
   }
 
-  const [selected, setSelected] = useState(selectedValue || null);
   const [selectOpen, setSelectOpen] = useState(false);
 
   let handleClickAway = () => setSelectOpen(false);
@@ -79,7 +78,6 @@ export default function Select({
                     option === selected,
                 })}
                 onClick={(e) => {
-                  setSelected(option);
                   setSelectOpen(false);
                   onChange && onChange(option);
                 }}

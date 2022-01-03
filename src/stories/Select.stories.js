@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { Select } from "Components";
 
@@ -13,11 +13,25 @@ export default {
   },
 };
 
-const Template = (args) => <Select {...args} />;
+const Template = (args) => {
+  const [selected, setSelected] = useState();
 
-export const Primary = Template.bind({});
+  useEffect(() => {
+    setSelected(args.selected);
+  }, [args.selected]);
 
-Primary.args = {
+  return (
+    <Select
+      {...args}
+      onChange={(option) => setSelected(option)}
+      selected={selected}
+    />
+  );
+};
+
+export const Simple = Template.bind({});
+
+Simple.args = {
   color: "default",
   options: [
     { label: "Small", value: "small" },

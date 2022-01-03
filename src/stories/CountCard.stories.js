@@ -15,8 +15,8 @@ export default {
 
 const Template = (args) => <CountCard {...args} />;
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const Simple = Template.bind({});
+Simple.args = {
   color: "default",
   width: 250,
   height: 150,
