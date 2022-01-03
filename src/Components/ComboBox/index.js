@@ -1,1 +1,1 @@
-export {default as ComboBox} from './ComboBox.component'
+export {default as ComboBox} from './ComboBox.jsx'

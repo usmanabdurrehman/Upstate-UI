@@ -1,6 +1,8 @@
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
-import auto from "@rollup/plugin-auto-install";
+import { babel } from "@rollup/plugin-babel";
+import css from "rollup-plugin-import-css";
+import image from "@rollup/plugin-image";
 
 export default [
   {
@@ -20,6 +22,12 @@ export default [
       "@material-ui/core",
       "@material-ui/icons",
     ],
-    plugins: [auto(), resolve(), commonjs()],
+    plugins: [
+      resolve(),
+      commonjs(),
+      babel({ babelHelpers: "bundled" }),
+      css(),
+      image(),
+    ],
   },
 ];

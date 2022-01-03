@@ -1,1 +1,1 @@
-export {default as Tags} from './Tags.component'
+export {default as Tags} from './Tags.jsx'

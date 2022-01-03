@@ -12,7 +12,7 @@ import PropTypes from "prop-types";
 
 import ClickAwayListener from "react-click-away-listener";
 
-import InputBase from "../InputBase/InputBase.component";
+import InputBase from "../InputBase/InputBase.jsx";
 
 export default function Select({
   color,

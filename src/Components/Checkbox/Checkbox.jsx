@@ -11,7 +11,7 @@ import { typeToColorMapping } from "utils";
 
 import classNames from "classnames";
 
-import InputBase from "../InputBase/InputBase.component";
+import InputBase from "../InputBase/InputBase.jsx";
 
 // Have to do something to make it required through a prop
 

@@ -1,1 +1,1 @@
-export {default as BreadCrumbs} from './BreadCrumbs.component'
+export {default as BreadCrumbs} from './BreadCrumbs.jsx'

@@ -1,1 +1,1 @@
-export {default as Tabs} from './Tabs.component'
+export {default as Tabs} from './Tabs.jsx'

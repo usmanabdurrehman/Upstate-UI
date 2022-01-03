@@ -1,1 +1,1 @@
-export {default as Accordion} from './Accordion.component'
+export {default as Accordion} from './Accordion.jsx'
