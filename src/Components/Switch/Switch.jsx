@@ -7,7 +7,14 @@ import { typeToColorMapping, returnDefault } from "utils";
 
 import classNames from "classnames";
 
-export default function Switch({ onClick, checked, color, classes }) {
+export default function Switch({
+  onClick,
+  checked,
+  color,
+  classes,
+  icon,
+  checkedIcon,
+}) {
   return (
     <div
       className={classNames({
@@ -27,7 +34,10 @@ export default function Switch({ onClick, checked, color, classes }) {
           [typeToColorMapping({ color })]: checked,
           [classes?.switchCircle]: classes?.switchCircle,
         })}
-      ></div>
+      >
+        {checked && checkedIcon && checkedIcon}
+        {!checked && icon && icon}
+      </div>
     </div>
   );
 }

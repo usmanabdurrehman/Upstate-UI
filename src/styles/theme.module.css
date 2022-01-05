@@ -31,10 +31,6 @@ code {
     monospace;
 }
 
-.wrapper > * {
-  margin: 50px;
-}
-
 .filled-primary {
   background-color: var(--primary);
   color: #fff;

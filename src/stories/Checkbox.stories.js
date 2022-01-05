@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 import { Checkbox } from "Components";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 export default {
   title: "Checkbox",
@@ -16,7 +18,7 @@ export default {
   },
 };
 
-export const Simple = (args) => {
+const Template = (args) => {
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
@@ -30,4 +32,13 @@ export const Simple = (args) => {
       onClick={(checked) => setChecked(!checked)}
     />
   );
+};
+
+export const Simple = Template.bind({});
+Simple.args = {};
+
+export const WithCustomIcon = Template.bind({});
+WithCustomIcon.args = {
+  checkedIcon: <FavoriteIcon />,
+  icon: <FavoriteBorderIcon />,
 };

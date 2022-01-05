@@ -14,8 +14,9 @@ export default function FAB({
   disabled,
   classes,
   onClick,
+  href,
 }) {
-  return (
+  const Button = (
     <button
       onClick={onClick}
       className={classNames({
@@ -46,6 +47,8 @@ export default function FAB({
       <div className={styles.buttonContent}>{children}</div>
     </button>
   );
+
+  return href ? <a href={href}>{Button}</a> : Button;
 }
 
 FAB.propTypes = {

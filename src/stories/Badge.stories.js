@@ -10,10 +10,20 @@ export default {
       options: ["primary", "success", "warning", "danger", "default"],
       control: { type: "radio" },
     },
+    vertical: {
+      options: ["top", "bottom"],
+      control: { type: "radio" },
+    },
+    horizontal: {
+      options: ["left", "right"],
+      control: { type: "radio" },
+    },
   },
 };
 
-const Template = (args) => <Badge {...args} />;
+const Template = ({ vertical, horizontal, ...rest }) => {
+  return <Badge {...rest} anchorOrigin={{ vertical, horizontal }} />;
+};
 
 export const Simple = Template.bind({});
 
@@ -21,4 +31,15 @@ Simple.args = {
   color: "default",
   children: "Badge",
   number: 9,
+  vertical: "top",
+  horizontal: "right",
+};
+
+export const DotNotification = Template.bind({});
+
+DotNotification.args = {
+  variant: "dot",
+  children: "Badge",
+  vertical: "top",
+  horizontal: "right",
 };

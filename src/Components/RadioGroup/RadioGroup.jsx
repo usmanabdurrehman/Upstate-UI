@@ -11,7 +11,7 @@ export default function RadioGroup({
   color,
   options,
   classes,
-  onClick,
+  onChange,
   value: selectedOption,
 }) {
   if (!options) {
@@ -42,7 +42,7 @@ export default function RadioGroup({
               [classes?.radio]: classes?.radio,
             })}
             onClick={(e) => {
-              onClick && onClick(index);
+              onChange && onChange(index);
             }}
           >
             <div

@@ -20,7 +20,12 @@
   transition: 0.5s;
 }
 
-.switchUnclicked{
+.switchCircle > * {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.switchUnclicked {
   background-color: white;
 }
 

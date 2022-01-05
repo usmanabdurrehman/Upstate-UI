@@ -6,15 +6,18 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 
 import ClickAwayListener from "react-click-away-listener";
 
+import InputBase from "../InputBase/InputBase.jsx";
+
 import { v4 as uuidv4 } from "uuid";
 
 export default memo(function ComboBox({
   fullWidth = false,
-  isClearable = true,
-  isDisabled = false,
-  isLoading = false,
+  clearable = true,
+  disabled = false,
+  loading = false,
   showSuggestions = true,
   enableCustomOptions = true,
+  required,
   onBlur,
   onChange,
   onFocus,
@@ -103,7 +106,7 @@ export default memo(function ComboBox({
         className={classNames({
           [styles.combobox]: true,
           [styles.fullWidth]: fullWidth,
-          [styles.disabled]: isDisabled,
+          [styles.disabled]: disabled,
           [classes?.combobox]: classes?.combobox,
         })}
         onClick={() => setShowOptions(true)}
@@ -143,9 +146,9 @@ export default memo(function ComboBox({
           </form>
         </div>
         <div className={styles.iconWrapper}>
-          {isLoading ? (
+          {loading ? (
             <CircularProgress className={styles.icon} />
-          ) : isClearable ? (
+          ) : clearable && selectedOptions.length ? (
             <CloseIcon onClick={onClear} className={styles.icon} />
           ) : null}
         </div>
@@ -172,6 +175,7 @@ export default memo(function ComboBox({
             ))}
           </div>
         )}
+        {required && <InputBase value={checked} />}
       </div>
     </ClickAwayListener>
   );

@@ -13,10 +13,6 @@ import classNames from "classnames";
 
 import InputBase from "../InputBase/InputBase.jsx";
 
-// Have to do something to make it required through a prop
-
-// Have to have a class for the checkmark
-
 export default function Checkbox({
   color,
   checked,
@@ -24,13 +20,16 @@ export default function Checkbox({
   disabled,
   classes,
   required,
+  icon,
+  checkedIcon,
 }) {
   return (
     <div
       className={classNames({
         [styles.checkbox]: true,
-        [typeToColorMapping({ color })]: checked,
-        [styles.removeBorder]: checked,
+        [styles.addBorder]: !icon && !checked,
+        [typeToColorMapping({ color })]: !checkedIcon && checked,
+        [styles.removeBorder]: !checkedIcon && checked,
         [globalStyles.disabled]: disabled,
         [classes?.checkbox]: classes?.checkbox,
       })}
@@ -38,7 +37,13 @@ export default function Checkbox({
         !disabled && onClick && onClick(checked);
       }}
     >
-      <img src={Check} className={styles.check} alt="Check mark" />
+      {checked &&
+        (checkedIcon ? (
+          checkedIcon
+        ) : (
+          <img src={Check} className={styles.check} alt="Check mark" />
+        ))}
+      {icon && !checked && icon}
       {required && <InputBase value={checked} />}
     </div>
   );

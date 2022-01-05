@@ -4,11 +4,13 @@ import styles from "./Badge.module.css";
 
 import PropTypes from "prop-types";
 
-import { typeToColorMapping } from "utils";
+import { typeToColorMapping, anchorOriginToClassMapper } from "utils";
 
 import classNames from "classnames";
 
 export default function Badge({
+  anchorOrigin = { horizontal: "right", vertical: "top" },
+  variant,
   color,
   number,
   max,
@@ -17,7 +19,7 @@ export default function Badge({
   classes,
   children,
 }) {
-  if (!number) {
+  if (!number && variant != "dot") {
     throw new Error("A number must be supplied for displaying the badge");
   }
 
@@ -27,11 +29,13 @@ export default function Badge({
         <div
           className={classNames({
             [styles.badge]: true,
+            [styles.dotBadge]: variant == "dot",
+            [anchorOriginToClassMapper(anchorOrigin)]: true,
             [typeToColorMapping({ color })]: true,
             [classes?.badge]: classes?.badge,
           })}
         >
-          <div>{Math.min(number, max)}</div>
+          {variant != "dot" && Math.min(number, max)}
         </div>
       )}
       <div className={styles.badgeContent}>{children}</div>
@@ -47,6 +51,7 @@ Badge.propTypes = {
     "danger",
     "default",
   ]),
+  variant: PropTypes.oneOf(["standard", "dot"]),
   number: PropTypes.number,
   max: PropTypes.number,
   showZero: PropTypes.bool,

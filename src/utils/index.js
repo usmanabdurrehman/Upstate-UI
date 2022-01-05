@@ -1,32 +1,38 @@
 import theme from "styles/theme.module.css";
+import globalStyles from "styles/global.module.css";
 
-export let returnDefault = ({ color, variant }) => {
-  let colors = ["primary", "success", "warning", "danger"];
-  let variants = ["filled", "outlined"];
+export const returnDefault = ({ color, variant }) => {
+  const colors = ["primary", "success", "warning", "danger"];
+  const variants = ["filled", "outlined"];
 
-  let value = color || variant;
-  let array = color ? colors : variant;
+  const value = color || variant;
+  const array = color ? colors : variants;
   return array.includes(value) ? value : array[0];
 };
 
-export let isEmpty = (value) => {
+export const isEmpty = (value) => {
   return typeof value != "boolean" && !value;
 };
 
-export let classNames = (classMapping) => {
-  const classes = [];
-  Object.keys(classMapping).forEach((classKey) => {
-    classMapping[classKey] && classes.push(classKey);
-  });
-  return classes.join(" ");
+export const typeToColorMapping = ({ color, variant = "filled" }) => {
+  const classString = `${returnDefault({ variant })}-${returnDefault({
+    color,
+  })}`;
+  return theme[classString];
 };
 
-export let typeToColorMapping = ({
-  color,
-  variant = "filled",
-}) => {
-  let classString = `${returnDefault({ variant })}-${returnDefault({ color })}`;
-  return theme[classString];
+export const severityToColorMapper = (severity) => {
+  const severityToColorMapper = {
+    error: "danger",
+    info: "primary",
+    success: "success",
+    warning: "warning",
+  };
+  return severityToColorMapper[severity] || "primary";
+};
+
+export const anchorOriginToClassMapper = ({ horizontal, vertical }) => {
+  return globalStyles[`${vertical}-${horizontal}`];
 };
 
 export let getThemeStyles = (theme, customStyles) => {

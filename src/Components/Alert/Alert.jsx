@@ -5,11 +5,31 @@ import ClearIcon from "@material-ui/icons/Clear";
 
 import PropTypes from "prop-types";
 
-import { returnDefault } from "utils";
+import {
+  returnDefault,
+  severityToColorMapper,
+  typeToColorMapping,
+} from "utils";
 
 import classNames from "classnames";
 
-export default function Alert({ color, text, showAlert, classes, onClose }) {
+export default function Alert({
+  icon,
+  iconMapping,
+  severity,
+  text,
+  showAlert,
+  classes,
+  onClose,
+  variant,
+}) {
+  console.log(
+    typeToColorMapping({
+      color: severityToColorMapper(severity),
+      variant,
+    })
+  );
+
   return (
     <div
       className={classNames({
@@ -20,11 +40,24 @@ export default function Alert({ color, text, showAlert, classes, onClose }) {
         className={classNames({
           [styles.alert]: true,
           [styles.showAlert]: showAlert,
-          [styles[`alert-${returnDefault({ color })}`]]: true,
+          // [styles[
+          //   `alert-${returnDefault({
+          //     color: severityToColorMapper(severity),
+          //   })}`
+          // ]]: true,
+          [typeToColorMapping({
+            color: severityToColorMapper(severity),
+            variant,
+          })]: true,
           [classes?.alert]: classes?.alert,
         })}
       >
-        <img src={`/icons/alert-${color}.svg`} className={styles.alertIcon} />
+        {icon || (iconMapping && iconMapping?.[severity]) || (
+          <img
+            src={`/icons/alert-${severityToColorMapper(severity)}.svg`}
+            className={styles.alertIcon}
+          />
+        )}
         <p className={styles.alertText}>{text}</p>
         <ClearIcon className={styles.icon} onClick={onClose} />
       </div>
@@ -33,13 +66,14 @@ export default function Alert({ color, text, showAlert, classes, onClose }) {
 }
 
 Alert.propTypes = {
-  color: PropTypes.oneOf(["primary", "success", "warning", "danger"]),
+  severity: PropTypes.oneOf(["error", "info", "success", "warning"]),
+  variant: PropTypes.oneOf(["outlined", "filled"]),
   text: PropTypes.string,
   showAlert: PropTypes.bool,
   classes: PropTypes.object,
 };
 
 Alert.defaultProps = {
-  color: "default",
+  severity: "info",
   showAlert: false,
 };

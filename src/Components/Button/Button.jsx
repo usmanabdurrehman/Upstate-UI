@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styles from "./Button.module.css";
 
 import PropTypes from "prop-types";
@@ -16,6 +16,7 @@ export default function Button({
   classes,
   onClick,
   isLoading,
+  href,
   ...rest
 }) {
   let typeToSizeMapper = (size) => {
@@ -27,7 +28,7 @@ export default function Button({
     return typeToSizeMapper[size] || typeToSizeMapper.small;
   };
 
-  return (
+  const Button = (
     <button
       onClick={() => {
         !isLoading && onClick && onClick();
@@ -53,6 +54,8 @@ export default function Button({
       <div className={styles.buttonContent}>{children}</div>
     </button>
   );
+
+  return href ? <a href={href}>{Button}</a> : Button;
 }
 
 Button.propTypes = {

@@ -8,26 +8,6 @@ import { typeToColorMapping } from "utils";
 import classNames from "classnames";
 
 export default function Progress({ color, progress, classes }) {
-  const DURATION = 0.6;
-
-  const [progressState, setProgressState] = useState(progress || 0);
-
-  const prevProgress = useRef();
-
-  useEffect(() => {
-    setProgressState(progress);
-    if (prevProgress.current != progress) {
-      prevProgress.current = progress;
-    }
-    const progressDifference = Math.abs((prevProgress.current || 0) - progress);
-    let animateProgess = setInterval(() => {
-      setProgressState(progress + progressDifference / (DURATION * 1000));
-      if (progressState >= progress) {
-        clearInterval(animateProgess);
-      }
-    }, (DURATION * 1000) / progressDifference);
-  }, [progress]);
-
   return (
     <div
       className={classNames({
@@ -42,7 +22,7 @@ export default function Progress({ color, progress, classes }) {
           [classes?.progress]: classes?.progress,
         })}
         style={{
-          width: `${progressState}%`,
+          width: `${progress}%`,
         }}
       ></div>
       <div
@@ -50,7 +30,7 @@ export default function Progress({ color, progress, classes }) {
           [styles.remaining]: true,
           [classes?.remaining]: [classes?.remaining],
         })}
-        style={{ width: `calc(${100 - progressState}% + 10px)` }}
+        style={{ width: `calc(${100 - progress}% + 10px)` }}
       ></div>
     </div>
   );

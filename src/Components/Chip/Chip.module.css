@@ -7,14 +7,53 @@
   white-space: nowrap;
   align-items: center;
   justify-content: center;
-  cursor: not-allowed;
-  padding: 0 12px;
+  padding: 0 10px 0 12px;
+
+  position: relative;
+  overflow: hidden;
 }
 
-.clickable{
+.leftGap {
+  margin-left: 5px;
+}
+
+.clickable {
   cursor: pointer;
 }
 
-.appearDisabled{
+.disabled {
   opacity: 0.5;
+}
+
+.avatarWrapper > * {
+  height: 100%;
+  width: 100%;
+}
+
+.buttonActiveRibbon {
+  width: 20%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: -20%;
+
+  transition: 0.4s;
+}
+
+.buttonWhiteRibbon {
+  background-color: white;
+}
+
+.chipContent {
+  position: relative;
+  z-index: 10;
+}
+
+.chip:active .buttonActiveRibbon {
+  left: 100%;
+}
+
+.deleteIconWrapper > * {
+  height: 65% !important;
+  width: 65% !important;
 }

@@ -4,8 +4,8 @@ export default {
   title: "Alert",
   component: Alert,
   argTypes: {
-    color: {
-      options: ["primary", "success", "warning", "danger"],
+    severity: {
+      options: ["error", "info", "success", "warning"],
       control: { type: "radio" },
     },
   },
@@ -16,7 +16,7 @@ const Template = (args) => <Alert {...args} />;
 export const Simple = Template.bind({});
 
 Simple.args = {
-  color: "primary",
+  severity: "info",
   text: "You have logged in",
   showAlert: true,
 };

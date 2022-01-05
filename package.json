@@ -10,7 +10,6 @@
   "author": "Usman Abdur Rehman",
   "dependencies": {
     "@babel/core": "^7.16.7",
-    "@babel/preset-env": "^7.16.7",
     "@babel/preset-react": "^7.16.7",
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",

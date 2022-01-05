@@ -7,6 +7,8 @@ import { typeToColorMapping } from "utils";
 
 import classNames from "classnames";
 
+import CancelIcon from "@material-ui/icons/Cancel";
+
 export default function Chip({
   label,
   color,
@@ -14,19 +16,53 @@ export default function Chip({
   disabled,
   variant,
   classes,
+  avatar,
+  deleteIcon,
+  onClick,
+  onDelete,
 }) {
   return (
-    <div
+    <button
       className={classNames({
         [styles.chip]: true,
         [typeToColorMapping({ color, variant })]: true,
         [styles.clickable]: clickable,
-        [styles.appearDisabled]: disabled,
+        [styles.disabled]: disabled,
         [classes?.chip]: classes?.chip,
       })}
+      onClick={onClick}
     >
-      {label}
-    </div>
+      {clickable && (
+        <div
+          className={classNames({
+            [variant == "outlined"
+              ? typeToColorMapping({ color, variant: "filled" })
+              : styles.buttonWhiteRibbon]: true,
+            [styles.buttonActiveRibbon]: true,
+          })}
+        ></div>
+      )}
+      {avatar && <div className={styles.avatarWrapper}>{avatar}</div>}
+      <div
+        className={classNames({
+          [styles.chipContent]: true,
+          [styles.leftGap]: avatar,
+        })}
+      >
+        {label}
+      </div>
+      {onDelete && (
+        <div
+          className={classNames({
+            [styles.deleteIconWrapper]: true,
+            [styles.leftGap]: true,
+          })}
+          onClick={onDelete}
+        >
+          {deleteIcon || <CancelIcon />}
+        </div>
+      )}
+    </button>
   );
 }
 
@@ -48,7 +84,6 @@ Chip.propTypes = {
 Chip.defaultProps = {
   color: "default",
   variant: "outlined",
-  label: "default",
   clickable: true,
   disabled: false,
 };
