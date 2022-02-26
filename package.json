@@ -11,11 +11,14 @@
   "dependencies": {
     "@babel/core": "^7.16.7",
     "@babel/preset-react": "^7.16.7",
+    "@cypress/react": "^5.12.3",
+    "@cypress/webpack-dev-server": "^1.8.1",
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
     "axios": "^0.21.4",
     "caniuse-lite": "^1.0.30001295",
     "classnames": "^2.3.1",
+    "html-webpack-plugin": "4",
     "prop-types": "^15.8.0",
     "react": "^17.0.2",
     "react-click-away-listener": "^2.0.3",
@@ -30,10 +33,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "build-lib": "rollup -c rollup.config.js",
-    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "test": "cypress open-ct"
   },
   "browserslist": {
     "production": [
@@ -64,6 +67,7 @@
     "@storybook/node-logger": "^6.4.9",
     "@storybook/preset-create-react-app": "^3.2.0",
     "@storybook/react": "^6.4.9",
+    "cypress": "^9.5.0",
     "rollup-plugin-import-css": "^3.0.2"
   },
   "eslintConfig": {
