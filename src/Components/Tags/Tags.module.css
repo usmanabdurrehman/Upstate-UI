@@ -1,0 +1,20 @@
+.tags {
+  display: flex;
+}
+
+.tag {
+  padding: 10px;
+  border-radius: 4px;
+  background-color: #f4f4f4;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.tag:hover {
+  background-color: #ccc;
+}
+
+.tag + .tag {
+  margin-left: 10px;
+}

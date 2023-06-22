@@ -1,0 +1,30 @@
+.progressWrapper {
+  width: 300px;
+  height: 15px;
+  border-radius: 10px;
+  display: flex;
+  overflow: hidden;
+}
+
+.progress {
+  border-radius: 10px;
+  position: relative;
+  z-index: 10;
+}
+
+.remaining {
+  background-color: #ddd;
+  border-radius: 10px;
+  margin-left: -10px;
+}
+/* 
+.changeProgress{
+  animation-name: progress;
+}
+
+@keyframes progress {
+  0% {
+    transform: translateX(0);
+  }
+}
+ */

@@ -1,0 +1,67 @@
+.alertWrapper{
+	position: fixed;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	overflow: hidden;
+	z-index: -1000;
+}
+
+.alert {
+	position: absolute;
+	top:40px;
+	right:-250px;
+	font-size: 14px;
+	min-height: 60px;
+	padding: 0 15px;
+	display: flex;
+	align-items: center;
+	max-width: 300px;
+	border:none;
+	transition:0.4s;
+	z-index:1000;
+}
+
+.showAlert{
+	right:40px;
+}
+
+.icon {
+	font-size: 16px !important;
+	cursor: pointer;
+}
+
+.alert-primary {
+	background-color: var(--primary-light);
+	color: var(--primary);
+	border-left: 6px solid var(--primary);
+}
+
+.alert-success {
+	background-color: var(--success-light);
+	color: var(--success);
+	border-left: 6px solid var(--success);
+}
+
+.alert-warning {
+	background-color: var(--warning-light);
+	color: var(--warning);
+	border-left: 6px solid var(--warning);
+}
+
+.alert-danger {
+	background-color: var(--danger-light);
+	color: var(--danger);
+	border-left: 6px solid var(--danger);
+}
+
+.alertIcon{
+	height:20px;
+	width:20px;
+}
+
+.alertText{
+	flex:1;
+	padding:0 20px 0 10px;
+}

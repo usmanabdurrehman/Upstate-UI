@@ -1,0 +1,20 @@
+.transferList {
+  display: grid;
+  grid-gap: 30px;
+}
+
+.transferCard {
+  cursor: pointer;
+}
+
+.defaultTransferCardStyle {
+  border-radius: 4px;
+  box-shadow: 3px 3px 7px lightgray;
+  padding: 10px;
+  transition: 0.3s;
+  font-size: 13px;
+}
+
+.defaultTransferCardStyle:hover {
+  transform: translateY(-3px);
+}

@@ -1,0 +1,57 @@
+.button {
+  border-radius: 50%;
+  height: 56px;
+  width: 56px;
+  cursor: pointer;
+  font-size: 24px;
+  /* line-height: 56px; */
+  padding: 0;
+  box-shadow: 2px 2px 5px lightgray;
+  transition: 0.4s;
+
+  overflow: hidden;
+  position: relative;
+}
+
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.buttonActiveRibbon {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: absolute;
+
+  transition: 0.2s;
+}
+
+.buttonWhiteRibbon {
+  background-color: white;
+}
+
+.buttonContent {
+  position: relative;
+  z-index: 10;
+}
+
+.buttonActiveRibbonTop {
+  bottom: 100%;
+  right: -100%;
+}
+
+.buttonActiveRibbonBottom {
+  top: 100%;
+  left: -100%;
+}
+
+.button:active .buttonActiveRibbonBottom {
+  top: 55%;
+  left: -55%;
+}
+
+.button:active .buttonActiveRibbonTop {
+  bottom: 55%;
+  right: -55%;
+}

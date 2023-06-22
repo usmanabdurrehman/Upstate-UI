@@ -1,0 +1,163 @@
+.tableWrapper {
+  overflow-x: auto;
+  box-shadow: 3px 3px 7px lightgray;
+  padding: 0;
+}
+
+.table {
+  border-collapse: collapse;
+  min-width: 600px;
+  font-weight: 300;
+  font-size: 14px;
+  width: 100%;
+  position: relative;
+}
+
+.filterWrapper {
+  display: flex;
+  justify-content: space-between;
+  background-color: transparent;
+}
+
+.searchWrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  min-width: 100px;
+  max-width: 350px;
+  width: 50%;
+  padding: 4px 8px;
+  box-shadow: 3px -3px 7px lightgray;
+  border-radius: 12px 12px 0 0;
+}
+
+.searchWrapper .search {
+  width: 100%;
+  border-radius: 20px;
+  padding: 10px;
+  border: 2px solid gray;
+  padding-left: 35px;
+  box-sizing: border-box;
+  background-color: transparent;
+}
+
+.searchWrapper .search:focus {
+  outline: none;
+}
+
+.searchWrapper .searchIcon {
+  position: absolute;
+  left: 18px;
+  color: gray;
+}
+
+.icons {
+  padding: 4px 8px;
+  box-shadow: 3px -3px 7px lightgray;
+  border-radius: 12px 12px 0 0;
+  display: grid;
+  grid-gap: 15px;
+}
+
+.icons a,
+.icons svg {
+  color: gray;
+  cursor: pointer;
+}
+
+.table th,
+.table td {
+  padding: 8px 16px;
+  text-align: left;
+}
+
+.table th {
+  cursor: pointer;
+  text-transform: capitalize;
+  /* cursor:move; */
+  user-select: none;
+}
+
+.table th > div {
+  display: flex;
+  align-items: center;
+}
+
+.table th p {
+  margin: 0;
+}
+
+.table .row {
+  position: relative;
+  width: 100%;
+}
+
+/* .table tr:nth-child(odd){
+	background-color: #f4f4f4;
+} */
+
+.table tr:nth-child(1) {
+  background-color: #47e5bc;
+  color: white;
+}
+
+.table tr {
+  /* border-bottom: 1px solid #ccc; */
+}
+
+.upicon {
+  font-size: 16px !important;
+  margin-left: 10px;
+  transition: 0.4s !important;
+}
+
+.invert {
+  transform: rotateZ(180deg);
+}
+
+.normal {
+  transform: rotateZ(0deg);
+}
+
+.popoverContent {
+  padding: 5px;
+  font-size: 14px;
+}
+
+.paginationWrapper {
+  display: flex;
+  justify-content: flex-end;
+  padding: 2px;
+}
+
+.pagination {
+  display: grid;
+  grid-gap: 10px;
+  color: gray;
+}
+
+.pagination > div {
+  padding: 8px;
+  box-shadow: -3px 3px 7px lightgray;
+  border-radius: 0 0 6px 6px;
+  cursor: pointer;
+}
+
+@media (max-width: 500px) {
+  .filterWrapper {
+    display: block;
+  }
+  .searchWrapper {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
+    box-shadow: none;
+  }
+  .icons {
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .tableWrapper {
+    box-shadow: none;
+  }
+}

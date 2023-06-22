@@ -1,0 +1,113 @@
+.combobox {
+  position: relative;
+
+  border: 1px solid black;
+  border-radius: 8px;
+
+  height: 40px;
+
+  display: flex;
+
+  width: 350px;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.selectedOptionsWrapper {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin-left: 10px;
+
+  flex: 1;
+}
+
+.selectedOption {
+  color: white;
+  background-color: rgb(22, 36, 165);
+  padding: 4px 8px;
+  font-size: 11px;
+
+  border-radius: 4px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+}
+
+.selectedOption + .selectedOption {
+  margin-left: 6px;
+}
+
+.optionsWrapper {
+  position: absolute;
+  top: 40px;
+  left: 0;
+
+  box-shadow: 3px 3px 7px lightgray;
+  width: 100%;
+}
+
+.option {
+  cursor: pointer;
+}
+
+.option + .option {
+  border-top: 1px solid lightgray;
+}
+
+.defaultOptionStyle:hover {
+  background-color: #f4f4f4;
+}
+
+.defaultOptionStyle {
+  font-size: 12px;
+  padding: 8px 10px;
+
+  transition: 0.4s;
+}
+
+.closeIconWrapper {
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+  height: 100%;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+  width: 30px;
+}
+
+.icon {
+  height: 12px !important;
+  width: 12px !important;
+
+  cursor: pointer;
+}
+
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.inputForm {
+  flex: 1;
+}
+
+.input {
+  padding: 4px 8px;
+  border: none;
+
+  width: 100%;
+}
+
+.input:focus {
+  outline: none;
+}

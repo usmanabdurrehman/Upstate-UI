@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap");
+
+:root {
+  --primary: #1266f1;
+  --primary-light: #cce5ff;
+
+  --success: #00b74a;
+  --success-light: #d4edda;
+
+  --warning: #ffa900;
+  --warning-light: #fff3cd;
+
+  --danger: #f93154;
+  --danger-light: #f8d7da;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Noto Sans JP", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.filled-primary {
+  background-color: var(--primary);
+  color: #fff;
+  border: none;
+}
+
+.filled-success {
+  background-color: var(--success);
+  color: #fff;
+  border: none;
+}
+
+.filled-warning {
+  background-color: var(--warning);
+  color: #fff;
+  border: none;
+}
+
+.filled-danger {
+  background-color: var(--danger);
+  color: #fff;
+  border: none;
+}
+
+.outlined-primary {
+  border: 1.5px solid var(--primary);
+  color: var(--primary);
+  background-color: #fff;
+}
+
+.outlined-success {
+  border: 1.5px solid var(--success);
+  color: var(--success);
+  background-color: #fff;
+}
+
+.outlined-warning {
+  border: 1.5px solid var(--warning);
+  color: var(--warning);
+  background-color: #fff;
+}
+
+.outlined-danger {
+  border: 1.5px solid var(--danger);
+  color: var(--danger);
+  background-color: #fff;
+}

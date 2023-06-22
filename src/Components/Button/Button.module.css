@@ -1,0 +1,70 @@
+.button {
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  text-transform: uppercase;
+  line-height: 1.75;
+  font-weight: 500;
+  transition: 0.4s;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.buttonSmall {
+  font-size: 13px;
+  padding: 4px 10px;
+}
+
+.buttonMedium {
+  font-size: 14px;
+  padding: 6px 16px;
+}
+
+.buttonLarge {
+  font-size: 15px;
+  padding: 8px 22px;
+}
+
+.buttonActiveRibbon {
+  width: 20%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: -20%;
+
+  transition: 0.4s;
+}
+
+.buttonWhiteRibbon {
+  background-color: white;
+}
+
+.buttonContent {
+  position: relative;
+  z-index: 10;
+}
+
+.button:active .buttonActiveRibbon {
+  left: 100%;
+}
+
+@keyframes isLoading {
+  30% {
+    left: 100%;
+  }
+  60% {
+    left: -20%;
+  }
+}
+
+.isLoading {
+  animation: isLoading;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+}
+
+.fullWidth {
+  width: 100%;
+}

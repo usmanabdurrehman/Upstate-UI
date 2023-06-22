@@ -1,0 +1,22 @@
+.badgeWrapper {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.badge {
+  height: 20px;
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  border-radius: 4px;
+  border-radius: 50%;
+  transition: 0.4s;
+  font-size: 12px;
+}
+
+.dotBadge {
+  height: 8px;
+  width: 8px;
+}

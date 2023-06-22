@@ -1,0 +1,33 @@
+.card {
+  box-shadow: 3px 3px 7px lightgray;
+  background-color: white;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  cursor: pointer;
+  border-radius: 20px 0 20px 0;
+  padding: 20px;
+  position: relative;
+  height: 150px;
+  color: black;
+  overflow: hidden;
+}
+
+.card > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card h1 {
+  font-size: 64px;
+  margin: 0;
+}
+
+.hoverLineTop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transition: 0.3s;
+  height: 4px;
+}
