@@ -5,10 +5,10 @@ import styles from "./Badge.module.css";
 import { typeToColorMapping, anchorOriginToClassMapper } from "../../utils";
 
 import classNames from "classnames";
-import { Classes, Color } from "../../types";
+import { Classes, Color, Direction } from "../../types";
 
 interface BadgeProps {
-  anchorOrigin?: { horizontal: string; vertical: string };
+  anchorOrigin?: { horizontal: Direction; vertical: Direction };
   variant: "standard" | "dot";
   color: Color;
   number: number;

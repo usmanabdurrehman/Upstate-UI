@@ -11,8 +11,8 @@ import PrintIcon from "@material-ui/icons/Print";
 import Popover from "@material-ui/core/Popover";
 import { IconButton, Checkbox } from "@material-ui/core";
 
-import { createCSV } from "./utils";
-import { getThemeStyles } from "utils";
+import { createCSV } from "./DataTable.utilsils";
+import { getThemeStyles } from "../../utils";
 
 import PropTypes from "prop-types";
 
@@ -175,7 +175,6 @@ export default function DataTable({
 
     w.document.write(html);
     w.window.print();
-    // w.document.close();
   };
 
   let getNumberOfPages = () => {
@@ -341,7 +340,6 @@ export default function DataTable({
               className={styles.row}
               style={{
                 order: index + 1,
-                // top:`${(index+1)*46}px`,
                 ...(themeStyles.options.stripedRows &&
                   index % 2 != 0 && {
                     backgroundColor: themeStyles.stripedRowsBackground,
@@ -390,8 +388,6 @@ export default function DataTable({
     </div>
   );
 }
-
-// #f47100
 
 DataTable.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),

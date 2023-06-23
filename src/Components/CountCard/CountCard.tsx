@@ -8,10 +8,10 @@ import { Classes, Color } from "../../types";
 interface CountCardProps {
   number: number;
   text: string;
-  color: Color;
+  color?: Color;
   width: number;
   height: number;
-  classes: Classes;
+  classes?: Classes;
 }
 
 export default function CountCard({
@@ -28,19 +28,19 @@ export default function CountCard({
         className={classNames({
           [styles.hoverLineTop]: true,
           [typeToColorMapping({ color })]: true,
-          [classes?.hoverLine]: classes?.hoverLine,
+          [classes?.hoverLine ?? ""]: classes?.hoverLine,
         })}
       ></div>
       <h1
         className={classNames({
-          [classes?.number]: classes?.number,
+          [classes?.number ?? ""]: classes?.number,
         })}
       >
         {number}
       </h1>
       <div
         className={classNames({
-          [classes?.text]: classes?.text,
+          [classes?.text ?? ""]: classes?.text,
         })}
       >
         {text}

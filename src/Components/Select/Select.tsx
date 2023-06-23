@@ -1,34 +1,42 @@
-import React, { useState } from "react";
-
-import { typeToColorMapping } from "utils";
-
+import { useState } from "react";
+import { typeToColorMapping } from "../../utils";
 import classNames from "classnames";
-
 import styles from "./Select.module.css";
-
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
-
-import PropTypes from "prop-types";
-
 import ClickAwayListener from "react-click-away-listener";
+import { InputBase } from "../InputBase";
+import { Classes, Color } from "../../types";
 
-import InputBase from "../InputBase/InputBase.jsx";
+export type SelectOption = {
+  label: string;
+  id: string;
+};
+
+interface SelectProps {
+  color: Color;
+  options: SelectOption[];
+  selected: SelectOption | undefined;
+  classes: Classes;
+  onChange: (option: SelectOption) => void;
+  required?: boolean;
+  placeholder?: string;
+}
 
 export default function Select({
-  color,
+  color = "default",
   options,
   selected,
   classes,
   placeholder,
   onChange,
   required,
-}) {
+}: SelectProps) {
   if (!options) {
     throw new Error("You should have atleast one option");
   } else if (!Array.isArray(options)) {
     throw new Error("options prop should be an array of strings");
-  } else if (!options.every((option) => option?.value)) {
-    throw new Error("options should be of type [{value,label},...]");
+  } else if (!options.every((option) => option?.id)) {
+    throw new Error("options should be of type [{id,label},...]");
   }
 
   const [selectOpen, setSelectOpen] = useState(false);
@@ -72,14 +80,14 @@ export default function Select({
               <div
                 className={classNames({
                   [styles.selectOption]: true,
-                  [styles.selectedOption]: option === selected,
+                  [styles.selectedOption]: option?.id === selected?.id,
                   [classes?.selectOption]: classes?.selectOption,
                   [typeToColorMapping({ color, variant: "outlined" })]:
-                    option === selected,
+                    option?.id === selected?.id,
                 })}
                 onClick={(e) => {
                   setSelectOpen(false);
-                  onChange && onChange(option);
+                  onChange(option);
                 }}
               >
                 {option.label}
@@ -92,23 +100,3 @@ export default function Select({
     </ClickAwayListener>
   );
 }
-
-Select.propTypes = {
-  color: PropTypes.oneOf([
-    "primary",
-    "success",
-    "warning",
-    "danger",
-    "default",
-  ]),
-  options: PropTypes.arrayOf(PropTypes.string),
-  selectedValue: PropTypes.string,
-  classes: PropTypes.arrayOf(PropTypes.string),
-  onChange: PropTypes.func,
-  required: PropTypes.bool,
-  placeholder: PropTypes.string,
-};
-
-Select.defaultProps = {
-  color: "default",
-};

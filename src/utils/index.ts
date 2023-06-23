@@ -35,14 +35,14 @@ export const typeToColorMapping = ({
   return theme[classString];
 };
 
-export const severityToColorMapper = (severity: Severity) => {
+export const severityToColorMapper = (severity: Severity): Color => {
   const severityToColorMapper = {
     error: "danger",
     info: "primary",
     success: "success",
     warning: "warning",
   };
-  return severityToColorMapper[severity] || "primary";
+  return (severityToColorMapper[severity] || "primary") as Color;
 };
 
 export const anchorOriginToClassMapper = ({

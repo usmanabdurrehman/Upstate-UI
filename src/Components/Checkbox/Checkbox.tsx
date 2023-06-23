@@ -1,7 +1,7 @@
 import React from "react";
 
 import styles from "./Checkbox.module.css";
-import globalStyles from "styles/global.module.css";
+import globalStyles from "../../styles/global.module.css";
 
 import Check from "./Check.svg";
 
@@ -13,19 +13,19 @@ import { InputBase } from "../InputBase";
 import { Classes, Color } from "../../types";
 
 interface CheckboxProps {
-  color: Color;
-  checked: boolean;
-  onClick: (checked: boolean) => void;
-  disabled: boolean;
-  classes: Classes;
-  required: boolean;
-  icon: React.ReactNode;
-  checkedIcon: React.ReactNode;
+  color?: Color;
+  checked?: boolean;
+  onClick?: (checked: boolean) => void;
+  disabled?: boolean;
+  classes?: Classes;
+  required?: boolean;
+  icon?: React.ReactNode;
+  checkedIcon?: React.ReactNode;
 }
 
 export default function Checkbox({
   color = "default",
-  checked,
+  checked = false,
   onClick,
   disabled = false,
   classes,
@@ -41,7 +41,7 @@ export default function Checkbox({
         [typeToColorMapping({ color })]: !checkedIcon && checked,
         [styles.removeBorder]: !checkedIcon && checked,
         [globalStyles.disabled]: disabled,
-        [classes?.checkbox]: classes?.checkbox,
+        [classes?.checkbox ?? ""]: classes?.checkbox,
       })}
       onClick={(e) => {
         !disabled && onClick && onClick(checked);

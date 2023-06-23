@@ -7,11 +7,11 @@ import classNames from "classnames";
 import { Classes, Color, Variant } from "../../types";
 
 interface FABProps {
-  children: React.ReactNode[];
-  color: Color;
+  children: React.ReactNode;
+  color?: Color;
   disabled?: boolean;
   variant?: Variant;
-  classes: Classes;
+  classes?: Classes;
   onClick: () => void;
   href?: string;
 }

@@ -29,7 +29,7 @@ export default function Tabs({ children, titles, selectedIndex }: TabsProps) {
         ))}
       </div>
       <div className={styles.contentWrapper}>
-        {children.map((child, index) => (
+        {children?.map((child, index) => (
           <div
             className={`${styles.content} ${
               selected == index ? styles.showContent : styles.hideContent

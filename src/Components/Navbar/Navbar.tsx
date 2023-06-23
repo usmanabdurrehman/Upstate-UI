@@ -8,13 +8,12 @@ import { IconButton } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
 
-import PropTypes from "prop-types";
 import { Classes } from "../../types";
 
 interface NavbarProps {
-  logo: React.ReactNode[];
+  logo: React.ReactNode;
   menuItems: React.ReactNode[];
-  classes: Classes;
+  classes?: Classes;
 }
 
 export default function Navbar({ logo, menuItems, classes }: NavbarProps) {

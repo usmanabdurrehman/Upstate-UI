@@ -2,6 +2,7 @@
   overflow-x: auto;
   box-shadow: 3px 3px 7px lightgray;
   padding: 0;
+  height: 100%;
 }
 
 .table {
@@ -22,7 +23,6 @@
 .table th {
   cursor: pointer;
   text-transform: capitalize;
-  /* cursor:move; */
   user-select: none;
 }
 
@@ -40,16 +40,7 @@
   width: 100%;
 }
 
-/* .table tr:nth-child(odd){
-	background-color: #f4f4f4;
-} */
-
 .table tr:nth-child(1) {
   background-color: #47e5bc;
   color: white;
 }
-
-.table tr {
-  /* border-bottom: 1px solid #ccc; */
-}
-

@@ -8,16 +8,16 @@ import { Classes, Color } from "../../types";
 
 interface SwitchProps {
   onClick: (checked: boolean) => void;
-  checked: boolean;
-  color: Color;
-  classes: Classes;
-  icon: React.ReactNode;
-  checkedIcon: React.ReactNode;
+  checked?: boolean;
+  color?: Color;
+  classes?: Classes;
+  icon?: React.ReactNode;
+  checkedIcon?: React.ReactNode;
 }
 
 export default function Switch({
   onClick,
-  checked,
+  checked = false,
   color = "default",
   classes,
   icon,
@@ -28,7 +28,7 @@ export default function Switch({
       className={classNames({
         [styles.switch]: true,
         [styles[`switchBG-${returnDefault({ color })}`]]: checked,
-        [classes?.switchBG]: classes?.switchBG,
+        [classes?.switchBG ?? ""]: classes?.switchBG,
       })}
       onClick={() => {
         onClick && onClick(checked);
@@ -40,7 +40,7 @@ export default function Switch({
           [styles.switchClicked]: checked,
           [styles.switchUnclicked]: !checked,
           [typeToColorMapping({ color })]: checked,
-          [classes?.switchCircle]: classes?.switchCircle,
+          [classes?.switchCircle ?? ""]: classes?.switchCircle,
         })}
       >
         {checked && checkedIcon && checkedIcon}

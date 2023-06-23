@@ -1,5 +1,4 @@
-import { StoryFn } from "@storybook/react";
-import React from "react";
+import type { StoryFn } from "@storybook/react";
 import { COLOR_STORY_OPTIONS } from "../../constants";
 
 import FAB from "./FAB";

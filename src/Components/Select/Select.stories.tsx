@@ -1,20 +1,22 @@
+import { StoryFn } from "@storybook/react";
 import React, { useState, useEffect } from "react";
+import { COLOR_STORY_OPTIONS } from "../../constants";
 
-import { Select } from "Components";
+import Select, { SelectOption } from "./Select";
 
 export default {
   title: "Select",
   component: Select,
   argTypes: {
     color: {
-      options: ["primary", "success", "warning", "danger", "default"],
+      options: COLOR_STORY_OPTIONS,
       control: { type: "radio" },
     },
   },
 };
 
-const Template = (args) => {
-  const [selected, setSelected] = useState();
+const Template: StoryFn<typeof Select> = (args) => {
+  const [selected, setSelected] = useState<SelectOption>();
 
   useEffect(() => {
     setSelected(args.selected);
@@ -34,9 +36,9 @@ export const Simple = Template.bind({});
 Simple.args = {
   color: "default",
   options: [
-    { label: "Small", value: "small" },
-    { label: "Medium", value: "medium" },
-    { label: "Large", value: "large" },
+    { label: "Small", id: "small" },
+    { label: "Medium", id: "medium" },
+    { label: "Large", id: "large" },
   ],
   placeholder: "Select Size",
 };

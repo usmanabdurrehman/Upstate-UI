@@ -4,15 +4,15 @@ import styles from "./Stepper.module.css";
 import classNames from "classnames";
 
 interface StepperProps {
-  active: number;
+  active?: number;
+  steps: string[];
 }
 
-export default function Stepper({ active }: StepperProps) {
+export default function Stepper({ active, steps }: StepperProps) {
   let [activeStep, setActiveStep] = useState(active || 0);
-  let steps = ["Step 1", "Step 2", "PreFinal", "Finish"];
 
   useEffect(() => {
-    setActiveStep(active);
+    typeof active !== "undefined" && setActiveStep(active);
   }, [active]);
 
   return (

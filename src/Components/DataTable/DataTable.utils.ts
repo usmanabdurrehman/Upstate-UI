@@ -1,4 +1,4 @@
-export let createCSV = (data) => {
+export const createCSV = (data: any[]) => {
   let csv = Object.keys(data[0]).join(",") + "\n";
   data.forEach((row) => {
     Object.values(row).forEach((value) => {

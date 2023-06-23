@@ -1,31 +1,42 @@
 import React from "react";
 import styles from "./Button.module.css";
 
-import PropTypes from "prop-types";
-
-import { typeToColorMapping } from "utils";
+import { typeToColorMapping } from "../../utils";
 
 import classNames from "classnames";
+import { Classes, Color, Size, Variant } from "../../types";
+
+interface ButtonProps {
+  color?: Color;
+  variant?: Variant;
+  children: React.ReactNode;
+  size?: Size;
+  fullWidth?: boolean;
+  classes?: Classes;
+  isLoading?: boolean;
+  onClick: () => void;
+  href?: string;
+}
 
 export default function Button({
   children,
-  color,
-  variant,
-  size,
-  fullWidth,
+  color = "default",
+  variant = "outlined",
+  size = "sm",
+  fullWidth = false,
   classes,
   onClick,
-  isLoading,
+  isLoading = false,
   href,
   ...rest
-}) {
-  let typeToSizeMapper = (size) => {
+}: ButtonProps) {
+  let typeToSizeMapper = (size: Size) => {
     let typeToSizeMapper = {
-      small: styles.buttonSmall,
-      medium: styles.buttonMedium,
-      large: styles.buttonLarge,
+      sm: styles.buttonSmall,
+      md: styles.buttonMedium,
+      lg: styles.buttonLarge,
     };
-    return typeToSizeMapper[size] || typeToSizeMapper.small;
+    return typeToSizeMapper[size] || typeToSizeMapper.sm;
   };
 
   const Button = (
@@ -38,7 +49,7 @@ export default function Button({
         [typeToSizeMapper(size)]: true,
         [typeToColorMapping({ color, variant })]: true,
         [styles.fullWidth]: fullWidth,
-        [classes?.button]: classes?.button,
+        [classes?.button ?? ""]: !!classes?.button,
       })}
       {...rest}
     >
@@ -57,27 +68,3 @@ export default function Button({
 
   return href ? <a href={href}>{Button}</a> : Button;
 }
-
-Button.propTypes = {
-  color: PropTypes.oneOf([
-    "primary",
-    "success",
-    "warning",
-    "danger",
-    "default",
-  ]),
-  variant: PropTypes.oneOf(["filled", "outlined"]),
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  fullWidth: PropTypes.bool,
-  classes: PropTypes.object,
-  isLoading: PropTypes.bool,
-};
-
-Button.defaultProps = {
-  color: "default",
-  variant: "outlined",
-  children: "default",
-  size: "small",
-  fullWidth: false,
-  isLoading: false,
-};

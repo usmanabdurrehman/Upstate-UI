@@ -24,7 +24,6 @@ export const Simple = Template.bind({});
 
 Simple.args = {
   data: dummyData,
-  columns: ["color", "description", "quantity"],
   customWidgets: {
     color: (value) => (
       <div
@@ -36,9 +35,6 @@ Simple.args = {
         }}
       ></div>
     ),
-  },
-  options: {
-    paginationLimit: 6,
   },
   theme: "navy",
 };

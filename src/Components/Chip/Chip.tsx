@@ -11,7 +11,7 @@ interface ChipProps {
   variant?: Variant;
   clickable?: boolean;
   disabled?: boolean;
-  classes: { [id: string]: string };
+  classes?: { [id: string]: string };
   avatar?: JSX.Element;
   deleteIcon?: JSX.Element;
   onClick?: () => void;

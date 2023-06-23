@@ -3,10 +3,8 @@ import styles from "./Modal.module.css";
 
 import ClickAwayListener from "react-click-away-listener";
 
-import PropTypes from "prop-types";
-
 interface ModalProps {
-  children: React.ReactNode[];
+  children: React.ReactNode;
   isOpen?: boolean;
   onClose: () => void;
 }
@@ -24,17 +22,17 @@ export default function Modal({
 
   let handleClickAway = () => {
     setOpen(false);
-    onClose && onClose();
+    onClose();
   };
 
+  if (!open) return null;
+
   return (
-    open && (
-      <div className={styles.modalWrapper}>
-        <ClickAwayListener onClickAway={handleClickAway}>
-          <div className={styles.modal}>{children}</div>
-        </ClickAwayListener>
-        <div className={styles.backdrop}></div>
-      </div>
-    )
+    <div className={styles.modalWrapper}>
+      <ClickAwayListener onClickAway={handleClickAway}>
+        <div className={styles.modal}>{children}</div>
+      </ClickAwayListener>
+      <div className={styles.backdrop}></div>
+    </div>
   );
 }

@@ -8,11 +8,10 @@ import ClickAwayListener from "react-click-away-listener";
 
 import { InputBase } from "../InputBase";
 
-import { v4 as uuidv4 } from "uuid";
 import { Classes } from "../../types";
 
 export type ComboBoxOption = {
-  id: string;
+  id: number;
   label: string;
   value?: any;
 };
@@ -27,14 +26,14 @@ interface ComboBoxProps {
   required?: boolean;
   onBlur?: () => void;
   onChange: (options: ComboBoxOption[]) => void;
-  onFocus: () => void;
-  onSearchChange: (text: string) => void;
-  placeholder: string;
-  multi: boolean;
-  options: Omit<ComboBoxOption, "id">[];
+  onFocus?: () => void;
+  onSearchChange?: (text: string) => void;
+  placeholder?: string;
+  multi?: boolean;
+  options: ComboBoxOption[];
   selectedOptions: ComboBoxOption[];
-  optionRenderer: (option: ComboBoxOption) => React.ReactNode;
-  classes: Classes;
+  optionRenderer?: (option: ComboBoxOption) => React.ReactNode;
+  classes?: Classes;
 }
 
 export default memo(function ComboBox({
@@ -56,11 +55,7 @@ export default memo(function ComboBox({
   optionRenderer,
   classes,
 }: ComboBoxProps) {
-  const defaultOptions = useMemo(() => {
-    return propOptions.map((propOption) => ({ ...propOption, id: uuidv4() }));
-  }, []);
-
-  const [options, setOptions] = useState(defaultOptions);
+  const [options, setOptions] = useState(propOptions);
   const [filterOptions, setFilterOptions] = useState<ComboBoxOption[]>([]);
 
   const [showOptions, setShowOptions] = useState(false);
@@ -69,14 +64,14 @@ export default memo(function ComboBox({
 
   const onClear = () => {
     onChange && onChange([]);
-    setOptions(defaultOptions);
+    setOptions(propOptions);
   };
 
-  const onClearOption = (id: string) => {
+  const onClearOption = (id: number) => {
     onChange && onChange(selectedOptions.filter((option) => option.id !== id));
     const currentOptions = [...options];
-    const optionIndexInOptionsArray = defaultOptions.findIndex(
-      (option) => option.id == id
+    const optionIndexInOptionsArray = propOptions.findIndex(
+      (option) => option.id === id
     );
     const clearedOption = selectedOptions.find((option) => option.id === id);
     clearedOption &&
@@ -103,7 +98,7 @@ export default memo(function ComboBox({
       ? onChange([...selectedOptions, selectedOption])
       : onChange([selectedOption]);
     setOptions((options) =>
-      (multi ? options : defaultOptions).filter(
+      (multi ? options : propOptions).filter(
         (option) => option.id != selectedOption.id
       )
     );
@@ -118,8 +113,8 @@ export default memo(function ComboBox({
     e.preventDefault();
     if (enableCustomOptions) {
       multi
-        ? onChange([...selectedOptions, { label: inputText, id: uuidv4() }])
-        : onChange([{ label: inputText, id: uuidv4() }]);
+        ? onChange([...selectedOptions, { label: inputText, id: Date.now() }])
+        : onChange([{ label: inputText, id: Date.now() }]);
       setInputText("");
     }
   };
@@ -135,21 +130,22 @@ export default memo(function ComboBox({
           [styles.combobox]: true,
           [styles.fullWidth]: fullWidth,
           [styles.isDisabled]: isDisabled,
-          [classes?.combobox]: classes?.combobox,
+          [classes?.combobox ?? ""]: classes?.combobox,
         })}
         onClick={() => setShowOptions(true)}
       >
         <div
           className={classNames({
             [styles.selectedOptionsWrapper]: true,
-            [classes?.selectedOptionsWrapper]: classes?.selectedOptionsWrapper,
+            [classes?.selectedOptionsWrapper ?? ""]:
+              classes?.selectedOptionsWrapper,
           })}
         >
           {selectedOptions.map((option) => (
             <div
               className={classNames({
                 [styles.selectedOption]: true,
-                [classes?.selectedOption]: classes?.selectedOption,
+                [classes?.selectedOption ?? ""]: classes?.selectedOption,
               })}
             >
               {option.label}
@@ -184,7 +180,7 @@ export default memo(function ComboBox({
           <div
             className={classNames({
               [styles.optionsWrapper]: true,
-              [classes?.optionsWrapper]: classes?.optionsWrapper,
+              [classes?.optionsWrapper ?? ""]: classes?.optionsWrapper,
             })}
           >
             {filterOptions.map((option) => (
@@ -192,7 +188,7 @@ export default memo(function ComboBox({
                 className={classNames({
                   [styles.defaultOptionStyle]: !optionRenderer,
                   [styles.option]: true,
-                  [classes?.option]: classes?.option,
+                  [classes?.option ?? ""]: classes?.option,
                 })}
                 onClick={() => {
                   selectOption(option);
