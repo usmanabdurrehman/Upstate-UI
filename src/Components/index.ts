@@ -10,7 +10,6 @@ export { Chip } from "./Chip";
 export { ComboBox } from "./ComboBox";
 export { Container } from "./Container";
 export { CountCard } from "./CountCard";
-export { DataTable } from "./DataTable";
 export { FAB } from "./FAB";
 export { Input } from "./Input";
 export { InputBase } from "./InputBase";

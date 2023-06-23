@@ -1,7 +1,7 @@
 import React from "react";
 
 import Table from "./Table";
-import dummyData from "../DataTable/DataTable.constants";
+import { dummyTableData } from "../../constants";
 import { StoryFn } from "@storybook/react";
 
 export default {
@@ -23,7 +23,7 @@ const Template: StoryFn<typeof Table> = (args) => <Table {...args} />;
 export const Simple = Template.bind({});
 
 Simple.args = {
-  data: dummyData,
+  data: dummyTableData,
   customWidgets: {
     color: (value) => (
       <div

@@ -8,7 +8,7 @@ import FaceIcon from "@material-ui/icons/Face";
 import { Progress } from "../Progress";
 import { Table } from "../Table";
 
-import dummyData from "../DataTable/DataTable.constants";
+import { dummyTableData } from "../../constants";
 import { ComboBox } from "../ComboBox";
 import { dummyOptions } from "../ComboBox/ComboBox.constants";
 
@@ -37,7 +37,7 @@ export const Introduction = () => (
     </div>
     <div className={styles.table}>
       <Table
-        data={dummyData.slice(0, 4)}
+        data={dummyTableData.slice(0, 4)}
         customWidgets={{
           color: (value) => (
             <div
