@@ -12,6 +12,7 @@ export default {
       control: { type: "radio" },
     },
   },
+  tags: ["autodocs"],
 };
 
 const Template: StoryFn<typeof Progress> = (args) => <Progress {...args} />;

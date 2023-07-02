@@ -22,11 +22,6 @@ export default function Table({
 
   const tableRef = useRef(null);
 
-  const mappedData = useMemo(
-    () => data.map((obj, index) => ({ ...obj, "Serial #": index + 1 })),
-    [data]
-  );
-
   const columns = useMemo(() => Object.keys(data?.[0]), [data]);
 
   return (
@@ -43,13 +38,13 @@ export default function Table({
             <th>{heading}</th>
           ))}
         </tr>
-        {mappedData.map((row, index) => (
+        {data.map((row, index) => (
           <tr
             className={styles.row}
             style={{
               order: index + 1,
               ...(themeStyles.options.stripedRows &&
-                index % 2 != 0 && {
+                index % 2 !== 0 && {
                   backgroundColor: themeStyles.stripedRowsBackground,
                   color: themeStyles.stripedRowsColor,
                 }),

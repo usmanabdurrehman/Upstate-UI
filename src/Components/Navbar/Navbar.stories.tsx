@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 export default {
   title: "Navbar",
   component: Navbar,
+  tags: ["autodocs"],
 };
 
 const Template: StoryFn<typeof Navbar> = (args) => {

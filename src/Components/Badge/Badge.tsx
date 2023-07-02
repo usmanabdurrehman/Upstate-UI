@@ -9,44 +9,39 @@ import { Classes, Color, Direction } from "../../types";
 
 interface BadgeProps {
   anchorOrigin?: { horizontal: Direction; vertical: Direction };
-  variant: "standard" | "dot";
-  color: Color;
-  number: number;
-  max: number;
-  showZero: boolean;
-  invisible: boolean;
-  classes: Classes;
+  variant?: "standard" | "dot";
+  color?: Color;
+  number?: number;
+  max?: number;
+  showZero?: boolean;
+  classes?: Classes;
   children: React.ReactNode;
 }
 
 export default function Badge({
   anchorOrigin = { horizontal: "right", vertical: "top" },
-  variant,
+  variant = "standard",
   color = "default",
   number,
   max = 99,
-  invisible = false,
   showZero = false,
   classes,
   children,
 }: BadgeProps) {
-  if (!number && variant != "dot") {
-    throw new Error("A number must be supplied for displaying the badge");
-  }
-
   return (
-    <div className={styles.badgeWrapper}>
-      {!invisible && (number === 0 ? showZero : true) && (
+    <div className={styles.badgeWrapper} data-cy="badge">
+      {(number === 0 ? showZero : true) && (
         <div
           className={classNames({
             [styles.badge]: true,
-            [styles.dotBadge]: variant == "dot",
+            [styles.dotBadge]: variant === "dot",
             [anchorOriginToClassMapper(anchorOrigin)]: true,
             [typeToColorMapping({ color })]: true,
-            [classes?.badge]: classes?.badge,
+            [classes?.badge ?? ""]: classes?.badge,
           })}
+          data-cy="badge-content"
         >
-          {variant != "dot" && Math.min(number, max)}
+          {variant !== "dot" && number && Math.min(number, max)}
         </div>
       )}
       <div className={styles.badgeContent}>{children}</div>

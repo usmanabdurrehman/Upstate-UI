@@ -8,33 +8,25 @@ interface StepperProps {
   steps: string[];
 }
 
-export default function Stepper({ active, steps }: StepperProps) {
-  let [activeStep, setActiveStep] = useState(active || 0);
-
-  useEffect(() => {
-    typeof active !== "undefined" && setActiveStep(active);
-  }, [active]);
-
+export default function Stepper({ active = 0, steps }: StepperProps) {
   return (
     <>
       <div className={styles.stepper}>
         {Array(steps.length + (steps.length - 1))
           .fill("_")
-          .map((item, index) =>
+          .map((_, index) =>
             index % 2 === 0 ? (
               <div>{steps[index / 2]}</div>
             ) : (
               <div
                 className={classNames({
                   [styles.line]: true,
-                  [styles.done]: activeStep + (activeStep - 1) >= index,
+                  [styles.done]: active + (active - 1) >= index,
                 })}
               ></div>
             )
           )}
       </div>
-      <button onClick={(e) => setActiveStep(activeStep + 1)}>+</button>
-      <button onClick={(e) => setActiveStep(activeStep - 1)}>-</button>
     </>
   );
 }

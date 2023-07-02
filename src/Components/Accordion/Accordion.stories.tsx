@@ -11,6 +11,7 @@ export default {
       control: false,
     },
   },
+  tags: ["autodocs"],
 };
 
 const Template: StoryFn<typeof Accordion> = (args) => {

@@ -15,10 +15,10 @@ import { Classes } from "../../types";
 interface AccordionProps {
   content: React.ReactNode;
   title: React.ReactNode;
-  disabled: boolean;
-  expanded: boolean;
-  onClick: (isExpaneded: boolean) => void;
-  classes: Classes;
+  disabled?: boolean;
+  expanded?: boolean;
+  onClick?: (isExpaneded: boolean) => void;
+  classes?: Classes;
 }
 
 export default function Accordion({
@@ -26,7 +26,7 @@ export default function Accordion({
   title,
   disabled = false,
   onClick,
-  expanded,
+  expanded = false,
   classes,
 }: AccordionProps) {
   return (
@@ -35,36 +35,39 @@ export default function Accordion({
         [styles.accordion]: true,
         [styles.accordionOpen]: expanded,
         [globalStyles.disabled]: disabled,
-        [classes?.accordionWrapper]: classes?.accordionWrapper,
+        [classes?.accordionWrapper ?? ""]: classes?.accordionWrapper,
       })}
     >
       <div
         className={classNames({
           [styles.title]: true,
           [globalStyles.disabled]: disabled,
-          [classes?.accordionTitle]: classes?.accordionTitle,
+          [classes?.accordionTitle ?? ""]: classes?.accordionTitle,
         })}
         onClick={() => {
-          !disabled && onClick && onClick(expanded);
+          !disabled && onClick && onClick(!expanded);
         }}
+        data-cy="accordion-button"
       >
         <p>{title}</p>
         <ExpandMoreIcon
           className={classNames({
             [styles.arrow]: true,
             [styles.invert]: expanded,
-            [classes?.accordionIcon]: classes?.accordionIcon,
+            [classes?.accordionIcon ?? ""]: classes?.accordionIcon,
           })}
         />
       </div>
-      <div
-        className={classNames({
-          [styles.content]: true,
-          [classes?.accordionContent]: classes?.accordionContent,
-        })}
-      >
-        {content}
-      </div>
+      {expanded && (
+        <div
+          className={classNames({
+            [styles.content]: true,
+            [classes?.accordionContent ?? ""]: classes?.accordionContent,
+          })}
+        >
+          {content}
+        </div>
+      )}
     </div>
   );
 }

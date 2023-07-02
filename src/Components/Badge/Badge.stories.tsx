@@ -20,6 +20,7 @@ export default {
       control: { type: "radio" },
     },
   },
+  tags: ["autodocs"],
 };
 
 const Template: StoryFn<typeof Badge> = ({ vertical, horizontal, ...rest }) => {

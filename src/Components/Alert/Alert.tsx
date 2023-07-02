@@ -10,13 +10,13 @@ import { Classes, Severity, Variant } from "../../types";
 
 interface AlertProps {
   severity?: Severity;
-  icon: React.ReactNode;
-  iconMapping: { [severity: string]: React.ReactNode };
+  icon?: React.ReactNode;
+  iconMapping?: { [severity: string]: React.ReactNode };
   text: string;
   showAlert?: boolean;
-  classes: Classes;
-  onClose: () => void;
-  variant: Variant;
+  classes?: Classes;
+  onClose?: () => void;
+  variant?: Variant;
 }
 
 export default function Alert({
@@ -27,7 +27,7 @@ export default function Alert({
   showAlert = false,
   classes,
   onClose,
-  variant,
+  variant = "outlined",
 }: AlertProps) {
   return (
     <div
@@ -43,17 +43,28 @@ export default function Alert({
             color: severityToColorMapper(severity),
             variant,
           })]: true,
-          [classes?.alert]: classes?.alert,
+          [classes?.alert ?? ""]: classes?.alert,
         })}
       >
         {icon || (iconMapping && iconMapping?.[severity]) || (
           <img
-            src={`/icons/alert-${severityToColorMapper(severity)}.svg`}
+            src={`/icons/alert/${severityToColorMapper(severity)}.svg`}
             className={styles.alertIcon}
+            data-cy="default-severity-icon"
+            style={{
+              filter:
+                variant === "filled"
+                  ? "invert(100%) sepia(100%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%)"
+                  : undefined,
+            }}
           />
         )}
         <p className={styles.alertText}>{text}</p>
-        <ClearIcon className={styles.icon} onClick={onClose} />
+        {onClose && (
+          <span data-cy="close-icon" onClick={onClose}>
+            <ClearIcon className={styles.icon} />
+          </span>
+        )}
       </div>
     </div>
   );

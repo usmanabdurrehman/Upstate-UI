@@ -7,6 +7,7 @@ import { dummyOptions } from "./ComboBox.constants";
 export default {
   title: "ComboBox",
   component: ComboBox,
+  tags: ["autodocs"],
 };
 
 const optionRenderer = (option: ComboBoxOption) => {

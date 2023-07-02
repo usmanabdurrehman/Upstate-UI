@@ -7,7 +7,7 @@ import classNames from "classnames";
 import { Classes, Color } from "../../types";
 
 interface SwitchProps {
-  onClick: (checked: boolean) => void;
+  onClick?: (checked: boolean) => void;
   checked?: boolean;
   color?: Color;
   classes?: Classes;
@@ -33,6 +33,7 @@ export default function Switch({
       onClick={() => {
         onClick && onClick(checked);
       }}
+      data-cy="switch"
     >
       <div
         className={classNames({

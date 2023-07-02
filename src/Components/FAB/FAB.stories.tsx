@@ -12,6 +12,7 @@ export default {
       control: { type: "radio" },
     },
   },
+  tags: ["autodocs"],
 };
 
 const Template: StoryFn<typeof FAB> = (args) => <FAB {...args} />;

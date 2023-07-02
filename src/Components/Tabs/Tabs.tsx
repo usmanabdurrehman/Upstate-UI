@@ -7,6 +7,8 @@ interface TabsProps {
   selectedIndex: number;
 }
 
+// TODO: Change styles from community to some other styles
+
 export default function Tabs({ children, titles, selectedIndex }: TabsProps) {
   const [selected, setSelected] = useState(selectedIndex || 0);
 

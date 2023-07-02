@@ -8,9 +8,9 @@ import { Classes, Color } from "../../types";
 interface BottomNavigationProps {
   children: React.ReactNode[];
   tabs: React.ReactNode[];
-  index: number;
-  classes: Classes;
-  color: Color;
+  index?: number;
+  classes?: Classes;
+  color?: Color;
   onClick: (index: number) => void;
 }
 
@@ -22,27 +22,22 @@ export default function BottomNavigation({
   color = "default",
   onClick,
 }: BottomNavigationProps) {
-  if (children.length != tabs.length) {
-    throw new Error("Length of children and tabs should be the same");
-  }
   return (
     <div
-      className={classNames({
-        [styles.bottomNavigationWrapper]: true,
-        [classes?.bottomNavigationWrapper]: classes?.bottomNavigationWrapper,
+      className={classNames(styles.bottomNavigationWrapper, {
+        [classes?.bottomNavigationWrapper ?? ""]:
+          classes?.bottomNavigationWrapper,
       })}
     >
       <div
-        className={classNames({
-          [styles.bottomNavigationContentWrapper]: true,
-          [classes?.bottomNavigationContentWrapper]:
+        className={classNames(styles.bottomNavigationContentWrapper, {
+          [classes?.bottomNavigationContentWrapper ?? ""]:
             classes?.bottomNavigationWrapper,
         })}
       >
         {children?.map((child, idx) => (
           <div
-            className={classNames({
-              [styles.content]: true,
+            className={classNames(styles.content, {
               [styles.showContent]: index === idx,
               [styles.hideContent]: index !== idx,
             })}
@@ -52,29 +47,30 @@ export default function BottomNavigation({
         ))}
       </div>
       <div
-        className={classNames({
-          [styles.bottomNavigation]: true,
-          [classes?.bottomNavigation]: classes?.bottomNavigation,
+        className={classNames(styles.bottomNavigation, {
+          [classes?.bottomNavigation ?? ""]: classes?.bottomNavigation,
         })}
       >
-        {tabs.map((child, idx) => (
+        {tabs.map((tab, idx) => (
           <div
-            className={classNames({
-              [styles.navMenu]: true,
-              [classes?.navMenu]: classes?.navMenu,
-              [classes?.active]: classes?.active,
+            className={classNames(styles.navMenu, {
+              [classes?.navMenu ?? ""]: classes?.navMenu,
+              [classes?.active ?? ""]: classes?.active,
             })}
             onClick={(e) => {
-              onClick && onClick(idx);
+              onClick(idx);
             }}
+            data-cy="tab"
           >
-            {child}
+            {tab}
             <div
-              className={classNames({
-                [typeToColorMapping({ color, variant: "filled" })]: true,
-                [styles.line]: true,
-                [styles.activeLine]: idx == index,
-              })}
+              className={classNames(
+                typeToColorMapping({ color, variant: "filled" }),
+                styles.line,
+                {
+                  [styles.activeLine]: idx === index,
+                }
+              )}
             ></div>
           </div>
         ))}

@@ -37,21 +37,26 @@ export default function Chip({
         [typeToColorMapping({ color, variant })]: true,
         [styles.clickable]: clickable,
         [styles.disabled]: disabled,
-        [classes?.chip]: classes?.chip,
+        [classes?.chip ?? ""]: classes?.chip,
       })}
       onClick={onClick}
     >
       {clickable && (
         <div
           className={classNames({
-            [variant == "outlined"
+            [variant === "outlined"
               ? typeToColorMapping({ color, variant: "filled" })
               : styles.buttonWhiteRibbon]: true,
             [styles.buttonActiveRibbon]: true,
           })}
-        ></div>
+          data-cy="chip-ribbon"
+        />
       )}
-      {avatar && <div className={styles.avatarWrapper}>{avatar}</div>}
+      {avatar && (
+        <div className={styles.avatarWrapper} data-cy="avatar">
+          {avatar}
+        </div>
+      )}
       <div
         className={classNames({
           [styles.chipContent]: true,
@@ -67,6 +72,7 @@ export default function Chip({
             [styles.leftGap]: true,
           })}
           onClick={onDelete}
+          data-cy="delete-icon"
         >
           {deleteIcon || <CancelIcon />}
         </div>

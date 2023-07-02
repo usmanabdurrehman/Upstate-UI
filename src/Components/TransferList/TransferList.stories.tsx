@@ -1,11 +1,11 @@
 import type { StoryFn } from "@storybook/react";
-import React from "react";
 
 import TransferList from "./TransferList";
 
 export default {
   title: "TransferList",
   component: TransferList,
+  tags: ["autodocs"],
 };
 
 const Template: StoryFn<typeof TransferList> = (args) => (

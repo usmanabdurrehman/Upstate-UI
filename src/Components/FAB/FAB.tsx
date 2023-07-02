@@ -32,12 +32,12 @@ export default function FAB({
         [styles.button]: true,
         [typeToColorMapping({ color, variant })]: true,
         [styles.disabled]: disabled,
-        [classes?.FAB]: classes?.FAB,
+        [classes?.FAB ?? ""]: classes?.FAB,
       })}
     >
       <div
         className={classNames({
-          [variant == "outlined"
+          [variant === "outlined"
             ? typeToColorMapping({ color, variant: "filled" })
             : styles.buttonWhiteRibbon]: true,
           [styles.buttonActiveRibbon]: true,
@@ -46,7 +46,7 @@ export default function FAB({
       ></div>
       <div
         className={classNames({
-          [variant == "outlined"
+          [variant === "outlined"
             ? typeToColorMapping({ color, variant: "filled" })
             : styles.buttonWhiteRibbon]: true,
           [styles.buttonActiveRibbon]: true,

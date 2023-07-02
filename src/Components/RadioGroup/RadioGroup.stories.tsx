@@ -13,6 +13,7 @@ export default {
       control: { type: "radio" },
     },
   },
+  tags: ["autodocs"],
 };
 
 const Template: StoryFn<typeof RadioGroup> = (args) => {

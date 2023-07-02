@@ -9,8 +9,8 @@ interface CountCardProps {
   number: number;
   text: string;
   color?: Color;
-  width: number;
-  height: number;
+  width?: number | string;
+  height?: number | string;
   classes?: Classes;
 }
 
@@ -18,8 +18,8 @@ export default function CountCard({
   number,
   text,
   color = "default",
-  width,
-  height,
+  width = "100%",
+  height = "100%",
   classes,
 }: CountCardProps) {
   return (

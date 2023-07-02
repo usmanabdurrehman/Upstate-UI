@@ -5,6 +5,7 @@ import Tabs from "./Tabs";
 export default {
   title: "Tabs",
   component: Tabs,
+  tags: ["autodocs"],
 };
 
 const Template: StoryFn<typeof Tabs> = (args) => {

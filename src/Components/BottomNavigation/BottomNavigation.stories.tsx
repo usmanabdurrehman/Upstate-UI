@@ -13,9 +13,6 @@ export default {
       control: { type: "radio" },
     },
   },
-  parameters: {
-    layout: "fullscreen",
-  },
 };
 
 const Template: StoryFn<typeof BottomNavigation> = (args) => {

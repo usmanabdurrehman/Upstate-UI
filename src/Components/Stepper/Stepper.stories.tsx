@@ -7,6 +7,7 @@ import Stepper from "./Stepper";
 export default {
   title: "Stepper",
   component: Stepper,
+  tags: ["autodocs"],
 };
 
 const Template: StoryFn<typeof Stepper> = (args) => {

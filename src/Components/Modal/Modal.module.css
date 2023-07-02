@@ -9,10 +9,12 @@
   right: 0;
   bottom: 0;
   color: black;
+  z-index: 10000;
 }
 
 .modal {
   opacity: 1;
+  background: white;
 }
 
 .backdrop {

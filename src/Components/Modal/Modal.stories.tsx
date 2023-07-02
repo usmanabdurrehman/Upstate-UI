@@ -4,6 +4,7 @@ import Modal from "./Modal";
 export default {
   title: "Modal",
   component: Modal,
+  tags: ["autodocs"],
 };
 
 const Template: StoryFn<typeof Modal> = (args) => <Modal {...args} />;

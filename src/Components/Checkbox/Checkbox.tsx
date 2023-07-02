@@ -46,12 +46,18 @@ export default function Checkbox({
       onClick={(e) => {
         !disabled && onClick && onClick(checked);
       }}
+      data-cy="checkbox"
     >
       {checked &&
         (checkedIcon ? (
           checkedIcon
         ) : (
-          <img src={Check} className={styles.check} alt="Check mark" />
+          <img
+            data-cy="checked-icon"
+            src={Check}
+            className={styles.check}
+            alt="Check mark"
+          />
         ))}
       {icon && !checked && icon}
       {required && <InputBase />}

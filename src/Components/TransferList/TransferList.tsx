@@ -5,6 +5,8 @@ import classNames from "classnames";
 
 import PropTypes from "prop-types";
 
+// TODO: Types
+
 export default function TransferList({
   headers,
   transferListData,

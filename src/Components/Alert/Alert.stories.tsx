@@ -10,6 +10,7 @@ export default {
       control: { type: "radio" },
     },
   },
+  tags: ["autodocs"],
 };
 
 const Template: StoryFn<typeof Alert> = (args) => <Alert {...args} />;
@@ -20,4 +21,5 @@ Simple.args = {
   severity: "info",
   text: "You have logged in",
   showAlert: true,
+  variant: "outlined",
 };
