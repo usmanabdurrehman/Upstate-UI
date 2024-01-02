@@ -8,10 +8,10 @@ https://upstate-ui.netlify.app
 
 ## Few cool features
 
-- Contains a plethora of **Reusable Controlled Components**
-- Contains **Form** Components like **Checkbox**, **Toggle**
-- Contains **Data View** Components like **Table**, **TransferList**
-- Contains **Navigation** Components like **Navbar**, **Tabs**
+- Contains a plethora of **Reusable Controlled Components** :control_knobs:
+- Contains **Form** Components like **Checkbox**, **Toggle** :white_check_mark:
+- Contains **Data View** Components like **Table**, **TransferList** :bookmark_tabs:
+- Contains **Navigation** Components like **Navbar**, **Tabs** :arrow_right:
 
 ## Technologies
 
